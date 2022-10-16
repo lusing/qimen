@@ -32,10 +32,11 @@ type JieQi struct {
 }
 
 func (jq *JieQi) GetName() string {
-	names := []string{"冬至", "小寒", "大寒",
+	names := []string{
+		"冬至", "小寒", "大寒",
 		"立春", "雨水", "惊蛰",
 		"春分", "清明", "谷雨",
-		"立夏", "小满", "大满",
+		"立夏", "小满", "芒种",
 		"夏至", "小暑", "大暑",
 		"立秋", "处暑", "白露",
 		"秋分", "寒露", "霜降",
@@ -44,7 +45,8 @@ func (jq *JieQi) GetName() string {
 }
 
 func (jq *JieQi) GetJu() (yang bool, ju []uint8) {
-	yinyang := jq.Id >= XiaZhi
+	//从夏至开始阳遁
+	yinyang := jq.Id < XiaZhi
 	var ju_num []uint8
 	switch jq.Id {
 	case DongZhi, JingZhe:

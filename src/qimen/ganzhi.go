@@ -34,22 +34,22 @@ func WuZiYuanDun(riGan tiangan.TianGan, shiZhi dizhi.DiZhi) tiangan.TianGan {
 
 func GetSanYuan(riGan tiangan.TianGan, riZhi dizhi.DiZhi) uint8 {
 	var futou uint8
-	var futou_gan uint8
-	futou_zhi := riZhi.Id
+	var futouGan uint8
+	futouZhi := riZhi.Id
 	if riGan.Id < tiangan.Ji {
-		futou_gan = tiangan.Jia
+		futouGan = tiangan.Jia
 		futou = riGan.Id - tiangan.Jia
-		futou_zhi = (futou_zhi + 12 - futou) % 12
-		gz1 := GanZhi{TianGanId: futou_gan, DiZhiId: futou_zhi}
+		futouZhi = (futouZhi + 12 - futou) % 12
+		gz1 := GanZhi{TianGanId: futouGan, DiZhiId: futouZhi}
 		println(gz1.GetName())
 	} else {
-		futou_gan = tiangan.Ji
+		futouGan = tiangan.Ji
 		futou = riGan.Id - tiangan.Ji
-		futou_zhi = (futou_zhi + 12 - futou) % 12
-		gz1 := GanZhi{TianGanId: futou_gan, DiZhiId: futou_zhi}
+		futouZhi = (futouZhi + 12 - futou) % 12
+		gz1 := GanZhi{TianGanId: futouGan, DiZhiId: futouZhi}
 		println(gz1.GetName())
 	}
-	switch futou_zhi {
+	switch futouZhi {
 	case dizhi.Zi, dizhi.Wu, dizhi.Mao, dizhi.You:
 		return 0
 	case dizhi.Yin, dizhi.Shen, dizhi.Si, dizhi.Hai:
