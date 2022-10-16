@@ -7,16 +7,20 @@ import (
 )
 
 func main() {
-	dz1 := dizhi.DiZhi{Id: dizhi.Zi}
-	println(dz1.GetName())
 
 	tg1 := tiangan.TianGan{
-		Id: tiangan.Jia,
+		Id: tiangan.Gui,
 	}
 	println(tg1.GetName())
 
+	dz1 := dizhi.DiZhi{Id: dizhi.You}
+	println(dz1.GetName())
+
 	jieqi1 := qimen.JieQi{
-		Id: qimen.BaiLu,
+		Id: qimen.MangZhong,
 	}
 	println(jieqi1.GetName())
+
+	num := qimen.GetSanYuan(tg1, dz1)
+	println(num)
 }
