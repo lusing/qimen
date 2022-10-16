@@ -26,4 +26,7 @@ func main() {
 
 	isYang, ju := qimen.GetJu(jieqi1, tg1, dz1)
 	println(isYang, ju)
+
+	////============================
+
 }
