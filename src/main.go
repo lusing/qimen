@@ -28,5 +28,14 @@ func main() {
 	println(isYang, ju)
 
 	////============================
+	// 1996年2月1日 大寒 戊辰日，应为阳遁三局
+	_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen})
 
+	// 1996年2月2日 大寒 己巳日，应为阳遁九局
+	_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Ji}, dizhi.DiZhi{Id: dizhi.Si})
+
+	// ===============================
+
+	pan := qimen.NewPan(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen})
+	pan.Display()
 }
