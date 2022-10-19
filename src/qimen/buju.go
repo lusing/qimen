@@ -14,8 +14,21 @@ func (pan *Pan) GetZhiFuXing(xunshou tiangan.TianGan) (x int, y int) {
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
 			if pan.grid[i][j].SanQiLiuYi.Id == xunshou.Id {
-				println("找到的天干：", pan.grid[i][j].SanQiLiuYi.GetName(), "在", i, ",", j)
+				println("值符位置：", pan.grid[i][j].SanQiLiuYi.GetName(), "在", i, ",", j)
 				println(pan.grid[i][j].DiPanJiuXing.GetName())
+				return i, j
+			}
+		}
+	}
+	return 1, 1
+}
+
+func (pan *Pan) GetPosByShiGan(shigan tiangan.TianGan) (x int, y int) {
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if pan.grid[i][j].SanQiLiuYi.Id == shigan.Id {
+				println("找到的时干：", pan.grid[i][j].SanQiLiuYi.GetName(), "在", i, ",", j)
+				//println(pan.grid[i][j].DiPanJiuXing.GetName())
 				return i, j
 			}
 		}
@@ -36,18 +49,31 @@ func (pan *Pan) Display() {
 	println("------------------------------------")
 	for _, row := range pan.grid {
 		for _, cell := range row {
+			print(cell.Shen.GetName(), "|")
+		}
+		println()
+		for _, cell := range row {
+			print(cell.TianPanQiYi.GetName(), "|")
+		}
+		println()
+		for _, cell := range row {
 			print(cell.SanQiLiuYi.GetName(), "|")
 			//print(cell.Gua.GetName())
 		}
 		println()
+		//for _, cell := range row {
+		//	print(cell.Gua.GetName(), "|")
+		//}
+		//println()
+		//for _, cell := range row {
+		//	print(cell.DiPanJiuXing.GetName(), "|")
+		//}
+		//println()
 		for _, cell := range row {
-			print(cell.Gua.GetName(), "|")
+			print(cell.TianPanJiuXing.GetName(), "|")
 		}
 		println()
-		for _, cell := range row {
-			print(cell.DiPanJiuXing.GetName(), "|")
-		}
-		println()
+
 		println("------------------------------------")
 	}
 }
@@ -99,27 +125,50 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 
 	pos1, pos2 := 2, 1
 
-	// 地盘九星初始值
+	// 地盘九星八门初始值
 
 	for i := 0; i < 8; i++ {
 		pan.grid[pos1][pos2].DiPanJiuXing = JiuXing{Id: uint8(i)}
+		pan.grid[pos1][pos2].DiMen = BaMen{Id: uint8(i)}
 		pos1, pos2 = GetNext(pos1, pos2)
 		//println(i)
 	}
 	pan.grid[1][1].DiPanJiuXing = JiuXing{Id: 8}
 
+	shigan := WuZiYuanDun(riGan, shiZhi)
 	xunshou := GetXunShou(shiZhi, riGan)
 	println("旬首:", xunshou.GetName())
 	pos1, pos2 = pan.GetZhiFuXing(xunshou)
-	println("值符星位置：", pos1, ",", pos2)
+	zhiFuXing := pan.grid[pos1][pos2].DiPanJiuXing
+	println("值符星：", pan.grid[pos1][pos2].DiPanJiuXing.GetName())
+	println("值使：", pan.grid[pos1][pos2].DiMen.GetName())
+
+	// 值符随时干
+	posX, posY := pan.GetPosByShiGan(shigan)
+
+	posX0, posY0 := 2, 1
+
+	for i := 0; i < 8; i++ {
+		pan.grid[posX][posY].TianPanJiuXing = JiuXing{Id: ((zhiFuXing.Id) + uint8(i)) % 8}
+		pan.grid[posX][posY].TianPanQiYi = pan.grid[posX0][posY0].SanQiLiuYi
+		pan.grid[posX][posY].Shen = BaShen{Id: uint8(i)}
+		posX, posY = GetNext(posX, posY)
+		posX0, posY0 = GetNext(posX0, posY0)
+	}
+
+	// 值使随时宫
 
 	return pan
 }
 
 type Cell struct {
-	SanQiLiuYi   tiangan.TianGan
-	DiPanJiuXing JiuXing
-	Gua          BaGua
+	SanQiLiuYi     tiangan.TianGan
+	TianPanQiYi    tiangan.TianGan
+	DiPanJiuXing   JiuXing
+	TianPanJiuXing JiuXing
+	DiMen          BaMen
+	Shen           BaShen
+	Gua            BaGua
 }
 
 func GetNext(row int, column int) (i int, j int) {
