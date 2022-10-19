@@ -36,6 +36,17 @@ func main() {
 
 	// ===============================
 
-	pan := qimen.NewPan(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen})
+	pan := qimen.NewPan(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen}, dizhi.DiZhi{
+		Id: dizhi.Chen,
+	})
 	pan.Display()
+
+	// 《奇门遁甲铁口断》25页，例1
+	// 2001年3月23日10点，春分
+	// 辛巳年辛卯月乙酉日庚戌时
+	pan1 := qimen.NewPan(qimen.JieQi{Id: qimen.ChunFen}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.You}, dizhi.DiZhi{
+		Id: dizhi.Si,
+	})
+	pan1.Display()
+
 }

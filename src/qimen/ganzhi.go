@@ -17,17 +17,18 @@ func (pgz *GanZhi) GetName() string {
 }
 
 func WuZiYuanDun(riGan tiangan.TianGan, shiZhi dizhi.DiZhi) tiangan.TianGan {
+	diff := shiZhi.Id + 10
 	switch riGan.Id {
 	case tiangan.Jia, tiangan.Ji:
-		return tiangan.TianGan{Id: tiangan.Jia}
+		return tiangan.TianGan{Id: (tiangan.Jia + diff) % 10}
 	case tiangan.Yi, tiangan.Geng:
-		return tiangan.TianGan{Id: tiangan.Bing}
+		return tiangan.TianGan{Id: (tiangan.Bing + diff) % 10}
 	case tiangan.Bing, tiangan.Xin:
-		return tiangan.TianGan{Id: tiangan.Wu}
+		return tiangan.TianGan{Id: (tiangan.Wu + diff) % 10}
 	case tiangan.Ding, tiangan.Ren:
-		return tiangan.TianGan{Id: tiangan.Geng}
+		return tiangan.TianGan{Id: (tiangan.Geng + diff) % 10}
 	case tiangan.Wu, tiangan.Gui:
-		return tiangan.TianGan{Id: tiangan.Ren}
+		return tiangan.TianGan{Id: (tiangan.Ren + diff) % 10}
 	}
 	return tiangan.TianGan{Id: 0}
 }
