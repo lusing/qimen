@@ -23,11 +23,13 @@ func (pan *Pan) GetZhiFuXing(xunshou tiangan.TianGan) (x int, y int) {
 	return 1, 1
 }
 
-func (pan *Pan) GetPosByShiGan(shigan tiangan.TianGan) (x int, y int) {
+// 根据三奇六仪名查找在九宫格中的位置
+
+func (pan *Pan) GetPosByTianGan(shigan tiangan.TianGan) (x int, y int) {
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
 			if pan.grid[i][j].SanQiLiuYi.Id == shigan.Id {
-				println("找到的时干：", pan.grid[i][j].SanQiLiuYi.GetName(), "在", i, ",", j)
+				println("找到的天干：", pan.grid[i][j].SanQiLiuYi.GetName(), "在", i, ",", j)
 				//println(pan.grid[i][j].DiPanJiuXing.GetName())
 				return i, j
 			}
@@ -50,6 +52,10 @@ func (pan *Pan) Display() {
 	for _, row := range pan.grid {
 		for _, cell := range row {
 			print(cell.Shen.GetName(), "|")
+		}
+		println()
+		for _, cell := range row {
+			print(cell.TianMen.GetName(), "|")
 		}
 		println()
 		for _, cell := range row {
@@ -136,15 +142,14 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	pan.grid[1][1].DiPanJiuXing = JiuXing{Id: 8}
 
 	shigan := WuZiYuanDun(riGan, shiZhi)
-	xunshou := GetXunShou(shiZhi, riGan)
+	xunshou, xunshouZhi := GetXunShou(shiZhi, riGan)
 	println("旬首:", xunshou.GetName())
 	pos1, pos2 = pan.GetZhiFuXing(xunshou)
 	zhiFuXing := pan.grid[pos1][pos2].DiPanJiuXing
 	println("值符星：", pan.grid[pos1][pos2].DiPanJiuXing.GetName())
-	println("值使：", pan.grid[pos1][pos2].DiMen.GetName())
 
 	// 值符随时干
-	posX, posY := pan.GetPosByShiGan(shigan)
+	posX, posY := pan.GetPosByTianGan(shigan)
 
 	posX0, posY0 := 2, 1
 
@@ -157,6 +162,24 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	}
 
 	// 值使随时宫
+	println("值使：", pan.grid[pos1][pos2].DiMen.GetName())
+	zhiShi := pan.grid[pos1][pos2].DiMen.Id
+	println("值使支为：", xunshouZhi.GetName(), "而时支为：", shiZhi.GetName())
+	stepMen := (int(shiZhi.Id) - int(xunshouZhi.Id) + 12) % 12
+	println("需要走", stepMen, "步")
+
+	// 查找旬首的位置，需要从旬首开始走stepMen步
+	posM1, posM2 := pan.GetPosByTianGan(xunshou)
+	for i := 1; i < stepMen; i++ {
+		posM1, posM2 = Fly(posM1, posM2)
+		println("Step：", i, ":", posM1, ",", posM2)
+	}
+	println("值使门起始位置在：", posM1, ",", posM2)
+
+	for i := 0; i < 8; i++ {
+		pan.grid[posM1][posM2].TianMen = BaMen{Id: uint8(zhiShi+uint8(i)) % 8}
+		posM1, posM2 = GetNext(posM1, posM2)
+	}
 
 	return pan
 }
@@ -167,6 +190,7 @@ type Cell struct {
 	DiPanJiuXing   JiuXing
 	TianPanJiuXing JiuXing
 	DiMen          BaMen
+	TianMen        BaMen
 	Shen           BaShen
 	Gua            BaGua
 }
@@ -202,6 +226,34 @@ func GetNext(row int, column int) (i int, j int) {
 	return 1, 1
 }
 
+func Fly(row int, column int) (i int, j int) {
+	if row == 2 && column == 1 {
+		return 0, 2
+	}
+	if row == 0 && column == 2 {
+		return 1, 0
+	}
+	if row == 1 && column == 0 {
+		return 0, 0
+	}
+	if row == 0 && column == 0 {
+		return 1, 1
+	}
+	if row == 1 && column == 1 {
+		return 2, 2
+	}
+	if row == 2 && column == 2 {
+		return 1, 2
+	}
+	if row == 1 && column == 2 {
+		return 0, 1
+	}
+	if row == 0 && column == 1 {
+		return 2, 1
+	}
+	return 2, 1
+}
+
 type Gong struct {
 	Gua        BaGua
 	SanQiLiuYi tiangan.TianGan
@@ -224,24 +276,24 @@ func GetJu(jq JieQi, rigan tiangan.TianGan, riZhi dizhi.DiZhi) (bool, uint8) {
 
 // 求旬首
 
-func GetXunShou(shiZhi dizhi.DiZhi, riGan tiangan.TianGan) tiangan.TianGan {
+func GetXunShou(shiZhi dizhi.DiZhi, riGan tiangan.TianGan) (tiangan.TianGan, dizhi.DiZhi) {
 	shiGan := WuZiYuanDun(riGan, shiZhi)
 	println("时干支:", shiGan.GetName(), shiZhi.GetName())
 	diff := shiGan.Id - tiangan.Jia
 	xunshouZhi := dizhi.DiZhi{Id: (shiZhi.Id - diff + 12) % 12}
 	switch xunshouZhi.Id {
 	case dizhi.Zi:
-		return tiangan.TianGan{Id: tiangan.Wu}
+		return tiangan.TianGan{Id: tiangan.Wu}, xunshouZhi
 	case dizhi.Xu:
-		return tiangan.TianGan{Id: tiangan.Ji}
+		return tiangan.TianGan{Id: tiangan.Ji}, xunshouZhi
 	case dizhi.Shen:
-		return tiangan.TianGan{Id: tiangan.Geng}
+		return tiangan.TianGan{Id: tiangan.Geng}, xunshouZhi
 	case dizhi.Wu:
-		return tiangan.TianGan{Id: tiangan.Xin}
+		return tiangan.TianGan{Id: tiangan.Xin}, xunshouZhi
 	case dizhi.Chen:
-		return tiangan.TianGan{Id: tiangan.Ren}
+		return tiangan.TianGan{Id: tiangan.Ren}, xunshouZhi
 	case dizhi.Yin:
-		return tiangan.TianGan{Id: tiangan.Gui}
+		return tiangan.TianGan{Id: tiangan.Gui}, xunshouZhi
 	}
-	return tiangan.TianGan{Id: 0}
+	return tiangan.TianGan{Id: 0}, xunshouZhi
 }
