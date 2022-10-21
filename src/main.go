@@ -56,7 +56,50 @@ func main() {
 	// 《神奇之门》103页，例1
 	// 1995年6月11日上午9时30分，芒种
 	// 乙亥年 壬午月 癸酉 日 丁巳时
-	panSqzm1 := qimen.NewPan(qimen.JieQi{Id: qimen.MangZhong}, tiangan.TianGan{Id: tiangan.Gui}, dizhi.DiZhi{Id: dizhi.You}, dizhi.DiZhi{Id: dizhi.Si})
-	panSqzm1.Display()
+	//panSqzm1 := qimen.NewPan(qimen.JieQi{Id: qimen.MangZhong}, tiangan.TianGan{Id: tiangan.Gui}, dizhi.DiZhi{Id: dizhi.You}, dizhi.DiZhi{Id: dizhi.Si})
+	//panSqzm1.Display()
+
+	// 《神奇之门》106页，例2
+	// 1995年8月13日下午8时，立秋
+	// 丙子日 戌时 TODO:
+	//panSqzm2 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Bing}, dizhi.DiZhi{Id: dizhi.Zi}, dizhi.DiZhi{Id: dizhi.Xu})
+	//panSqzm2.Display()
+
+	// 《开悟之门》
+
+	// 《神奇之门》186页，例1
+	// 1996年3月16日下午4时，惊蛰
+	// 壬子日 申时
+	// TODO:
+	//panSqzm1_1 := qimen.NewPan(qimen.JieQi{Id: qimen.JingZhe}, tiangan.TianGan{Id: tiangan.Ren}, dizhi.DiZhi{Id: dizhi.Zi}, dizhi.DiZhi{Id: dizhi.Shen})
+	//panSqzm1_1.Display()
+
+	// 《神奇之门》188页，例2
+	// 1996年7月27日下午4时，大暑
+	// 乙丑日 申时 阴遁7局
+	// TODO:
+	//panSqzm1_2 := qimen.NewPan(qimen.JieQi{Id: qimen.DaShu}, tiangan.TianGan{Id: tiangan.Ren}, dizhi.DiZhi{Id: dizhi.Zi}, dizhi.DiZhi{Id: dizhi.Shen})
+	//panSqzm1_2.Display()
+
+	// 《神奇之门》190页，例3
+	// 1996年5月9日下午4时20分，立夏
+	// 丙午日 申时 阴遁7局
+	// TODO:
+	//panSqzm1_3 := qimen.NewPan(qimen.JieQi{Id: qimen.LiXia}, tiangan.TianGan{Id: tiangan.Bing}, dizhi.DiZhi{Id: dizhi.Wu}, dizhi.DiZhi{Id: dizhi.Shen})
+	//panSqzm1_3.Display()
+
+	// 《神奇之门》191页，例4
+	// 1996年5月23日下午，小满
+	// 庚申日 戌时
+	// TODO: 八门不对
+	//panSqzm1_4 := qimen.NewPan(qimen.JieQi{Id: qimen.XiaoMan}, tiangan.TianGan{Id: tiangan.Geng}, dizhi.DiZhi{Id: dizhi.Shen}, dizhi.DiZhi{Id: dizhi.Xu})
+	//panSqzm1_4.Display()
+
+	// 《神奇之门》193页，例5
+	// 1996年11月2日下午4时，霜降
+	// 癸卯日 申时
+	// TODO:
+	//panSqzm1_5 := qimen.NewPan(qimen.JieQi{Id: qimen.ShuangJiang}, tiangan.TianGan{Id: tiangan.Gui}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Shen})
+	//panSqzm1_5.Display()
 
 }

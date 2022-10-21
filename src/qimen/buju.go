@@ -152,6 +152,13 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	zhiFuXing := pan.grid[pos1][pos2].DiPanJiuXing
 	println("值符星：", pan.grid[pos1][pos2].DiPanJiuXing.GetName())
 
+	if pos1 == 1 && pos2 == 1 {
+		println("值符星在中宫")
+		// 中五宫寄在坤二宫
+		pos1 = 0
+		pos2 = 2
+	}
+
 	// 值符随时干
 
 	// 时干在地盘几宫
@@ -174,6 +181,8 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 			posX0, posY0 = GetPrev(posX0, posY0)
 		}
 	}
+	pan.grid[1][1].TianPanJiuXing = JiuXing{Id: TianQin}
+	pan.grid[1][1].TianPanQiYi = pan.grid[1][1].SanQiLiuYi
 
 	// 值使随时宫
 	println("值使：", pan.grid[pos1][pos2].DiMen.GetName())
@@ -184,6 +193,11 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 
 	// 查找旬首的位置，需要从旬首开始走stepMen步
 	posM1, posM2 := pan.GetPosByTianGan(xunshou)
+	if posM1 == 1 && posM2 == 1 {
+		println("旬首在中宫")
+		//posM1 = 0
+		//posM2 = 2
+	}
 	for i := 1; i < stepMen; i++ {
 		if isYang {
 			posM1, posM2 = Fly(posM1, posM2)
@@ -197,11 +211,11 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 
 	for i := 0; i < 8; i++ {
 		pan.grid[posM1][posM2].TianMen = BaMen{Id: uint8(zhiShi+uint8(i)) % 8}
-		if isYang {
-			posM1, posM2 = GetNext(posM1, posM2)
-		} else {
-			posM1, posM2 = GetPrev(posM1, posM2)
-		}
+		//if isYang {
+		posM1, posM2 = GetNext(posM1, posM2)
+		//} else {
+		//	posM1, posM2 = GetPrev(posM1, posM2)
+		//}
 	}
 
 	return pan
