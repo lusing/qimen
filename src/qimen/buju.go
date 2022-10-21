@@ -136,7 +136,11 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	for i := 0; i < 8; i++ {
 		pan.grid[pos1][pos2].DiPanJiuXing = JiuXing{Id: uint8(i)}
 		pan.grid[pos1][pos2].DiMen = BaMen{Id: uint8(i)}
-		pos1, pos2 = GetNext(pos1, pos2)
+		if isYang {
+			pos1, pos2 = GetNext(pos1, pos2)
+		} else {
+			pos1, pos2 = GetPrev(pos1, pos2)
+		}
 		//println(i)
 	}
 	pan.grid[1][1].DiPanJiuXing = JiuXing{Id: 8}
@@ -149,16 +153,26 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	println("值符星：", pan.grid[pos1][pos2].DiPanJiuXing.GetName())
 
 	// 值符随时干
+
+	// 时干在地盘几宫
+
 	posX, posY := pan.GetPosByTianGan(shigan)
 
-	posX0, posY0 := 2, 1
+	// 值符原来在地盘几宫，已经在前面 GetZhiFuXing 计算了
+
+	posX0, posY0 := pos1, pos2
 
 	for i := 0; i < 8; i++ {
 		pan.grid[posX][posY].TianPanJiuXing = JiuXing{Id: ((zhiFuXing.Id) + uint8(i)) % 8}
 		pan.grid[posX][posY].TianPanQiYi = pan.grid[posX0][posY0].SanQiLiuYi
 		pan.grid[posX][posY].Shen = BaShen{Id: uint8(i)}
-		posX, posY = GetNext(posX, posY)
-		posX0, posY0 = GetNext(posX0, posY0)
+		if isYang {
+			posX, posY = GetNext(posX, posY)
+			posX0, posY0 = GetNext(posX0, posY0)
+		} else {
+			posX, posY = GetPrev(posX, posY)
+			posX0, posY0 = GetPrev(posX0, posY0)
+		}
 	}
 
 	// 值使随时宫
@@ -171,14 +185,23 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	// 查找旬首的位置，需要从旬首开始走stepMen步
 	posM1, posM2 := pan.GetPosByTianGan(xunshou)
 	for i := 1; i < stepMen; i++ {
-		posM1, posM2 = Fly(posM1, posM2)
+		if isYang {
+			posM1, posM2 = Fly(posM1, posM2)
+		} else {
+			posM1, posM2 = FlyBack(posM1, posM2)
+		}
+
 		println("Step：", i, ":", posM1, ",", posM2)
 	}
 	println("值使门起始位置在：", posM1, ",", posM2)
 
 	for i := 0; i < 8; i++ {
 		pan.grid[posM1][posM2].TianMen = BaMen{Id: uint8(zhiShi+uint8(i)) % 8}
-		posM1, posM2 = GetNext(posM1, posM2)
+		if isYang {
+			posM1, posM2 = GetNext(posM1, posM2)
+		} else {
+			posM1, posM2 = GetPrev(posM1, posM2)
+		}
 	}
 
 	return pan
@@ -226,6 +249,37 @@ func GetNext(row int, column int) (i int, j int) {
 	return 1, 1
 }
 
+func GetPrev(row int, column int) (i int, j int) {
+	if row == 0 && column == 0 {
+		return 1, 0
+	}
+	if row == 1 && column == 0 {
+		return 2, 0
+	}
+	if row == 2 && column == 0 {
+		return 2, 1
+	}
+	if row == 2 && column == 1 {
+		return 2, 2
+	}
+	if row == 2 && column == 2 {
+		return 1, 2
+	}
+	if row == 1 && column == 2 {
+		return 0, 2
+	}
+	if row == 0 && column == 2 {
+		return 0, 1
+	}
+	if row == 0 && column == 1 {
+		return 0, 0
+	}
+	if row == 1 && column == 1 {
+		return 1, 1
+	}
+	return 1, 1
+}
+
 func Fly(row int, column int) (i int, j int) {
 	if row == 2 && column == 1 {
 		return 0, 2
@@ -252,6 +306,40 @@ func Fly(row int, column int) (i int, j int) {
 		return 2, 1
 	}
 	return 2, 1
+}
+
+// 从离九宫跳回坎一宫
+
+func FlyBack(row int, column int) (i int, j int) {
+	if row == 0 && column == 1 {
+		return 2, 0
+	}
+	if row == 2 && column == 0 {
+		return 1, 2
+	}
+	if row == 1 && column == 2 {
+		return 2, 2
+	}
+	if row == 2 && column == 2 {
+		return 1, 1
+	}
+	if row == 1 && column == 1 {
+		return 0, 0
+	}
+	if row == 0 && column == 0 {
+		return 1, 0
+	}
+	if row == 1 && column == 0 {
+		return 0, 2
+	}
+	if row == 0 && column == 2 {
+		return 2, 1
+	}
+	if row == 2 && column == 1 {
+		return 0, 1
+	}
+
+	return 0, 1
 }
 
 type Gong struct {
