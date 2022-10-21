@@ -8,33 +8,33 @@ import (
 
 func main() {
 
-	tg1 := tiangan.TianGan{
-		Id: tiangan.Gui,
-	}
-	println(tg1.GetName())
-
-	dz1 := dizhi.DiZhi{Id: dizhi.You}
-	println(dz1.GetName())
-
-	jieqi1 := qimen.JieQi{
-		Id: qimen.MangZhong,
-	}
-	println(jieqi1.GetName())
-
-	num := qimen.GetSanYuan(tg1, dz1)
-	println(num)
-
-	isYang, ju := qimen.GetJu(jieqi1, tg1, dz1)
-	println(isYang, ju)
-
-	////============================
-	// 1996年2月1日 大寒 戊辰日，应为阳遁三局
-	_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen})
-
-	// 1996年2月2日 大寒 己巳日，应为阳遁九局
-	_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Ji}, dizhi.DiZhi{Id: dizhi.Si})
-
-	println("==========================================")
+	//tg1 := tiangan.TianGan{
+	//	Id: tiangan.Gui,
+	//}
+	//println(tg1.GetName())
+	//
+	//dz1 := dizhi.DiZhi{Id: dizhi.You}
+	//println(dz1.GetName())
+	//
+	//jieqi1 := qimen.JieQi{
+	//	Id: qimen.MangZhong,
+	//}
+	//println(jieqi1.GetName())
+	//
+	//num := qimen.GetSanYuan(tg1, dz1)
+	//println(num)
+	//
+	//isYang, ju := qimen.GetJu(jieqi1, tg1, dz1)
+	//println(isYang, ju)
+	//
+	//////============================
+	//// 1996年2月1日 大寒 戊辰日，应为阳遁三局
+	//_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Wu}, dizhi.DiZhi{Id: dizhi.Chen})
+	//
+	//// 1996年2月2日 大寒 己巳日，应为阳遁九局
+	//_, _ = qimen.GetJu(qimen.JieQi{Id: qimen.DaHan}, tiangan.TianGan{Id: tiangan.Ji}, dizhi.DiZhi{Id: dizhi.Si})
+	//
+	//println("==========================================")
 
 	// ===============================
 
@@ -66,6 +66,15 @@ func main() {
 	//panSqzm2.Display()
 
 	// 《开悟之门》
+	// 2001年8月20日下午4点，立秋
+	// TODO:
+	panKwzm1 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Shen})
+	panKwzm1.Display()
+
+	// 2001年8月20日下午9点，立秋
+	// 乙卯日 丁亥时， 阴遁 5 局
+	// panKwzm2 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Hai})
+	// panKwzm2.Display()
 
 	// 《神奇之门》186页，例1
 	// 1996年3月16日下午4时，惊蛰

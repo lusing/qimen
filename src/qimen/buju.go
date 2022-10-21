@@ -136,11 +136,11 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	for i := 0; i < 8; i++ {
 		pan.grid[pos1][pos2].DiPanJiuXing = JiuXing{Id: uint8(i)}
 		pan.grid[pos1][pos2].DiMen = BaMen{Id: uint8(i)}
-		if isYang {
-			pos1, pos2 = GetNext(pos1, pos2)
-		} else {
-			pos1, pos2 = GetPrev(pos1, pos2)
-		}
+		//if isYang {
+		pos1, pos2 = GetNext(pos1, pos2)
+		//} else {
+		//	pos1, pos2 = GetPrev(pos1, pos2)
+		//}
 		//println(i)
 	}
 	pan.grid[1][1].DiPanJiuXing = JiuXing{Id: 8}
@@ -163,7 +163,18 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 
 	// 时干在地盘几宫
 
-	posX, posY := pan.GetPosByTianGan(shigan)
+	println("时干：", shigan.GetName())
+
+	var posX, posY int
+
+	// 如果时干是甲，按照遁甲的原则，查到时干支对应的天干，再查天干在地盘几宫
+	if shigan.Id == tiangan.Jia {
+		dungan := GetDunTianGan(shigan, shiZhi)
+		println("遁甲：", dungan.GetName())
+		posX, posY = pan.GetPosByTianGan(dungan)
+	} else {
+		posX, posY = pan.GetPosByTianGan(shigan)
+	}
 
 	// 值符原来在地盘几宫，已经在前面 GetZhiFuXing 计算了
 
@@ -173,13 +184,13 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 		pan.grid[posX][posY].TianPanJiuXing = JiuXing{Id: ((zhiFuXing.Id) + uint8(i)) % 8}
 		pan.grid[posX][posY].TianPanQiYi = pan.grid[posX0][posY0].SanQiLiuYi
 		pan.grid[posX][posY].Shen = BaShen{Id: uint8(i)}
-		if isYang {
-			posX, posY = GetNext(posX, posY)
-			posX0, posY0 = GetNext(posX0, posY0)
-		} else {
-			posX, posY = GetPrev(posX, posY)
-			posX0, posY0 = GetPrev(posX0, posY0)
-		}
+		//if isYang {
+		posX, posY = GetNext(posX, posY)
+		posX0, posY0 = GetNext(posX0, posY0)
+		//} else {
+		//	posX, posY = GetPrev(posX, posY)
+		//	posX0, posY0 = GetPrev(posX0, posY0)
+		//}
 	}
 	pan.grid[1][1].TianPanJiuXing = JiuXing{Id: TianQin}
 	pan.grid[1][1].TianPanQiYi = pan.grid[1][1].SanQiLiuYi
@@ -398,4 +409,28 @@ func GetXunShou(shiZhi dizhi.DiZhi, riGan tiangan.TianGan) (tiangan.TianGan, diz
 		return tiangan.TianGan{Id: tiangan.Gui}, xunshouZhi
 	}
 	return tiangan.TianGan{Id: 0}, xunshouZhi
+}
+
+// 求六甲的遁干，如果不是六甲，返回原时干
+
+func GetDunTianGan(shiGan tiangan.TianGan, riZhi dizhi.DiZhi) tiangan.TianGan {
+	if shiGan.Id != tiangan.Jia {
+		return shiGan
+	} else {
+		switch riZhi.Id {
+		case dizhi.Zi:
+			return tiangan.TianGan{Id: tiangan.Wu}
+		case dizhi.Xu:
+			return tiangan.TianGan{Id: tiangan.Ji}
+		case dizhi.Shen:
+			return tiangan.TianGan{Id: tiangan.Geng}
+		case dizhi.Wu:
+			return tiangan.TianGan{Id: tiangan.Xin}
+		case dizhi.Chen:
+			return tiangan.TianGan{Id: tiangan.Ren}
+		case dizhi.Yin:
+			return tiangan.TianGan{Id: tiangan.Gui}
+		}
+		return tiangan.TianGan{Id: tiangan.Jia}
+	}
 }
