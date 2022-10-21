@@ -65,16 +65,18 @@ func main() {
 	//panSqzm2 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Bing}, dizhi.DiZhi{Id: dizhi.Zi}, dizhi.DiZhi{Id: dizhi.Xu})
 	//panSqzm2.Display()
 
-	// 《开悟之门》
+	// 《开悟之门》75页，例1
 	// 2001年8月20日下午4点，立秋
-	// TODO:
+	// 乙卯日 甲申时，阴遁 5 局
 	panKwzm1 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Shen})
 	panKwzm1.Display()
 
+	// 《开悟之门》80页，例2
 	// 2001年8月20日下午9点，立秋
 	// 乙卯日 丁亥时， 阴遁 5 局
-	// panKwzm2 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Hai})
-	// panKwzm2.Display()
+	// TODO
+	//panKwzm2 := qimen.NewPan(qimen.JieQi{Id: qimen.LiuQiu}, tiangan.TianGan{Id: tiangan.Yi}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Hai})
+	//panKwzm2.Display()
 
 	// 《神奇之门》186页，例1
 	// 1996年3月16日下午4时，惊蛰

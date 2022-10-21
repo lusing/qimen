@@ -179,18 +179,24 @@ func NewPan(jq JieQi, riGan tiangan.TianGan, riZhi dizhi.DiZhi, shiZhi dizhi.DiZ
 	// 值符原来在地盘几宫，已经在前面 GetZhiFuXing 计算了
 
 	posX0, posY0 := pos1, pos2
+	posX1, posY1 := posX, posY
 
 	for i := 0; i < 8; i++ {
 		pan.grid[posX][posY].TianPanJiuXing = JiuXing{Id: ((zhiFuXing.Id) + uint8(i)) % 8}
 		pan.grid[posX][posY].TianPanQiYi = pan.grid[posX0][posY0].SanQiLiuYi
-		pan.grid[posX][posY].Shen = BaShen{Id: uint8(i)}
-		//if isYang {
+
 		posX, posY = GetNext(posX, posY)
 		posX0, posY0 = GetNext(posX0, posY0)
-		//} else {
-		//	posX, posY = GetPrev(posX, posY)
-		//	posX0, posY0 = GetPrev(posX0, posY0)
-		//}
+
+		// 神盘分阴阳遁
+
+		if isYang {
+			pan.grid[posX][posY].Shen = BaShen{Id: uint8(i)}
+		} else {
+			pan.grid[posX1][posY1].Shen = BaShen{Id: uint8(i)}
+			posX1, posY1 = GetPrev(posX1, posY1)
+		}
+
 	}
 	pan.grid[1][1].TianPanJiuXing = JiuXing{Id: TianQin}
 	pan.grid[1][1].TianPanQiYi = pan.grid[1][1].SanQiLiuYi
