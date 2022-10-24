@@ -1,6 +1,7 @@
 package main
 
 import (
+	"qimen/src/meihuayishu"
 	"qimen/src/qimen"
 	"qimen/src/qimen/dizhi"
 	"qimen/src/qimen/tiangan"
@@ -112,5 +113,14 @@ func main() {
 	// TODO:
 	//panSqzm1_5 := qimen.NewPan(qimen.JieQi{Id: qimen.ShuangJiang}, tiangan.TianGan{Id: tiangan.Gui}, dizhi.DiZhi{Id: dizhi.Mao}, dizhi.DiZhi{Id: dizhi.Shen})
 	//panSqzm1_5.Display()
+
+	// 《奇门遁甲现代应用》76页，例1
+	// 2007年5月6日辰时，立夏
+	// 庚子日 辰时
+	// TODO:
+	panHd1 := qimen.NewPan(qimen.JieQi{Id: qimen.LiXia}, tiangan.TianGan{Id: tiangan.Geng}, dizhi.DiZhi{Id: dizhi.Zi}, dizhi.DiZhi{Id: dizhi.Chen})
+	panHd1.Display()
+
+	meihuayishu.Test()
 
 }
