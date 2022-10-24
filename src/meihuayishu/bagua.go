@@ -1,11 +1,55 @@
 package meihuayishu
 
+import "qimen/src/qimen"
+
 type Gua64 struct {
 	Value uint8
 }
 
 type Gua8 struct {
 	Value uint8
+}
+
+func (pbg *Gua8) GetXing() qimen.Xing {
+	switch pbg.Value % 8 {
+	case 00: // 坤 土
+		return qimen.Xing{Id: qimen.TU}
+	case 01: // 震 木
+		return qimen.Xing{Id: qimen.MU}
+	case 02: // 坎 水
+		return qimen.Xing{Id: qimen.SHUI}
+	case 03: // 兑 金
+		return qimen.Xing{Id: qimen.JIN}
+	case 04: //	艮 土
+		return qimen.Xing{Id: qimen.TU}
+	case 05: // 离 火
+		return qimen.Xing{Id: qimen.HUO}
+	case 06: //	巽 木
+		return qimen.Xing{Id: qimen.MU}
+	case 07: // 乾 金
+		return qimen.Xing{Id: qimen.JIN}
+	}
+	return qimen.Xing{Id: qimen.MU}
+}
+
+func (pbg *Gua8) sheng(shengee Gua8) bool {
+	sheng1 := pbg.GetXing()
+	sheng2 := shengee.GetXing()
+	result := sheng1.Sheng(sheng2)
+	if result {
+		println(pbg.GetName(), "生", shengee.GetName())
+	}
+	return result
+}
+
+func (pbg *Gua8) ke(kee Gua8) bool {
+	ke1 := pbg.GetXing()
+	ke2 := kee.GetXing()
+	result := ke1.Ke(ke2)
+	if result {
+		println(pbg.GetName(), "克", kee.GetName())
+	}
+	return result
 }
 
 func (pbg *Gua8) GetName() string {
