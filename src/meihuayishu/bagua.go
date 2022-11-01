@@ -2,8 +2,26 @@ package meihuayishu
 
 import "qimen/src/qimen"
 
+type FullGua struct {
+	BenGua  Gua64
+	HuGua   Gua64
+	BianGua Gua64
+}
+
 type Gua64 struct {
 	Value uint8
+}
+
+func BuildGua(highGua Gua8, lowGua Gua8) *Gua64 {
+	return &Gua64{Value: highGua.Value<<3 + lowGua.Value}
+}
+
+func getHighGua(gua Gua64) Gua8 {
+	return Gua8{Value: gua.Value & 070}
+}
+
+func getLowGua(gua Gua64) Gua8 {
+	return Gua8{Value: gua.Value & 007}
 }
 
 type Gua8 struct {
@@ -101,14 +119,14 @@ type BaGua struct {
 }
 
 const (
-	QianGua = 1
-	DuiGua  = 2
-	LiGua   = 3
-	ZhenGua = 4
-	XunGua  = 5
-	KanGua  = 6
-	GenGua  = 7
-	KunGua  = 8
+	QianGua = 1 // 000 + 1
+	DuiGua  = 2 // 001 + 1
+	LiGua   = 3 // 010 + 1
+	ZhenGua = 4 // 011 + 1
+	XunGua  = 5 // 100 + 1
+	KanGua  = 6 // 101 + 1
+	GenGua  = 7 // 110 + 1
+	KunGua  = 8 // 111 + 1
 )
 
 func (pbg *BaGua) GetName() string {
