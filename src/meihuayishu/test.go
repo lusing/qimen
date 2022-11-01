@@ -8,5 +8,8 @@ func Test() {
 
 	// 观梅占例
 	ShiJianQiGua(dizhi.Chen+1, 12, 17, dizhi.Shen+1)
+
+	// 牡丹占
+	ShiJianQiGua(dizhi.Si+1, 3, 16, dizhi.Mao+1)
 	//LianZiQiGua(9, 12, 2)
 }
