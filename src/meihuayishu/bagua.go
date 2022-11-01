@@ -1,6 +1,9 @@
 package meihuayishu
 
-import "qimen/src/qimen"
+import (
+	"fmt"
+	"qimen/src/qimen"
+)
 
 type FullGua struct {
 	BenGua  Gua64
@@ -12,13 +15,26 @@ type Gua64 struct {
 	Value uint8
 }
 
-func (p64g *Gua64) GetName() string {
+func (p64g *Gua64) GetHuGua() Gua64 {
 	var value uint8 = p64g.Value
 	if value == 0 {
 		value = 0b111111
 	} else {
 		value = value - 1
 	}
+
+	var huGua uint8 = 0
+	xiaGua := value & 0b001110
+	xiaGua = xiaGua >> 1
+	shangGua := value & 0b011100
+	shangGua = shangGua << 1
+	huGua = xiaGua | shangGua
+
+	return Gua64{huGua + 1}
+}
+
+func (p64g *Gua64) GetName() string {
+	var value uint8 = p64g.Value
 
 	switch value {
 	case 0b000000:
@@ -170,29 +186,18 @@ type Gua8 struct {
 	Value uint8
 }
 
-func (pbg *Gua8) GetXing() qimen.Xing {
-	switch pbg.Value % 8 {
-	case 00: // 坤 土
-		return qimen.Xing{Id: qimen.TU}
-	case 01: // 震 木
-		return qimen.Xing{Id: qimen.MU}
-	case 02: // 坎 水
-		return qimen.Xing{Id: qimen.SHUI}
-	case 03: // 兑 金
+func (pbg *BaGua) GetXing() qimen.Xing {
+	switch pbg.Value {
+	case 0b000: // 乾 金
 		return qimen.Xing{Id: qimen.JIN}
-	case 04: //	艮 土
+	case 0b001: // 巽 风
 		return qimen.Xing{Id: qimen.TU}
-	case 05: // 离 火
-		return qimen.Xing{Id: qimen.HUO}
-	case 06: //	巽 木
-		return qimen.Xing{Id: qimen.MU}
-	case 07: // 乾 金
-		return qimen.Xing{Id: qimen.JIN}
+
 	}
-	return qimen.Xing{Id: qimen.MU}
+	return qimen.Xing{Id: qimen.JIN}
 }
 
-func (pbg *Gua8) sheng(shengee Gua8) bool {
+func (pbg BaGua) sheng(shengee BaGua) bool {
 	sheng1 := pbg.GetXing()
 	sheng2 := shengee.GetXing()
 	result := sheng1.Sheng(sheng2)
@@ -202,7 +207,7 @@ func (pbg *Gua8) sheng(shengee Gua8) bool {
 	return result
 }
 
-func (pbg *Gua8) ke(kee Gua8) bool {
+func (pbg *BaGua) ke(kee BaGua) bool {
 	ke1 := pbg.GetXing()
 	ke2 := kee.GetXing()
 	result := ke1.Ke(ke2)
@@ -212,66 +217,46 @@ func (pbg *Gua8) ke(kee Gua8) bool {
 	return result
 }
 
-func (pbg *Gua8) GetName() string {
-	switch pbg.Value % 8 {
-	case 00:
-		return "坤"
-	case 01:
-		return "震"
-	case 02:
-		return "坎"
-	case 03:
-		return "兑"
-	case 04:
-		return "艮"
-	case 05:
-		return "离"
-	case 06:
-		return "巽"
-	case 07:
-		return "乾"
-	}
-	return "无极"
+func NewGua64FromNumbers(lowGuaNumber int, highGuaNumber int) *Gua64 {
+	lowGua := NewGuaFromNumber(lowGuaNumber)
+	highGua := NewGuaFromNumber(highGuaNumber)
+	result := highGua.Value<<3 + lowGua.Value
+	fmt.Printf("lowGua: %b, highGua: %b, result:%b", lowGua, highGua, result)
+	return &Gua64{Value: result}
 }
 
-func NewGuaFromNumber(num int) *Gua8 {
-	switch num % 8 {
-	case KunGua % 8:
-		return &Gua8{Value: 00}
-	case QianGua:
-		return &Gua8{Value: 07}
-	case DuiGua:
-		return &Gua8{Value: 03}
-	case LiGua:
-		return &Gua8{Value: 05}
-	case ZhenGua:
-		return &Gua8{Value: 01}
-	case XunGua:
-		return &Gua8{Value: 06}
-	case KanGua:
-		return &Gua8{Value: 02}
-	case GenGua:
-		return &Gua8{Value: 04}
-	}
-	return &Gua8{}
+func NewGuaFromNumber(num int) *BaGua {
+	value := (num - 1) % 8
+	var value8 uint8 = uint8(value) & 0b111
+	//fmt.Printf("value8:%b\n", value8)
+	value8 = (^value8) & 0b111
+	//fmt.Printf("value8: %b\n", value8)
+	value0 := value8 & 0b001
+	value1 := (value8 & 0b010) >> 1
+	value2 := (value8 & 0b100) >> 2
+	//println(value0, value1, value2)
+	result := (value0 << 2) + (value1 << 1) + value2
+	fmt.Printf("result: %b\n", result)
+	return &BaGua{Value: result}
 }
 
 type BaGua struct {
-	Id uint8
+	Value uint8
 }
 
 const (
-	QianGua = 1 // 000 + 1
-	DuiGua  = 2 // 001 + 1
-	LiGua   = 3 // 010 + 1
-	ZhenGua = 4 // 011 + 1
-	XunGua  = 5 // 100 + 1
-	KanGua  = 6 // 101 + 1
-	GenGua  = 7 // 110 + 1
-	KunGua  = 8 // 111 + 1
+	QianGua = 0b000
+	DuiGua  = 0b001
+	LiGua   = 0b010
+	ZhenGua = 0b011
+	XunGua  = 0b100
+	KanGua  = 0b101
+	GenGua  = 0b110
+	KunGua  = 0b111
 )
 
 func (pbg *BaGua) GetName() string {
-	names := []string{"坤", "乾", "兑", "离", "震", "巽", "坎", "艮", "坤"}
-	return names[pbg.Id%8]
+	//names := []string{"乾", "兑", "离", "震", "巽", "坎", "艮", "坤"}
+	names := []string{"坤", "震", "坎", "兑", "艮", "离", "巽", "乾"}
+	return names[pbg.Value%8]
 }
