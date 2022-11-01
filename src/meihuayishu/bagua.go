@@ -12,6 +12,7 @@ type FullGua struct {
 }
 
 func (gua *FullGua) DuanGua() {
+	gua.BenGua.GetYaoCi(gua.BianYao)
 	lowIsTi := gua.BianYao > 3
 	var tiGua, tiGua1, tiGua2 BaGua
 	var yongGua, yongGua1, yongGua2 BaGua
@@ -326,4 +327,30 @@ func (pbg *BaGua) GetName() string {
 	//names := []string{"乾", "兑", "离", "震", "巽", "坎", "艮", "坤"}
 	names := []string{"坤", "震", "坎", "兑", "艮", "离", "巽", "乾"}
 	return names[pbg.Value%8]
+}
+
+func (pgua *Gua64) GetYaoCi(yao int) {
+	switch pgua.Value {
+	case 0b000000:
+		if yao == 1 {
+			println("初六：履霜，坚冰至。")
+		}
+	case 0b010001: // 水雷屯
+		println("屯，元亨，利贞；勿用有攸往，利建侯。")
+		println("《彖》曰：屯，刚柔始交而难生，动乎险中，大亨贞。雷雨之动满盈，天造草昧，宜守建侯而不宁")
+		println("《象》曰：云雷屯；君子以经纶。")
+		if yao == 1 {
+			println("初九：磐桓，利居贞，利建侯。")
+		} else if yao == 2 {
+			println("六二：屯如邅如，乘马班如。匪寇，婚媾，女子贞不字，十年乃字。")
+		} else if yao == 3 {
+			println("六三：即鹿无虞，惟入于林中，君子几不如舍，往吝。")
+		} else if yao == 4 {
+			println("六四：乘马班如，求婚媾，往吉，无不利。")
+		} else if yao == 5 {
+			println("九五：屯其膏，小贞吉，大贞凶。")
+		} else if yao == 6 {
+			println("上六：乘马班如，泣血涟如。")
+		}
+	}
 }
