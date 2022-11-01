@@ -1,7 +1,6 @@
 package meihuayishu
 
 import (
-	"fmt"
 	"qimen/src/qimen"
 )
 
@@ -9,19 +8,76 @@ type FullGua struct {
 	BenGua  Gua64
 	HuGua   Gua64
 	BianGua Gua64
+	BianYao int
+}
+
+func (gua *FullGua) DuanGua() {
+	lowIsTi := gua.BianYao > 3
+	var tiGua, tiGua1, tiGua2 BaGua
+	var yongGua, yongGua1, yongGua2 BaGua
+	if lowIsTi {
+		println("下卦为体")
+		tiGua = gua.BenGua.GetLow()
+		yongGua = gua.BenGua.GetHigh()
+		tiGua1 = gua.HuGua.GetLow()
+		yongGua1 = gua.HuGua.GetHigh()
+		tiGua2 = gua.BianGua.GetLow()
+		yongGua2 = gua.BianGua.GetHigh()
+	} else {
+		println("下卦为用")
+		tiGua = gua.BenGua.GetHigh()
+		yongGua = gua.BenGua.GetLow()
+		tiGua1 = gua.HuGua.GetHigh()
+		yongGua1 = gua.HuGua.GetLow()
+		tiGua2 = gua.BianGua.GetHigh()
+		yongGua2 = gua.BianGua.GetLow()
+	}
+	println("体卦：", tiGua.GetName())
+	println("用卦：", yongGua.GetName())
+
+	print("本卦：")
+	JiXiong(yongGua, tiGua)
+
+	print("互卦：")
+	JiXiong(yongGua1, tiGua1)
+
+	print("变卦：")
+	JiXiong(yongGua2, tiGua2)
+}
+
+func JiXiong(yongGua BaGua, tiGua BaGua) {
+	if yongGua.Sheng(&tiGua) {
+		println("用卦生体卦，大吉")
+	} else if tiGua.Sheng(&yongGua) {
+		println("用卦生体卦，小凶")
+	} else if tiGua.Ke(&yongGua) {
+		println("用卦克体卦，大凶")
+	} else if yongGua.Ke(&tiGua) {
+		println("用卦克体卦，小吉")
+	} else {
+		println("用卦不生体卦，不克体卦，中平")
+	}
 }
 
 type Gua64 struct {
 	Value uint8
 }
 
+func (pbg *Gua64) GetLow() BaGua {
+	value := pbg.Value & 0b000111
+	//fmt.Printf("%b", value)
+	return BaGua{Value: value}
+}
+
+func (pbg *Gua64) GetHigh() BaGua {
+	value := pbg.Value & 0b111000
+	value = value >> 3
+	//fmt.Printf("%b", value)
+	return BaGua{Value: value}
+}
+
 func (p64g *Gua64) GetHuGua() Gua64 {
 	var value uint8 = p64g.Value
-	if value == 0 {
-		value = 0b111111
-	} else {
-		value = value - 1
-	}
 
 	var huGua uint8 = 0
 	xiaGua := value & 0b001110
@@ -30,7 +86,20 @@ func (p64g *Gua64) GetHuGua() Gua64 {
 	shangGua = shangGua << 1
 	huGua = xiaGua | shangGua
 
-	return Gua64{huGua + 1}
+	return Gua64{huGua}
+}
+
+func (p64g *Gua64) GetBianGua(bianYao int) Gua64 {
+	var value uint8 = p64g.Value
+	var value2 uint8 = 1
+
+	if bianYao > 1 {
+		value2 = value2 << (bianYao - 1)
+	}
+
+	var bianGua uint8 = value ^ value2
+
+	return Gua64{bianGua}
 }
 
 func (p64g *Gua64) GetName() string {
@@ -170,34 +239,29 @@ func (p64g *Gua64) GetName() string {
 	return "混沌未开"
 }
 
-func BuildGua(highGua Gua8, lowGua Gua8) *Gua64 {
-	return &Gua64{Value: highGua.Value<<3 + lowGua.Value}
-}
-
-func getHighGua(gua Gua64) Gua8 {
-	return Gua8{Value: gua.Value & 070}
-}
-
-func getLowGua(gua Gua64) Gua8 {
-	return Gua8{Value: gua.Value & 007}
-}
-
-type Gua8 struct {
-	Value uint8
-}
-
 func (pbg *BaGua) GetXing() qimen.Xing {
 	switch pbg.Value {
-	case 0b000: // 乾 金
-		return qimen.Xing{Id: qimen.JIN}
-	case 0b001: // 巽 风
+	case 0b000: // 坤 土
 		return qimen.Xing{Id: qimen.TU}
-
+	case 0b001: // 震 木
+		return qimen.Xing{Id: qimen.MU}
+	case 0b010: // 坎 水
+		return qimen.Xing{Id: qimen.SHUI}
+	case 0b011: // 兑 金
+		return qimen.Xing{Id: qimen.JIN}
+	case 0b100: // 艮 土
+		return qimen.Xing{Id: qimen.TU}
+	case 0b101: // 离 火
+		return qimen.Xing{Id: qimen.HUO}
+	case 0b110: // 巽 木
+		return qimen.Xing{Id: qimen.MU}
+	case 0b111: // 乾 金
+		return qimen.Xing{Id: qimen.JIN}
 	}
 	return qimen.Xing{Id: qimen.JIN}
 }
 
-func (pbg BaGua) sheng(shengee BaGua) bool {
+func (pbg BaGua) Sheng(shengee *BaGua) bool {
 	sheng1 := pbg.GetXing()
 	sheng2 := shengee.GetXing()
 	result := sheng1.Sheng(sheng2)
@@ -207,7 +271,7 @@ func (pbg BaGua) sheng(shengee BaGua) bool {
 	return result
 }
 
-func (pbg *BaGua) ke(kee BaGua) bool {
+func (pbg *BaGua) Ke(kee *BaGua) bool {
 	ke1 := pbg.GetXing()
 	ke2 := kee.GetXing()
 	result := ke1.Ke(ke2)
@@ -217,12 +281,15 @@ func (pbg *BaGua) ke(kee BaGua) bool {
 	return result
 }
 
-func NewGua64FromNumbers(lowGuaNumber int, highGuaNumber int) *Gua64 {
+func NewGua64FromNumbers(lowGuaNumber int, highGuaNumber int, bianYao int) *FullGua {
 	lowGua := NewGuaFromNumber(lowGuaNumber)
 	highGua := NewGuaFromNumber(highGuaNumber)
 	result := highGua.Value<<3 + lowGua.Value
-	fmt.Printf("lowGua: %b, highGua: %b, result:%b", lowGua, highGua, result)
-	return &Gua64{Value: result}
+	//fmt.Printf("lowGua: %b, highGua: %b, result:%b", lowGua, highGua, result)
+	benGua := Gua64{Value: result}
+	huGua := benGua.GetHuGua()
+	bianGua := benGua.GetBianGua(bianYao)
+	return &FullGua{BenGua: benGua, HuGua: huGua, BianGua: bianGua, BianYao: bianYao}
 }
 
 func NewGuaFromNumber(num int) *BaGua {
@@ -236,7 +303,7 @@ func NewGuaFromNumber(num int) *BaGua {
 	value2 := (value8 & 0b100) >> 2
 	//println(value0, value1, value2)
 	result := (value0 << 2) + (value1 << 1) + value2
-	fmt.Printf("result: %b\n", result)
+	//fmt.Printf("result: %b\n", result)
 	return &BaGua{Value: result}
 }
 
