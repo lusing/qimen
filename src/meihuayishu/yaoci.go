@@ -78,6 +78,19 @@ func (pgua *Gua64) GetYaoCi(yao int) {
 		println("井：改邑不改井，无丧无得，往来井井。汔至，亦未繘井，羸其瓶，凶。")
 	case 0b010111: // 水天需
 		println("需：有孚，光亨，贞吉，利涉大川。")
+		if yao == 1 {
+			println("初九：需于郊，利用恒，无咎。")
+		} else if yao == 2 {
+			println("九二：需于沙，小有言，终吉。")
+		} else if yao == 3 {
+			println("九三：需于泥，致寇至。")
+		} else if yao == 4 {
+			println("六四：需于血，出自穴。")
+		} else if yao == 5 {
+			println("九五：需于酒食，贞吉。")
+		} else if yao == 6 {
+			println("上六：入于穴，有不速之客三人来，敬之终吉。")
+		}
 	case 0b011000: // 泽地萃
 		println("萃：亨。王假有庙，利见大人，亨，利贞。用大牲吉，利有攸往。")
 	case 0b011001: // 泽雷随
@@ -161,6 +174,19 @@ func (pgua *Gua64) GetYaoCi(yao int) {
 		println("无妄：元亨，利贞，其匪正有眚，不利有攸往。")
 	case 0b111010: // 天水讼
 		println("讼：有孚，窒惕，中吉，终凶。利见大人，不利涉大川。")
+		if yao == 1 {
+			println("初六：不永所事，小有言，终吉。")
+		} else if yao == 2 {
+			println("九二：不克讼，归而逋其邑人，三百户，无眚。")
+		} else if yao == 3 {
+			println("九三：食旧德，贞厉，终吉。或从王事，无成有终。")
+		} else if yao == 4 {
+			println("九四：不克讼，复即命，渝，安贞吉。")
+		} else if yao == 5 {
+			println("九五：讼，元吉。")
+		} else if yao == 6 {
+			println("上九：或锡之鞶带，终朝三褫之。")
+		}
 	case 0b111011: // 天泽履
 		println("履：履虎尾，不咥人，亨。")
 	case 0b111100: // 天山遁
