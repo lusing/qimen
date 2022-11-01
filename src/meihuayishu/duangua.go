@@ -28,6 +28,7 @@ func ShiJianQiGua(year int, month int, day int, hour int) {
 }
 
 // 二字占：二字为两仪平分，以一字为上卦，以一字为下卦
+
 func LianZiQiGua(zi1 int, zi2 int, hour int) {
 	var shangGua uint8 = uint8(zi1 % 8)
 	//println("上卦：", shangGua)
