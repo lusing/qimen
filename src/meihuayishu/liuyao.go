@@ -2,6 +2,7 @@ package meihuayishu
 
 import (
 	"qimen/src/qimen/dizhi"
+	"qimen/src/qimen/tiangan"
 	"qimen/src/qimen/wuxing"
 )
 
@@ -12,6 +13,7 @@ type Yao struct {
 	LQ     LiuQin // 六亲
 	IsShi  bool   // 世爻
 	IsYing bool   // 应爻
+	LS     LiuShen
 }
 
 type GuaYao struct {
@@ -170,22 +172,40 @@ func (gua *FullGua) PaiPan() {
 		}
 	}
 
-	println("gong:", gong.GetName())
+	for i := 0; i < 6; i++ {
+		switch gua.RiGan.Id {
+		case tiangan.Jia, tiangan.Yi:
+			yao6.Yaos[i].LS.Id = (QINGLONG + i) % 6
+		case tiangan.Bing, tiangan.Ding:
+			yao6.Yaos[i].LS.Id = (ZHUQUE + i) % 6
+		case tiangan.Wu:
+			yao6.Yaos[i].LS.Id = (GOUCHEN + i) % 6
+		case tiangan.Ji:
+			yao6.Yaos[i].LS.Id = (TENGSHE + i) % 6
+		case tiangan.Geng, tiangan.Xin:
+			yao6.Yaos[i].LS.Id = (BAIHU + i) % 6
+		case tiangan.Ren, tiangan.Gui:
+			yao6.Yaos[i].LS.Id = (XUANWU + i) % 6
+		}
+	}
+
+	println("宫:", gong.GetName())
 
 	for i := 5; i >= 0; i-- {
+		print(yao6.Yaos[i].LS.GetName(), " ")
 		if yao6.Yaos[i].Value {
-			print("-")
+			print("- ")
 		} else {
-			print("=")
+			print("= ")
 		}
 		print(yao6.Yaos[i].LQ.GetName())
 		print(yao6.Yaos[i].NaZhi.GetName())
 		xing := yao6.Yaos[i].NaZhi.GetXing()
 		print(xing.GetName())
 		if yao6.Yaos[i].IsShi {
-			print("世")
+			print(" 世")
 		} else if yao6.Yaos[i].IsYing {
-			print("应")
+			print(" 应")
 		}
 		println()
 	}

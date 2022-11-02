@@ -1,6 +1,9 @@
 package meihuayishu
 
-import "qimen/src/qimen/dizhi"
+import (
+	"qimen/src/qimen/dizhi"
+	"qimen/src/qimen/tiangan"
+)
 
 func Test() {
 
@@ -12,7 +15,8 @@ func Test() {
 	// 牡丹占
 	ShiJianQiGua(dizhi.Si+1, 3, 16, dizhi.Mao+1)
 
+	gan1 := tiangan.TianGan{Id: tiangan.Ji}
 	zhi1 := dizhi.DiZhi{Id: dizhi.Wei}
-	LianZiQiGua(14, 12, 2, zhi1)
+	LianZiQiGua(14, 12, 2, zhi1, gan1)
 
 }

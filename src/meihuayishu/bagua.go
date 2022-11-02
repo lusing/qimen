@@ -2,6 +2,7 @@ package meihuayishu
 
 import (
 	"qimen/src/qimen/dizhi"
+	"qimen/src/qimen/tiangan"
 	"qimen/src/qimen/wuxing"
 )
 
@@ -11,6 +12,7 @@ type FullGua struct {
 	BianGua Gua64
 	BianYao int
 	RiZhi   dizhi.DiZhi
+	RiGan   tiangan.TianGan
 }
 
 func (gua *FullGua) DuanGua() {

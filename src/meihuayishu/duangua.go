@@ -1,6 +1,9 @@
 package meihuayishu
 
-import "qimen/src/qimen/dizhi"
+import (
+	"qimen/src/qimen/dizhi"
+	"qimen/src/qimen/tiangan"
+)
 
 // 年月日时起例。年月日为上卦。年月日加时总数为下卦。又以年月日时总数取爻
 
@@ -31,7 +34,7 @@ func ShiJianQiGua(year int, month int, day int, hour int) {
 
 // 二字占：二字为两仪平分，以一字为上卦，以一字为下卦
 
-func LianZiQiGua(zi1 int, zi2 int, hour int, riZhi dizhi.DiZhi) {
+func LianZiQiGua(zi1 int, zi2 int, hour int, riZhi dizhi.DiZhi, riGan tiangan.TianGan) {
 	var shangGua uint8 = uint8(zi1 % 8)
 	//println("上卦：", shangGua)
 	//sg := NewGuaFromNumber(int(shangGua))
@@ -55,6 +58,7 @@ func LianZiQiGua(zi1 int, zi2 int, hour int, riZhi dizhi.DiZhi) {
 	fullGua.DuanGua()
 
 	fullGua.RiZhi = riZhi
+	fullGua.RiGan = riGan
 
 	fullGua.PaiPan()
 }
