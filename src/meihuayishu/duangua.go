@@ -54,5 +54,7 @@ func LianZiQiGua(zi1 int, zi2 int, hour int, riZhi dizhi.DiZhi) {
 
 	fullGua.DuanGua()
 
+	fullGua.RiZhi = riZhi
+
 	fullGua.PaiPan()
 }

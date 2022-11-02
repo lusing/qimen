@@ -330,3 +330,7 @@ func (pbg *BaGua) GetName() string {
 	names := []string{"坤", "震", "坎", "兑", "艮", "离", "巽", "乾"}
 	return names[pbg.Value%8]
 }
+
+func (pbg *BaGua) GetFan() BaGua {
+	return BaGua{Value: (^pbg.Value) & 0b111}
+}

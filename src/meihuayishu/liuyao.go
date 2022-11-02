@@ -1,14 +1,22 @@
 package meihuayishu
 
-import "qimen/src/qimen/dizhi"
+import (
+	"qimen/src/qimen/dizhi"
+	"qimen/src/qimen/wuxing"
+)
 
 type Yao struct {
-	Value bool
-	NaZhi dizhi.DiZhi
+	Value  bool        // 1为阳，0为阴
+	NaZhi  dizhi.DiZhi // 纳支
+	WuXing wuxing.Xing
+	LQ     LiuQin // 六亲
+	IsShi  bool   // 世爻
+	IsYing bool   // 应爻
 }
 
 type GuaYao struct {
-	Yaos [6]Yao
+	Yaos     [6]Yao
+	GuanGong BaGua
 }
 
 func (gua *FullGua) PaiPan() {
@@ -87,15 +95,98 @@ func (gua *FullGua) PaiPan() {
 		yao6.Yaos[5].NaZhi.Id = dizhi.Mao
 	}
 
+	// 寻世问宫
+	for i := 0; i < 6; i++ {
+		yao6.Yaos[i].IsShi = false
+		yao6.Yaos[i].IsYing = false
+	}
+
+	var gong BaGua
+
+	if yao6.Yaos[2].Value == yao6.Yaos[5].Value &&
+		yao6.Yaos[1].Value != yao6.Yaos[4].Value &&
+		yao6.Yaos[0].Value != yao6.Yaos[3].Value {
+		// 天同二世
+		yao6.Yaos[1].IsShi = true
+		yao6.Yaos[4].IsYing = true
+		gong = shangGua
+		//println("天同二世")
+	} else if yao6.Yaos[2].Value != yao6.Yaos[5].Value &&
+		yao6.Yaos[1].Value == yao6.Yaos[4].Value &&
+		yao6.Yaos[0].Value == yao6.Yaos[3].Value {
+		yao6.Yaos[4].IsShi = true
+		yao6.Yaos[1].IsYing = true
+		println("天变五")
+	} else if yao6.Yaos[0].Value == yao6.Yaos[3].Value &&
+		yao6.Yaos[1].Value != yao6.Yaos[4].Value &&
+		yao6.Yaos[2].Value != yao6.Yaos[5].Value {
+		yao6.Yaos[3].IsShi = true
+		yao6.Yaos[0].IsYing = true
+		gong = xiaGua.GetFan()
+		println("地同四世")
+	} else if yao6.Yaos[0].Value != yao6.Yaos[3].Value &&
+		yao6.Yaos[1].Value == yao6.Yaos[4].Value &&
+		yao6.Yaos[2].Value == yao6.Yaos[5].Value {
+		yao6.Yaos[0].IsShi = true
+		yao6.Yaos[3].IsYing = true
+		gong = shangGua
+		println("地变初，一世")
+	} else if yao6.Yaos[1].Value == yao6.Yaos[4].Value &&
+		yao6.Yaos[0].Value != yao6.Yaos[3].Value &&
+		yao6.Yaos[2].Value != yao6.Yaos[5].Value {
+		yao6.Yaos[3].IsShi = true
+		yao6.Yaos[0].IsYing = true
+		gong = xiaGua.GetFan()
+		println("人同游魂")
+	} else if yao6.Yaos[1].Value != yao6.Yaos[4].Value &&
+		yao6.Yaos[0].Value == yao6.Yaos[3].Value &&
+		yao6.Yaos[2].Value == yao6.Yaos[5].Value {
+		yao6.Yaos[2].IsShi = true
+		yao6.Yaos[5].IsYing = true
+		gong = xiaGua
+		println("人变归魂")
+	}
+
+	// 宫主
+	if xiaGua.Value == shangGua.Value {
+		yao6.Yaos[0].IsShi = true
+		yao6.Yaos[3].IsYing = true
+		gong = shangGua
+	}
+
+	for i := 0; i < 6; i++ {
+		gongWuXing := gong.GetXing()
+		zhiWuXing := yao6.Yaos[i].NaZhi.GetXing()
+		if yao6.Yaos[i].NaZhi.GetXing().Id == gongWuXing.Id {
+			yao6.Yaos[i].LQ.Id = XIONGDI
+		} else if zhiWuXing.Sheng(gongWuXing) {
+			yao6.Yaos[i].LQ.Id = FUMU
+		} else if zhiWuXing.Ke(gongWuXing) {
+			yao6.Yaos[i].LQ.Id = GUANGUI
+		} else if gongWuXing.Sheng(zhiWuXing) {
+			yao6.Yaos[i].LQ.Id = ZISUN
+		} else if gongWuXing.Ke(zhiWuXing) {
+			yao6.Yaos[i].LQ.Id = QICAI
+		}
+	}
+
+	println("gong:", gong.GetName())
+
 	for i := 5; i >= 0; i-- {
 		if yao6.Yaos[i].Value {
 			print("-")
 		} else {
 			print("=")
 		}
+		print(yao6.Yaos[i].LQ.GetName())
 		print(yao6.Yaos[i].NaZhi.GetName())
 		xing := yao6.Yaos[i].NaZhi.GetXing()
 		print(xing.GetName())
+		if yao6.Yaos[i].IsShi {
+			print("世")
+		} else if yao6.Yaos[i].IsYing {
+			print("应")
+		}
 		println()
 	}
 }
