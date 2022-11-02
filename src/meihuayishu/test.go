@@ -12,5 +12,5 @@ func Test() {
 	// 牡丹占
 	ShiJianQiGua(dizhi.Si+1, 3, 16, dizhi.Mao+1)
 
-	LianZiQiGua(14, 12, 2)
+	LianZiQiGua(14, 12, 2, dizhi.DiZhi{Id: dizhi.Wei})
 }
