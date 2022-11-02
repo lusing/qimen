@@ -1,4 +1,4 @@
-package qimen
+package wuxing
 
 type Xing struct {
 	Id uint8

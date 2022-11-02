@@ -51,4 +51,6 @@ func LianZiQiGua(zi1 int, zi2 int, hour int) {
 	println("变卦：", fullGua.BianGua.GetName())
 
 	fullGua.DuanGua()
+
+	fullGua.PaiPan()
 }

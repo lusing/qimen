@@ -1,7 +1,7 @@
 package meihuayishu
 
 import (
-	"qimen/src/qimen"
+	"qimen/src/qimen/wuxing"
 )
 
 type FullGua struct {
@@ -240,26 +240,26 @@ func (p64g *Gua64) GetName() string {
 	return "混沌未开"
 }
 
-func (pbg *BaGua) GetXing() qimen.Xing {
+func (pbg *BaGua) GetXing() wuxing.Xing {
 	switch pbg.Value {
 	case 0b000: // 坤 土
-		return qimen.Xing{Id: qimen.TU}
+		return wuxing.Xing{Id: wuxing.TU}
 	case 0b001: // 震 木
-		return qimen.Xing{Id: qimen.MU}
+		return wuxing.Xing{Id: wuxing.MU}
 	case 0b010: // 坎 水
-		return qimen.Xing{Id: qimen.SHUI}
+		return wuxing.Xing{Id: wuxing.SHUI}
 	case 0b011: // 兑 金
-		return qimen.Xing{Id: qimen.JIN}
+		return wuxing.Xing{Id: wuxing.JIN}
 	case 0b100: // 艮 土
-		return qimen.Xing{Id: qimen.TU}
+		return wuxing.Xing{Id: wuxing.TU}
 	case 0b101: // 离 火
-		return qimen.Xing{Id: qimen.HUO}
+		return wuxing.Xing{Id: wuxing.HUO}
 	case 0b110: // 巽 木
-		return qimen.Xing{Id: qimen.MU}
+		return wuxing.Xing{Id: wuxing.MU}
 	case 0b111: // 乾 金
-		return qimen.Xing{Id: qimen.JIN}
+		return wuxing.Xing{Id: wuxing.JIN}
 	}
-	return qimen.Xing{Id: qimen.JIN}
+	return wuxing.Xing{Id: wuxing.JIN}
 }
 
 func (pbg BaGua) Sheng(shengee *BaGua) bool {
