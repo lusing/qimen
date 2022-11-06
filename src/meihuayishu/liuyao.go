@@ -7,7 +7,7 @@ import (
 )
 
 type Yao struct {
-	Value  bool        // 1为阳，0为阴
+	Value  bool        // true为阳，false为阴
 	NaZhi  dizhi.DiZhi // 纳支
 	WuXing wuxing.Xing
 	LQ     LiuQin // 六亲
