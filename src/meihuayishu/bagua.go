@@ -6,6 +6,8 @@ import (
 	"qimen/src/qimen/wuxing"
 )
 
+// TODO: 这只针对梅花的
+
 type FullGua struct {
 	BenGua  Gua64
 	HuGua   Gua64
