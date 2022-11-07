@@ -21,7 +21,7 @@ class Gua8 : WuXing {
         val result = (value0.shl(2)) + (value1.shl(1)) + value2
         //println("Output value:"+result.toString(2))
         this.value = result
-        super.xing = getXing()
+        super.xing = getXingImpl()
     }
     
     constructor(first :Boolean, second :Boolean, third :Boolean) : super(WuXing.TU) {
@@ -30,10 +30,10 @@ class Gua8 : WuXing {
         if (second) value = value.or(0b010)
         if (third) value = value.or(0b100)
         this.value = value
-        super.xing = getXing()
+        super.xing = getXingImpl()
     }
 
-    fun getXing() :Int {
+    fun getXingImpl() :Int {
         return when (this.value) {
             0b000-> (WuXing.TU)
             0b001-> (WuXing.MU)
