@@ -3,18 +3,17 @@ package com.github.lusing.liuyao
 class LiuQin {
     var lq: Int = XIONGDI
 
-    fun getName() :String {
-        when  (this.lq) {
-            FUMU->
-            return "父母"
-            ZISUN->
-            return "子孙"
-            GUANGUI->
-            return "官鬼"
-            QICAI->
-            return "妻财"
-            XIONGDI->
-            return "兄弟"
+    fun getName(): String {
+        when (this.lq) {
+            FUMU -> return "父母"
+
+            ZISUN -> return "子孙"
+
+            GUANGUI -> return "官鬼"
+
+            QICAI -> return "妻财"
+
+            XIONGDI -> return "兄弟"
         }
         return ""
     }
