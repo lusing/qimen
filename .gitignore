@@ -1,2 +1,4 @@
-.idea
-/src.exe
+/go/.idea
+/go/src.exe
+/kotlin/out/
+/kotlin/.idea/
