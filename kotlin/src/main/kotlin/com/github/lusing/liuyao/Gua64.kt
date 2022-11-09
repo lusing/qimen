@@ -3,6 +3,7 @@ package com.github.lusing.liuyao
 
 class Gua64 {
     val value: Int
+    lateinit var yaos: Array<Yao>
 
     constructor(value: Int) {
         this.value = value
@@ -12,23 +13,77 @@ class Gua64 {
         val lowGua = Gua8(lowNum)
         val highGua = Gua8(highNum)
         this.value = (highGua.value.shl(3)) + lowGua.value
+        var yao = Yao(8)
+        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
     }
 
     constructor(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int) {
         var value = 0
-        if (first % 2 == 1) value = value.or(0b00000001)
-        if (second % 2 == 1) value = value.or(0b00000010)
-        if (third % 2 == 1) value = value.or(0b00000100)
-        if (fourth % 2 == 1) value = value.or(0b00001000)
-        if (fifth % 2 == 1) value = value.or(0b00010000)
-        if (sixth % 2 == 1) value = value.or(0b00100000)
+        if (first % 2 == 1) {
+            value = value.or(0b00000001)
+            this.yaos[0].isYang = true
+        }else{
+            this.yaos[0].isYang = false
+        }
+        if (second % 2 == 1) {
+            value = value.or(0b00000010)
+            this.yaos[1].isYang = true
+        }else{
+            this.yaos[1].isYang = false
+        }
+        if (third % 2 == 1) {
+            value = value.or(0b00000100)
+            this.yaos[2].isYang = true
+        }else{
+            this.yaos[2].isYang = false
+        }
+        if (fourth % 2 == 1) {
+            value = value.or(0b00001000)
+            this.yaos[3].isYang = true
+        }else{
+            this.yaos[3].isYang = false
+        }
+        if (fifth % 2 == 1) {
+            value = value.or(0b00010000)
+            this.yaos[4].isYang = true
+        }else{
+            this.yaos[4].isYang = false
+        }
+        if (sixth % 2 == 1) {
+            value = value.or(0b00100000)
+            this.yaos[5].isYang = true
+        }else{
+            this.yaos[5].isYang = false
+        }
         this.value = value
+    }
+
+    constructor(values: Array<Int>){
+        var value = 0
+        if (values[0] % 2 == 1) value = value.or(0b00000001)
+        if (values[1] % 2 == 1) value = value.or(0b00000010)
+        if (values[2] % 2 == 1) value = value.or(0b00000100)
+        if (values[3] % 2 == 1) value = value.or(0b00001000)
+        if (values[4] % 2 == 1) value = value.or(0b00010000)
+        if (values[5] % 2 == 1) value = value.or(0b00100000)
+        this.value = value
+    }
+
+    fun getGuaArray(): Array<Boolean>{
+        val result = arrayOf(false, false, false, false, false, false)
+        if (value.and(0b00000001) == 0b00000001) result[0] = true
+        if (value.and(0b00000010) == 0b00000010) result[1] = true
+        if (value.and(0b00000100) == 0b00000100) result[2] = true
+        if (value.and(0b00001000) == 0b00001000) result[3] = true
+        if (value.and(0b00010000) == 0b00010000) result[4] = true
+        if (value.and(0b00100000) == 0b00100000) result[5] = true
+        return result
     }
 
     /*
      * 取下卦
      */
-    fun GetLow(): Gua8 {
+    fun getLow(): Gua8 {
         val value = this.value.and(0b000111)
         //fmt.Printf("%b", value)
         var gua = Gua8(value)
@@ -36,7 +91,7 @@ class Gua64 {
         return gua
     }
 
-    fun GetHigh(): Gua8 {
+    fun getHigh(): Gua8 {
         var value = this.value.and(0b111000)
         value.ushr(3)
         var gua = Gua8(value)

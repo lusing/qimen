@@ -1,11 +1,9 @@
-import com.github.lusing.liuyao.Gua8
+import com.github.lusing.liuyao.Test
 
 fun main() {
     //val eng = QiMenEngine()
     //eng.run()
+    var test1 = Test()
+    test1.test()
 
-    for (i in 1..8){
-        val gua = Gua8(i)
-        println(gua.getName())
-    }
 }

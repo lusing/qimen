@@ -5,7 +5,6 @@ import com.github.lusing.qimen.WuXing
 
 class Gua8 : WuXing {
     var value: Int
-        set
 
     /*
      * 根据先天八卦数起卦
@@ -23,8 +22,8 @@ class Gua8 : WuXing {
         this.value = result
         super.xing = getXingImpl()
     }
-    
-    constructor(first :Boolean, second :Boolean, third :Boolean) : super(WuXing.TU) {
+
+    constructor(first: Boolean, second: Boolean, third: Boolean) : super(WuXing.TU) {
         var value = 0
         if (first) value = value.or(0b001)
         if (second) value = value.or(0b010)
@@ -33,21 +32,21 @@ class Gua8 : WuXing {
         super.xing = getXingImpl()
     }
 
-    fun getXingImpl() :Int {
+    fun getXingImpl(): Int {
         return when (this.value) {
-            0b000-> (WuXing.TU)
-            0b001-> (WuXing.MU)
-            0b010-> (WuXing.SHUI)  // 坎 水
-            0b011-> (WuXing.JIN) // 兑 金
-            0b100->(WuXing.TU) // 艮 土
-            0b101->(WuXing.HUO) // 离 火
-            0b110->(WuXing.MU) // 巽 木
-            0b111->(WuXing.JIN) // 乾 金
+            0b000 -> (WuXing.TU) // 坤 土
+            0b001 -> (WuXing.MU) // 震 木
+            0b010 -> (WuXing.SHUI)  // 坎 水
+            0b011 -> (WuXing.JIN) // 兑 金
+            0b100 -> (WuXing.TU) // 艮 土
+            0b101 -> (WuXing.HUO) // 离 火
+            0b110 -> (WuXing.MU) // 巽 木
+            0b111 -> (WuXing.JIN) // 乾 金
             else -> (WuXing.TU)
         }
     }
 
-    fun getName() :String{
+    fun getName(): String {
         return when (value) {
             0b000 -> ("坤")
             0b001 -> ("震")
