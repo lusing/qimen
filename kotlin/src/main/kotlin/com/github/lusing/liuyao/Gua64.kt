@@ -320,6 +320,10 @@ class Gua64 {
         if (xiaGua.value == shangGua.value) {
             this.yaos[0].isShi = true
             this.yaos[3].isYing = true
+            this.gong = xiaGua
+        }else if (xiaGua.value == shangGua.getFan().value){
+            this.yaos[3].isShi = true
+            this.yaos[0].isYing = true
             this.gong = shangGua
         }
 

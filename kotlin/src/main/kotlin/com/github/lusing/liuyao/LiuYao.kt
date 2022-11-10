@@ -13,7 +13,7 @@ class LiuYao constructor(gua: Gua64) {
 
         println("宫:${benGua.gong.getName()}")
 
-        for (i in 0..5) {
+        for (i in 5 downTo 0) {
             print("${benGua.yaos[i].liuShen.getName()} ")
             if (benGua.yaos[i].isYang) {
                 print("- ")
