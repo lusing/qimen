@@ -113,5 +113,58 @@ class LiuYao constructor(gua: Gua64) {
                 benGua.yaos[5].naZhi = DiZhi(DiZhi.MAO)
             }
         }
+
+        var gong : Gua8
+
+        if (benGua.yaos[2].isYang == benGua.yaos[5].isYang &&
+                benGua.yaos[2].isYang == benGua.yaos[5].isYang &&
+                benGua.yaos[2].isYang == benGua.yaos[5].isYang){
+            // 天同二世
+            benGua.yaos[1].isShi = true
+            benGua.yaos[4].isYing = true
+            benGua.gong = shangGua
+            //println("天同二世")
+        } else if (benGua.yaos[2].isYang != benGua.yaos[5].isYang &&
+                benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
+                benGua.yaos[0].isYang == benGua.yaos[3].isYang) {
+            benGua.yaos[4].isShi = true
+            benGua.yaos[1].isYing = true
+            println("天变五")
+        } else if (benGua.yaos[0].isYang == benGua.yaos[3].isYang &&
+                benGua.yaos[1].isYang != benGua.yaos[4].isYang &&
+                benGua.yaos[2].isYang != benGua.yaos[5].isYang) {
+            benGua.yaos[3].isShi = true
+            benGua.yaos[0].isYing = true
+            //gong = xiaGua.GetFan()
+            println("地同四世")
+        } else if (benGua.yaos[0].isYang != benGua.yaos[3].isYang &&
+                benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
+                benGua.yaos[2].isYang == benGua.yaos[5].isYang) {
+            benGua.yaos[0].isShi = true
+            benGua.yaos[3].isYing = true
+            gong = shangGua
+            println("地变初，一世")
+        } else if (benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
+                benGua.yaos[0].isYang != benGua.yaos[3].isYang &&
+                benGua.yaos[2].isYang != benGua.yaos[5].isYang) {
+            benGua.yaos[3].isShi = true
+            benGua.yaos[0].isYing = true
+            //gong = xiaGua.GetFan()
+            println("人同游魂")
+        } else if (benGua.yaos[1].isYang != benGua.yaos[4].isYang &&
+                benGua.yaos[0].isYang == benGua.yaos[3].isYang &&
+                benGua.yaos[2].isYang == benGua.yaos[5].isYang) {
+            benGua.yaos[2].isShi = true
+            benGua.yaos[5].isYing = true
+            gong = xiaGua
+            println("人变归魂")
+        }
+
+        // 宫主
+        if (xiaGua.value == shangGua.value) {
+            benGua.yaos[0].isShi = true
+            benGua.yaos[3].isYing = true
+            gong = shangGua
+        }
     }
 }

@@ -7,6 +7,8 @@ class Yao {
     var isChange = false
     lateinit var naZhi : DiZhi // 纳支
     lateinit var lq : LiuQin // 六亲
+    var isShi: Boolean = false
+    var isYing = false
 
     constructor(number : Int){
         this.isYang = number % 2 == 1

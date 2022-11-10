@@ -6,6 +6,7 @@ package com.github.lusing.liuyao
 class Gua64 {
     val value: Int
     lateinit var yaos: Array<Yao>
+    lateinit var gong: Gua8
 
 //    constructor(value: Int) {
 //        this.value = value
