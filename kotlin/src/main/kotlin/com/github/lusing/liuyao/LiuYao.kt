@@ -8,8 +8,9 @@ class LiuYao constructor(gua: Gua64) {
     var benGua = gua
     lateinit var bianGua: Gua64
     fun paiPan() {
-        this.bianGua = benGua.getBianGua()
-        println(this.bianGua.getName())
+        // TODO: 变卦有bug
+//        this.bianGua = benGua.getBianGua()
+//        println(this.bianGua.getName())
 
         println("宫:${benGua.gong.getName()}")
 

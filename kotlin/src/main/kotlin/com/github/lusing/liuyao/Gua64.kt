@@ -103,8 +103,13 @@ class Gua64 {
         if (yaos[4].isYang) value = value.or(0b00010000)
         if (yaos[5].isYang) value = value.or(0b00100000)
         this.value = value
-        this.yaos = yaos
+        //this.yaos = yaos
         this.riGan = TianGan(rg)
+        var yao = Yao(8)
+        this.yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+        for (i in 0..5) {
+            this.yaos[i].isYang = yaos[i].isYang
+        }
         this.paiPan()
     }
 
@@ -144,7 +149,7 @@ class Gua64 {
     fun getLow(): Gua8 {
         val value = this.value.and(0b000111)
         //fmt.Printf("%b", value)
-        var gua = Gua8(value)
+        var gua = Gua8(value, false)
         gua.value = value
         return gua
     }
@@ -152,7 +157,7 @@ class Gua64 {
     fun getHigh(): Gua8 {
         var value = this.value.and(0b111000)
         value.ushr(3)
-        var gua = Gua8(value)
+        var gua = Gua8(value, false)
         gua.value = value
         return gua
     }
@@ -266,14 +271,14 @@ class Gua64 {
         this.gong = shangGua
 
         if (this.yaos[2].isYang == this.yaos[5].isYang &&
-            this.yaos[2].isYang == this.yaos[5].isYang &&
-            this.yaos[2].isYang == this.yaos[5].isYang
+            this.yaos[1].isYang != this.yaos[4].isYang &&
+            this.yaos[0].isYang != this.yaos[3].isYang
         ) {
             // 天同二世
             this.yaos[1].isShi = true
             this.yaos[4].isYing = true
             this.gong = shangGua
-            //println("天同二世")
+            println("天同二世")
         } else if (this.yaos[2].isYang != this.yaos[5].isYang &&
             this.yaos[1].isYang == this.yaos[4].isYang &&
             this.yaos[0].isYang == this.yaos[3].isYang
@@ -282,9 +287,9 @@ class Gua64 {
             this.yaos[1].isYing = true
             gong = xiaGua.getFan()
             println("天变五")
-        } else if (this.yaos[0].isYang == this.yaos[3].isYang &&
-            this.yaos[1].isYang != this.yaos[4].isYang &&
-            this.yaos[2].isYang != this.yaos[5].isYang
+        } else if ((this.yaos[0].isYang == this.yaos[3].isYang) &&
+            (this.yaos[1].isYang != this.yaos[4].isYang) &&
+            (this.yaos[2].isYang != this.yaos[5].isYang)
         ) {
             this.yaos[3].isShi = true
             this.yaos[0].isYing = true
@@ -305,6 +310,8 @@ class Gua64 {
             this.yaos[3].isShi = true
             this.yaos[0].isYing = true
             gong = xiaGua.getFan()
+            println(xiaGua.getName())
+            println(gong.getName())
             println("人同游魂")
         } else if (this.yaos[1].isYang != this.yaos[4].isYang &&
             this.yaos[0].isYang == this.yaos[3].isYang &&
@@ -329,16 +336,24 @@ class Gua64 {
 
         for (i in 0..5) {
             if (this.yaos[i].naZhi.xing.xing == this.gong.xing) {
+                println("兄弟")
                 this.yaos[i].lq = LiuQin(LiuQin.XIONGDI)
             } else if (this.yaos[i].naZhi.xing.isSheng(this.gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.FUMU)
+                println("父母")
             } else if (this.yaos[i].naZhi.xing.isKe(this.gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.GUANGUI)
+                println("官鬼")
             } else if (this.gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.ZISUN)
+                println("子孙")
             } else if (this.gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.QICAI)
+                println("妻财")
             }
+
+            println("${this.gong.getWuXing().toString()}->${this.yaos[i].naZhi.xing.toString()}")
+            println("${this.yaos[i].lq.getName()} ")
 
             when(this.riGan.tianGan){
                 TianGan.JIA, TianGan.YI-> this.yaos[i].liuShen = LiuShen((LiuShen.QINGLONG + i) % 6)

@@ -9,17 +9,21 @@ class Gua8 : WuXing {
     /*
      * 根据先天八卦数起卦
      */
-    constructor(guaNum: Int) : super(WuXing.TU) {
-        val value = (guaNum - 1) % 8
-        var value8 = value.and(0b111)
-        //println("Input value:"+value8.toString(2))
-        value8 = value8.inv().and(0b111)
-        val value0 = value8 and 0b001
-        val value1 = (value8 and 0b010).ushr(1)
-        val value2 = (value8 and 0b100).ushr(2)
-        val result = (value0.shl(2)) + (value1.shl(1)) + value2
-        //println("Output value:"+result.toString(2))
-        this.value = result
+    constructor(guaNum: Int, isXianTian: Boolean) : super(WuXing.TU) {
+        if (isXianTian) {
+            val value = (guaNum - 1) % 8
+            var value8 = value.and(0b111)
+            //println("Input value:"+value8.toString(2))
+            value8 = value8.inv().and(0b111)
+            val value0 = value8 and 0b001
+            val value1 = (value8 and 0b010).ushr(1)
+            val value2 = (value8 and 0b100).ushr(2)
+            val result = (value0.shl(2)) + (value1.shl(1)) + value2
+            //println("Output value:"+result.toString(2))
+            this.value = result
+        } else {
+            this.value = guaNum
+        }
         super.xing = getXingImpl()
     }
 
@@ -33,7 +37,11 @@ class Gua8 : WuXing {
     }
 
     fun getFan(): Gua8 {
-        return Gua8(value.inv().and(0b111))
+        //println("getFan")
+        //println(value.toString(2))
+        //println(value.inv().toString(2))
+        //println(value.inv().and(0b111).toString(2))
+        return Gua8(value.inv().and(0b111),false)
     }
 
     fun getXingImpl(): Int {
@@ -50,7 +58,7 @@ class Gua8 : WuXing {
         }
     }
 
-    fun getWuXing() : WuXing{
+    fun getWuXing(): WuXing {
         return WuXing(this.getXingImpl())
     }
 
