@@ -1,6 +1,7 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.LiuQin
 
 class Yao {
     var isYang = false

@@ -1,6 +1,12 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.LiuQin
+import com.github.lusing.qimen.LiuQin.Companion.FUMU
+import com.github.lusing.qimen.LiuQin.Companion.GUANGUI
+import com.github.lusing.qimen.LiuQin.Companion.QICAI
+import com.github.lusing.qimen.LiuQin.Companion.XIONGDI
+import com.github.lusing.qimen.LiuQin.Companion.ZISUN
 
 class LiuYao constructor(gua: Gua64) {
     var benGua = gua
@@ -114,49 +120,53 @@ class LiuYao constructor(gua: Gua64) {
             }
         }
 
-        var gong : Gua8
-
         if (benGua.yaos[2].isYang == benGua.yaos[5].isYang &&
-                benGua.yaos[2].isYang == benGua.yaos[5].isYang &&
-                benGua.yaos[2].isYang == benGua.yaos[5].isYang){
+            benGua.yaos[2].isYang == benGua.yaos[5].isYang &&
+            benGua.yaos[2].isYang == benGua.yaos[5].isYang
+        ) {
             // 天同二世
             benGua.yaos[1].isShi = true
             benGua.yaos[4].isYing = true
             benGua.gong = shangGua
             //println("天同二世")
         } else if (benGua.yaos[2].isYang != benGua.yaos[5].isYang &&
-                benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
-                benGua.yaos[0].isYang == benGua.yaos[3].isYang) {
+            benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
+            benGua.yaos[0].isYang == benGua.yaos[3].isYang
+        ) {
             benGua.yaos[4].isShi = true
             benGua.yaos[1].isYing = true
             println("天变五")
         } else if (benGua.yaos[0].isYang == benGua.yaos[3].isYang &&
-                benGua.yaos[1].isYang != benGua.yaos[4].isYang &&
-                benGua.yaos[2].isYang != benGua.yaos[5].isYang) {
+            benGua.yaos[1].isYang != benGua.yaos[4].isYang &&
+            benGua.yaos[2].isYang != benGua.yaos[5].isYang
+        ) {
             benGua.yaos[3].isShi = true
             benGua.yaos[0].isYing = true
             //gong = xiaGua.GetFan()
             println("地同四世")
         } else if (benGua.yaos[0].isYang != benGua.yaos[3].isYang &&
-                benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
-                benGua.yaos[2].isYang == benGua.yaos[5].isYang) {
+            benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
+            benGua.yaos[2].isYang == benGua.yaos[5].isYang
+        ) {
             benGua.yaos[0].isShi = true
             benGua.yaos[3].isYing = true
-            gong = shangGua
+            benGua.gong = shangGua
             println("地变初，一世")
         } else if (benGua.yaos[1].isYang == benGua.yaos[4].isYang &&
-                benGua.yaos[0].isYang != benGua.yaos[3].isYang &&
-                benGua.yaos[2].isYang != benGua.yaos[5].isYang) {
+            benGua.yaos[0].isYang != benGua.yaos[3].isYang &&
+            benGua.yaos[2].isYang != benGua.yaos[5].isYang
+        ) {
             benGua.yaos[3].isShi = true
             benGua.yaos[0].isYing = true
             //gong = xiaGua.GetFan()
             println("人同游魂")
         } else if (benGua.yaos[1].isYang != benGua.yaos[4].isYang &&
-                benGua.yaos[0].isYang == benGua.yaos[3].isYang &&
-                benGua.yaos[2].isYang == benGua.yaos[5].isYang) {
+            benGua.yaos[0].isYang == benGua.yaos[3].isYang &&
+            benGua.yaos[2].isYang == benGua.yaos[5].isYang
+        ) {
             benGua.yaos[2].isShi = true
             benGua.yaos[5].isYing = true
-            gong = xiaGua
+            benGua.gong = xiaGua
             println("人变归魂")
         }
 
@@ -164,7 +174,22 @@ class LiuYao constructor(gua: Gua64) {
         if (xiaGua.value == shangGua.value) {
             benGua.yaos[0].isShi = true
             benGua.yaos[3].isYing = true
-            gong = shangGua
+            benGua.gong = shangGua
+        }
+
+        for (i in 0..5) {
+            if (benGua.yaos[i].naZhi.xing.xing == benGua.gong.xing) {
+                benGua.yaos[i].lq = LiuQin(XIONGDI)
+            } else if (benGua.yaos[i].naZhi.xing.isSheng(benGua.gong.getWuXing())) {
+                benGua.yaos[i].lq = LiuQin(FUMU)
+            } else if (benGua.yaos[i].naZhi.xing.isKe(benGua.gong.getWuXing())) {
+                benGua.yaos[i].lq = LiuQin(GUANGUI)
+            } else if (benGua.gong.getWuXing().isSheng(benGua.yaos[i].naZhi.xing)) {
+                benGua.yaos[i].lq = LiuQin(ZISUN)
+            } else if (benGua.gong.getWuXing().isKe(benGua.yaos[i].naZhi.xing)) {
+                benGua.yaos[i].lq = LiuQin(QICAI)
+            }
         }
     }
 }
+

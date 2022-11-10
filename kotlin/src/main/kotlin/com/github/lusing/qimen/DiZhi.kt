@@ -11,7 +11,7 @@ class DiZhi(idz: Int) {
         return (sDiZhi[diZhi]).toString()
     }
 
-    val xing: WuXing?
+    val xing: WuXing
         get() {
             var xing = -1
             xing = when (diZhi) {
@@ -20,7 +20,7 @@ class DiZhi(idz: Int) {
                 CHEN, XU, CHOU, WEI -> WuXing.TU
                 SHEN, YOU -> WuXing.JIN
                 HAI, ZI -> WuXing.SHUI
-                else -> return null
+                else -> WuXing.MU
             }
             return WuXing(xing)
         }

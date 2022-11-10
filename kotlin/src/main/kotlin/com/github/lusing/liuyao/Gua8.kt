@@ -46,6 +46,10 @@ class Gua8 : WuXing {
         }
     }
 
+    fun getWuXing() : WuXing{
+        return WuXing(this.getXingImpl())
+    }
+
     fun getName(): String {
         return when (value) {
             0b000 -> ("坤")
