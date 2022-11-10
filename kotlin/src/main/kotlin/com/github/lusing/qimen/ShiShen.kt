@@ -1,6 +1,6 @@
 package com.github.lusing.qimen
 
-open class ShiShen() : LiuQin() {
+open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
     var shiShen = 0
         protected set get
 
@@ -69,14 +69,14 @@ open class ShiShen() : LiuQin() {
                     ss1.shiShen = ShiShen.Companion.PIANYIN
                 }
             } else if (me.isSheng(other)) {
-                ss1.liuqin = ERNV
+                ss1.liuqin = ZISUN
                 if (isSame) {
                     ss1.shiShen = ShiShen.Companion.SHISHEN
                 } else {
                     ss1.shiShen = ShiShen.Companion.SHANGGUAN
                 }
             } else if (other.isKe(me)) {
-                ss1.liuqin = GUANSHA
+                ss1.liuqin = GUANGUI
                 if (isSame) {
                     ss1.shiShen = ShiShen.Companion.QISHA
                 } else {

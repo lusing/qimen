@@ -1,5 +1,7 @@
 package com.github.lusing.liuyao
 
+import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.LiuQin
 import com.github.lusing.qimen.TianGan
 
 /**
@@ -69,6 +71,7 @@ class Gua64 {
         }
         this.value = value
         this.riGan = TianGan(rg)
+        this.paiPan()
     }
 
     constructor(values: Array<Int>, rg:Int) {
@@ -88,6 +91,7 @@ class Gua64 {
         }
         this.value = value
         this.riGan = TianGan(rg)
+        this.paiPan()
     }
 
     constructor(yaos: Array<Yao>, rg: Int) {
@@ -101,6 +105,7 @@ class Gua64 {
         this.value = value
         this.yaos = yaos
         this.riGan = TianGan(rg)
+        this.paiPan()
     }
 
     fun getBianGua(): Gua64 {
@@ -150,6 +155,196 @@ class Gua64 {
         var gua = Gua8(value)
         gua.value = value
         return gua
+    }
+
+    fun paiPan(){
+        var xiaGua = this.getLow()
+        var shangGua = this.getHigh()
+
+        when (xiaGua.value %8) {
+            0b000 -> // 坤 未巳卯
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.WEI)
+                this.yaos[1].naZhi = DiZhi(DiZhi.SI)
+                this.yaos[2].naZhi = DiZhi(DiZhi.MAO)
+            }
+
+            0b001, 0b111 -> // 震 子寅辰
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.ZI)
+                this.yaos[1].naZhi = DiZhi(DiZhi.YIN)
+                this.yaos[2].naZhi = DiZhi(DiZhi.CHEN)
+            }
+
+            0b010 -> // 坎 寅辰午
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.YIN)
+                this.yaos[1].naZhi = DiZhi(DiZhi.CHEN)
+                this.yaos[2].naZhi = DiZhi(DiZhi.WU)
+            }
+
+            0b011 -> // 兑 巳卯丑
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.SI)
+                this.yaos[1].naZhi = DiZhi(DiZhi.MAO)
+                this.yaos[2].naZhi = DiZhi(DiZhi.CHOU)
+            }
+
+            0b100 -> // 艮 辰午申
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.CHEN)
+                this.yaos[1].naZhi = DiZhi(DiZhi.WU)
+                this.yaos[2].naZhi = DiZhi(DiZhi.SHEN)
+            }
+
+            0b101 -> // 离 卯丑亥
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.MAO)
+                this.yaos[1].naZhi = DiZhi(DiZhi.CHOU)
+                this.yaos[2].naZhi = DiZhi(DiZhi.HAI)
+            }
+
+            0b110 -> // 巽 丑亥酉
+            {
+                this.yaos[0].naZhi = DiZhi(DiZhi.CHOU)
+                this.yaos[1].naZhi = DiZhi(DiZhi.HAI)
+                this.yaos[2].naZhi = DiZhi(DiZhi.YOU)
+            }
+        }
+
+        when (shangGua.value % 8) {
+            0b000 -> // 坤 丑亥酉
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.CHOU)
+                this.yaos[4].naZhi = DiZhi(DiZhi.HAI)
+                this.yaos[5].naZhi = DiZhi(DiZhi.YOU)
+            }
+
+            0b001, 0b111 -> // 震 午申戌
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.WU)
+                this.yaos[4].naZhi = DiZhi(DiZhi.SHEN)
+                this.yaos[5].naZhi = DiZhi(DiZhi.XU)
+            }
+
+            0b010 -> // 坎 申戌子
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.SHEN)
+                this.yaos[4].naZhi = DiZhi(DiZhi.XU)
+                this.yaos[5].naZhi = DiZhi(DiZhi.ZI)
+            }
+
+            0b011 -> // 兑 亥酉未
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.HAI)
+                this.yaos[4].naZhi = DiZhi(DiZhi.YOU)
+                this.yaos[5].naZhi = DiZhi(DiZhi.WEI)
+            }
+
+            0b100 -> // 艮 戌子寅
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.XU)
+                this.yaos[4].naZhi = DiZhi(DiZhi.ZI)
+                this.yaos[5].naZhi = DiZhi(DiZhi.YIN)
+            }
+
+            0b101 -> // 离 酉未巳
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.YOU)
+                this.yaos[4].naZhi = DiZhi(DiZhi.WEI)
+                this.yaos[5].naZhi = DiZhi(DiZhi.SI)
+            }
+
+            0b110 -> // 巽 未巳卯
+            {
+                this.yaos[3].naZhi = DiZhi(DiZhi.WEI)
+                this.yaos[4].naZhi = DiZhi(DiZhi.SI)
+                this.yaos[5].naZhi = DiZhi(DiZhi.MAO)
+            }
+        }
+
+        this.gong = shangGua
+
+        if (this.yaos[2].isYang == this.yaos[5].isYang &&
+            this.yaos[2].isYang == this.yaos[5].isYang &&
+            this.yaos[2].isYang == this.yaos[5].isYang
+        ) {
+            // 天同二世
+            this.yaos[1].isShi = true
+            this.yaos[4].isYing = true
+            this.gong = shangGua
+            //println("天同二世")
+        } else if (this.yaos[2].isYang != this.yaos[5].isYang &&
+            this.yaos[1].isYang == this.yaos[4].isYang &&
+            this.yaos[0].isYang == this.yaos[3].isYang
+        ) {
+            this.yaos[4].isShi = true
+            this.yaos[1].isYing = true
+            gong = xiaGua.getFan()
+            println("天变五")
+        } else if (this.yaos[0].isYang == this.yaos[3].isYang &&
+            this.yaos[1].isYang != this.yaos[4].isYang &&
+            this.yaos[2].isYang != this.yaos[5].isYang
+        ) {
+            this.yaos[3].isShi = true
+            this.yaos[0].isYing = true
+            gong = xiaGua.getFan()
+            println("地同四世")
+        } else if (this.yaos[0].isYang != this.yaos[3].isYang &&
+            this.yaos[1].isYang == this.yaos[4].isYang &&
+            this.yaos[2].isYang == this.yaos[5].isYang
+        ) {
+            this.yaos[0].isShi = true
+            this.yaos[3].isYing = true
+            this.gong = shangGua
+            println("地变初，一世")
+        } else if (this.yaos[1].isYang == this.yaos[4].isYang &&
+            this.yaos[0].isYang != this.yaos[3].isYang &&
+            this.yaos[2].isYang != this.yaos[5].isYang
+        ) {
+            this.yaos[3].isShi = true
+            this.yaos[0].isYing = true
+            gong = xiaGua.getFan()
+            println("人同游魂")
+        } else if (this.yaos[1].isYang != this.yaos[4].isYang &&
+            this.yaos[0].isYang == this.yaos[3].isYang &&
+            this.yaos[2].isYang == this.yaos[5].isYang
+        ) {
+            this.yaos[2].isShi = true
+            this.yaos[5].isYing = true
+            this.gong = xiaGua
+            println("人变归魂")
+        }
+
+        // 宫主
+        if (xiaGua.value == shangGua.value) {
+            this.yaos[0].isShi = true
+            this.yaos[3].isYing = true
+            this.gong = shangGua
+        }
+
+        for (i in 0..5) {
+            if (this.yaos[i].naZhi.xing.xing == this.gong.xing) {
+                this.yaos[i].lq = LiuQin(LiuQin.XIONGDI)
+            } else if (this.yaos[i].naZhi.xing.isSheng(this.gong.getWuXing())) {
+                this.yaos[i].lq = LiuQin(LiuQin.FUMU)
+            } else if (this.yaos[i].naZhi.xing.isKe(this.gong.getWuXing())) {
+                this.yaos[i].lq = LiuQin(LiuQin.GUANGUI)
+            } else if (this.gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
+                this.yaos[i].lq = LiuQin(LiuQin.ZISUN)
+            } else if (this.gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
+                this.yaos[i].lq = LiuQin(LiuQin.QICAI)
+            }
+
+            when(this.riGan.tianGan){
+                TianGan.JIA, TianGan.YI-> this.yaos[i].liuShen = LiuShen((LiuShen.QINGLONG + i) % 6)
+                TianGan.BING,TianGan.DING -> this.yaos[i].liuShen = LiuShen((LiuShen.ZHUQUE + i) % 6)
+                TianGan.WU-> this.yaos[i].liuShen = LiuShen((LiuShen.GOUCHEN + i) % 6)
+                TianGan.JI-> this.yaos[i].liuShen = LiuShen((LiuShen.TENGSHE + i) % 6)
+                TianGan.GENG, TianGan.XIN-> this.yaos[i].liuShen = LiuShen((LiuShen.BAIHU + i) % 6)
+                TianGan.REN, TianGan.GUI-> this.yaos[i].liuShen = LiuShen((LiuShen.XUANWU + i) % 6)
+            }
+        }
     }
 
     override fun toString(): String {

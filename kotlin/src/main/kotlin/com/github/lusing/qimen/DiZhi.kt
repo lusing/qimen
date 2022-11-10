@@ -11,6 +11,10 @@ class DiZhi(idz: Int) {
         return (sDiZhi[diZhi]).toString()
     }
 
+    fun getName() :String {
+        return this.toString()
+    }
+
     val xing: WuXing
         get() {
             var xing = -1

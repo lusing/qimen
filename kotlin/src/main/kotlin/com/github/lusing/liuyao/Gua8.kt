@@ -32,6 +32,10 @@ class Gua8 : WuXing {
         super.xing = getXingImpl()
     }
 
+    fun getFan(): Gua8 {
+        return Gua8(value.inv().and(0b111))
+    }
+
     fun getXingImpl(): Int {
         return when (this.value) {
             0b000 -> (WuXing.TU) // 坤 土

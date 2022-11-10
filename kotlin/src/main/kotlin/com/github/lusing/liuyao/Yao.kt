@@ -8,6 +8,7 @@ class Yao {
     var isChange = false
     lateinit var naZhi : DiZhi // 纳支
     lateinit var lq : LiuQin // 六亲
+    lateinit var liuShen : LiuShen // 六神
     var isShi: Boolean = false
     var isYing = false
 
