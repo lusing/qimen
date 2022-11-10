@@ -150,21 +150,21 @@ class Gua64 {
         val value = this.value.and(0b000111)
         //fmt.Printf("%b", value)
         var gua = Gua8(value, false)
-        gua.value = value
         return gua
     }
 
     fun getHigh(): Gua8 {
         var value = this.value.and(0b111000)
-        value.ushr(3)
+        value = value.ushr(3)
         var gua = Gua8(value, false)
-        gua.value = value
         return gua
     }
 
     fun paiPan(){
         var xiaGua = this.getLow()
         var shangGua = this.getHigh()
+
+        println("下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
 
         when (xiaGua.value %8) {
             0b000 -> // 坤 未巳卯
@@ -241,6 +241,7 @@ class Gua64 {
 
             0b011 -> // 兑 亥酉未
             {
+                println("兑")
                 this.yaos[3].naZhi = DiZhi(DiZhi.HAI)
                 this.yaos[4].naZhi = DiZhi(DiZhi.YOU)
                 this.yaos[5].naZhi = DiZhi(DiZhi.WEI)
@@ -336,24 +337,24 @@ class Gua64 {
 
         for (i in 0..5) {
             if (this.yaos[i].naZhi.xing.xing == this.gong.xing) {
-                println("兄弟")
+                //println("兄弟")
                 this.yaos[i].lq = LiuQin(LiuQin.XIONGDI)
             } else if (this.yaos[i].naZhi.xing.isSheng(this.gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.FUMU)
-                println("父母")
+                //println("父母")
             } else if (this.yaos[i].naZhi.xing.isKe(this.gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.GUANGUI)
-                println("官鬼")
+                //println("官鬼")
             } else if (this.gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.ZISUN)
-                println("子孙")
+                //println("子孙")
             } else if (this.gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.QICAI)
-                println("妻财")
+                //println("妻财")
             }
 
-            println("${this.gong.getWuXing().toString()}->${this.yaos[i].naZhi.xing.toString()}")
-            println("${this.yaos[i].lq.getName()} ")
+            //println("${this.gong.getWuXing().toString()}->${this.yaos[i].naZhi.xing.toString()}")
+            //println("${this.yaos[i].lq.getName()} ")
 
             when(this.riGan.tianGan){
                 TianGan.JIA, TianGan.YI-> this.yaos[i].liuShen = LiuShen((LiuShen.QINGLONG + i) % 6)

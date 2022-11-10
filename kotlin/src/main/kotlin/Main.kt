@@ -7,7 +7,7 @@ fun main() {
 
     var w1 = WuXing(WuXing.SHUI)
     var w2 = WuXing(WuXing.MU)
-    println(w1.isSheng(w2))
+    //println(w1.isSheng(w2))
 
     var test1 = Test()
     test1.test()
