@@ -1,10 +1,13 @@
 package com.github.lusing.liuyao
 
+import com.github.lusing.qimen.TianGan
+
 /**
  * 六十四卦配六爻
  */
 class Gua64 {
     val value: Int
+    val riGan : TianGan
     lateinit var yaos: Array<Yao>
     lateinit var gong: Gua8
 
@@ -14,15 +17,15 @@ class Gua64 {
 //        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
 //    }
 
-    constructor(lowNum: Int, highNum: Int) {
-        val lowGua = Gua8(lowNum)
-        val highGua = Gua8(highNum)
-        this.value = (highGua.value.shl(3)) + lowGua.value
-        var yao = Yao(8)
-        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
-    }
+//    constructor(lowNum: Int, highNum: Int) {
+//        val lowGua = Gua8(lowNum)
+//        val highGua = Gua8(highNum)
+//        this.value = (highGua.value.shl(3)) + lowGua.value
+//        var yao = Yao(8)
+//        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+//    }
 
-    constructor(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int) {
+    constructor(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int, rg: Int) {
         var value = 0
 
         var yao = Yao(8)
@@ -65,9 +68,10 @@ class Gua64 {
             this.yaos[5].isYang = false
         }
         this.value = value
+        this.riGan = TianGan(rg)
     }
 
-    constructor(values: Array<Int>) {
+    constructor(values: Array<Int>, rg:Int) {
         var value = 0
         if (values[0] % 2 == 1) value = value.or(0b00000001)
         if (values[1] % 2 == 1) value = value.or(0b00000010)
@@ -83,9 +87,10 @@ class Gua64 {
             this.yaos[i] = Yao(values[i])
         }
         this.value = value
+        this.riGan = TianGan(rg)
     }
 
-    constructor(yaos: Array<Yao>) {
+    constructor(yaos: Array<Yao>, rg: Int) {
         var value = 0
         if (yaos[0].isYang) value = value.or(0b00000001)
         if (yaos[1].isYang) value = value.or(0b00000010)
@@ -95,6 +100,7 @@ class Gua64 {
         if (yaos[5].isYang) value = value.or(0b00100000)
         this.value = value
         this.yaos = yaos
+        this.riGan = TianGan(rg)
     }
 
     fun getBianGua(): Gua64 {
@@ -105,7 +111,7 @@ class Gua64 {
                 bianYao[i].isChange = false
             }
         }
-        return Gua64(bianYao)
+        return Gua64(bianYao, this.riGan.tianGan)
     }
 
     fun debug() {
