@@ -1,13 +1,17 @@
 package com.github.lusing.liuyao
 
-
+/**
+ * 六十四卦配六爻
+ */
 class Gua64 {
     val value: Int
     lateinit var yaos: Array<Yao>
 
-    constructor(value: Int) {
-        this.value = value
-    }
+//    constructor(value: Int) {
+//        this.value = value
+//        var yao = Yao(8)
+//        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+//    }
 
     constructor(lowNum: Int, highNum: Int) {
         val lowGua = Gua8(lowNum)
@@ -19,46 +23,50 @@ class Gua64 {
 
     constructor(first: Int, second: Int, third: Int, fourth: Int, fifth: Int, sixth: Int) {
         var value = 0
+
+        var yao = Yao(8)
+        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+
         if (first % 2 == 1) {
             value = value.or(0b00000001)
             this.yaos[0].isYang = true
-        }else{
+        } else {
             this.yaos[0].isYang = false
         }
         if (second % 2 == 1) {
             value = value.or(0b00000010)
             this.yaos[1].isYang = true
-        }else{
+        } else {
             this.yaos[1].isYang = false
         }
         if (third % 2 == 1) {
             value = value.or(0b00000100)
             this.yaos[2].isYang = true
-        }else{
+        } else {
             this.yaos[2].isYang = false
         }
         if (fourth % 2 == 1) {
             value = value.or(0b00001000)
             this.yaos[3].isYang = true
-        }else{
+        } else {
             this.yaos[3].isYang = false
         }
         if (fifth % 2 == 1) {
             value = value.or(0b00010000)
             this.yaos[4].isYang = true
-        }else{
+        } else {
             this.yaos[4].isYang = false
         }
         if (sixth % 2 == 1) {
             value = value.or(0b00100000)
             this.yaos[5].isYang = true
-        }else{
+        } else {
             this.yaos[5].isYang = false
         }
         this.value = value
     }
 
-    constructor(values: Array<Int>){
+    constructor(values: Array<Int>) {
         var value = 0
         if (values[0] % 2 == 1) value = value.or(0b00000001)
         if (values[1] % 2 == 1) value = value.or(0b00000010)
@@ -66,10 +74,48 @@ class Gua64 {
         if (values[3] % 2 == 1) value = value.or(0b00001000)
         if (values[4] % 2 == 1) value = value.or(0b00010000)
         if (values[5] % 2 == 1) value = value.or(0b00100000)
+
+        var yao = Yao(8)
+        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+
+        for (i in 0..5) {
+            this.yaos[i] = Yao(values[i])
+        }
         this.value = value
     }
 
-    fun getGuaArray(): Array<Boolean>{
+    constructor(yaos: Array<Yao>) {
+        var value = 0
+        if (yaos[0].isYang) value = value.or(0b00000001)
+        if (yaos[1].isYang) value = value.or(0b00000010)
+        if (yaos[2].isYang) value = value.or(0b00000100)
+        if (yaos[3].isYang) value = value.or(0b00001000)
+        if (yaos[4].isYang) value = value.or(0b00010000)
+        if (yaos[5].isYang) value = value.or(0b00100000)
+        this.value = value
+        this.yaos = yaos
+    }
+
+    fun getBianGua(): Gua64 {
+        var bianYao = this.yaos.clone()
+        for (i in 0..5) {
+            if (this.yaos[i].isChange) {
+                bianYao[i].isYang = this.yaos[i].isYang.not()
+                bianYao[i].isChange = false
+            }
+        }
+        return Gua64(bianYao)
+    }
+
+    fun debug() {
+        for (i in 0..5) {
+            print("yao ${i + 1} is ${if (this.yaos[i].isYang) "阳" else "阴"}")
+            print("yao ${i + 1} is ${if (this.yaos[i].isChange) "动" else "静"}")
+            println("爻")
+        }
+    }
+
+    fun getGuaArray(): Array<Boolean> {
         val result = arrayOf(false, false, false, false, false, false)
         if (value.and(0b00000001) == 0b00000001) result[0] = true
         if (value.and(0b00000010) == 0b00000010) result[1] = true
