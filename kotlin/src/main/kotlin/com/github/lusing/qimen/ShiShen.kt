@@ -2,7 +2,8 @@ package com.github.lusing.qimen
 
 open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
     var shiShen = 0
-        protected set get
+        protected set
+        get
 
     override fun toString(): String {
         val sb = StringBuilder()
