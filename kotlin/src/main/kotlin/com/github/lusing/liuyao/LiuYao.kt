@@ -1,11 +1,13 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.LiuQin
 
-class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int) {
+class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int, yongShen: Int) {
     var benGua = gua
     val yueJian = DiZhi(yueJian)
     val riJian = DiZhi(riJian)
+    val yongShen = LiuQin(yongShen)
     lateinit var bianGua: Gua64
     fun paiPan() {
         print(this.benGua.getName())
