@@ -9,7 +9,7 @@ import com.github.lusing.qimen.TianGan
  */
 class Gua64 {
     val value: Int
-    val riGan : TianGan
+    val riGan: TianGan
     lateinit var yaos: Array<Yao>
     lateinit var gong: Gua8
 
@@ -79,7 +79,7 @@ class Gua64 {
         this.paiPan()
     }
 
-    constructor(values: Array<Int>, rg:Int) {
+    constructor(values: Array<Int>, rg: Int) {
         var value = 0
         if (values[0] % 2 == 1) value = value.or(0b00000001)
         if (values[1] % 2 == 1) value = value.or(0b00000010)
@@ -111,7 +111,7 @@ class Gua64 {
         //this.yaos = yaos
         this.riGan = TianGan(rg)
         var yao = Yao(8)
-        this.yaos = arrayOf(yao,yao, yao, yao, yao, yao)
+        this.yaos = arrayOf(yao, yao, yao, yao, yao, yao)
         for (i in 0..5) {
             this.yaos[i] = Yao(8)
             this.yaos[i].isYang = yaos[i].isYang
@@ -129,7 +129,10 @@ class Gua64 {
                 bianYao[i].isChange = false
             }
         }
-        return Gua64(bianYao, this.riGan.tianGan)
+        var bg = Gua64(bianYao, this.riGan.tianGan)
+        println(this.gong.getName())
+        bg.updateLiuQin(this.gong)
+        return bg
     }
 
     fun debug() {
@@ -168,18 +171,18 @@ class Gua64 {
         return gua
     }
 
-    fun paiPan(){
+    fun paiPan() {
         var xiaGua = this.getLow()
         var shangGua = this.getHigh()
 
         println("下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
 
-        for(i in 0..5) {
-            this.yaos[i].naZhi = DiZhi(DiZhi.ZI+i)
+        for (i in 0..5) {
+            this.yaos[i].naZhi = DiZhi(DiZhi.ZI + i)
             println(this.yaos[i].naZhi.getName())
         }
 
-        when (xiaGua.value %8) {
+        when (xiaGua.value % 8) {
             0b000 -> // 坤 未巳卯
             {
                 this.yaos[0].naZhi = DiZhi(DiZhi.WEI)
@@ -345,45 +348,49 @@ class Gua64 {
             this.yaos[0].isShi = true
             this.yaos[3].isYing = true
             this.gong = xiaGua
-        }else if (xiaGua.value == shangGua.getFan().value){
+        } else if (xiaGua.value == shangGua.getFan().value) {
             this.yaos[3].isShi = true
             this.yaos[0].isYing = true
             this.gong = shangGua
         }
 
         println("[Debug]宫主：${this.gong.getName()}")
-        for(i in 0..5){
-            println("[Debug]${this.yaos[i].naZhi.getName()} ${this.yaos[i].isShi} ${this.yaos[i].isYing}")
-        }
+//        for(i in 0..5){
+//            println("[Debug]${this.yaos[i].naZhi.getName()} ${this.yaos[i].isShi} ${this.yaos[i].isYing}")
+//        }
+
+        //定六亲
+        this.updateLiuQin(gong)
 
         for (i in 0..5) {
-            if (this.yaos[i].naZhi.xing.xing == this.gong.xing) {
+            when (this.riGan.tianGan) {
+                TianGan.JIA, TianGan.YI -> this.yaos[i].liuShen = LiuShen((LiuShen.QINGLONG + i) % 6)
+                TianGan.BING, TianGan.DING -> this.yaos[i].liuShen = LiuShen((LiuShen.ZHUQUE + i) % 6)
+                TianGan.WU -> this.yaos[i].liuShen = LiuShen((LiuShen.GOUCHEN + i) % 6)
+                TianGan.JI -> this.yaos[i].liuShen = LiuShen((LiuShen.TENGSHE + i) % 6)
+                TianGan.GENG, TianGan.XIN -> this.yaos[i].liuShen = LiuShen((LiuShen.BAIHU + i) % 6)
+                TianGan.REN, TianGan.GUI -> this.yaos[i].liuShen = LiuShen((LiuShen.XUANWU + i) % 6)
+            }
+        }
+    }
+
+    fun updateLiuQin(gong: Gua8) {
+        for (i in 0..5) {
+            if (this.yaos[i].naZhi.xing.xing == gong.xing) {
                 //println("兄弟")
                 this.yaos[i].lq = LiuQin(LiuQin.XIONGDI)
-            } else if (this.yaos[i].naZhi.xing.isSheng(this.gong.getWuXing())) {
+            } else if (this.yaos[i].naZhi.xing.isSheng(gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.FUMU)
                 //println("父母")
-            } else if (this.yaos[i].naZhi.xing.isKe(this.gong.getWuXing())) {
+            } else if (this.yaos[i].naZhi.xing.isKe(gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.GUANGUI)
                 //println("官鬼")
-            } else if (this.gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
+            } else if (gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.ZISUN)
                 //println("子孙")
-            } else if (this.gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
+            } else if (gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.QICAI)
                 //println("妻财")
-            }
-
-            //println("${this.gong.getWuXing().toString()}->${this.yaos[i].naZhi.xing.toString()}")
-            //println("${this.yaos[i].lq.getName()} ")
-
-            when(this.riGan.tianGan){
-                TianGan.JIA, TianGan.YI-> this.yaos[i].liuShen = LiuShen((LiuShen.QINGLONG + i) % 6)
-                TianGan.BING,TianGan.DING -> this.yaos[i].liuShen = LiuShen((LiuShen.ZHUQUE + i) % 6)
-                TianGan.WU-> this.yaos[i].liuShen = LiuShen((LiuShen.GOUCHEN + i) % 6)
-                TianGan.JI-> this.yaos[i].liuShen = LiuShen((LiuShen.TENGSHE + i) % 6)
-                TianGan.GENG, TianGan.XIN-> this.yaos[i].liuShen = LiuShen((LiuShen.BAIHU + i) % 6)
-                TianGan.REN, TianGan.GUI-> this.yaos[i].liuShen = LiuShen((LiuShen.XUANWU + i) % 6)
             }
         }
     }

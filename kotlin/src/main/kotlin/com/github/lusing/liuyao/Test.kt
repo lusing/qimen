@@ -21,7 +21,7 @@ class Test {
         val gua2 = Gua64(yaos2, TianGan.JI)
         val ly2 = LiuYao(gua2, DiZhi.MAO)
         val bgua = ly2.benGua.getBianGua()
-        bgua.debug()
+        //bgua.debug()
         ly2.paiPan()
     }
 }
