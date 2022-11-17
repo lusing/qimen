@@ -1,14 +1,14 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
-import com.github.lusing.qimen.LiuQin
-import com.github.lusing.qimen.TianGan
 
-class LiuYao constructor(gua: Gua64) {
+class LiuYao constructor(gua: Gua64, yueJian: Int) {
     var benGua = gua
+    val yueJian = DiZhi(yueJian)
     lateinit var bianGua: Gua64
     fun paiPan() {
         // TODO: 变卦有bug
+        println(this.benGua.getName())
 //        this.bianGua = benGua.getBianGua()
 //        println(this.bianGua.getName())
 
