@@ -20,6 +20,8 @@ class Test {
         val yaos2 = arrayOf(7,8,8,6,8,8)
         val gua2 = Gua64(yaos2, TianGan.JI)
         val ly2 = LiuYao(gua2, DiZhi.MAO)
+        val bgua = ly2.benGua.getBianGua()
+        bgua.debug()
         ly2.paiPan()
     }
 }

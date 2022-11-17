@@ -7,10 +7,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
     val yueJian = DiZhi(yueJian)
     lateinit var bianGua: Gua64
     fun paiPan() {
-        // TODO: 变卦有bug
         println(this.benGua.getName())
-        this.bianGua = benGua.getBianGua()
-        println(this.bianGua.getName())
 
         println("宫:${benGua.gong.getName()}")
 
@@ -28,6 +25,27 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
             if (benGua.yaos[i].isShi) {
                 print(" 世")
             } else if (benGua.yaos[i].isYing) {
+                print(" 应")
+            }
+            println()
+        }
+
+        this.bianGua = benGua.getBianGua()
+        println(this.bianGua.getName())
+        for (i in 5 downTo 0) {
+            print("${this.bianGua.yaos[i].liuShen.getName()} ")
+            if (this.bianGua.yaos[i].isYang) {
+                print("- ")
+            } else {
+                print("= ")
+            }
+            print(this.bianGua.yaos[i].lq.getName())
+            print(this.bianGua.yaos[i].naZhi.getName())
+            var xing = this.bianGua.yaos[i].naZhi.xing
+            print(xing.toString())
+            if (this.bianGua.yaos[i].isShi) {
+                print(" 世")
+            } else if (this.bianGua.yaos[i].isYing) {
                 print(" 应")
             }
             println()
