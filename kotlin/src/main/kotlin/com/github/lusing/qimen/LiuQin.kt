@@ -2,7 +2,7 @@ package com.github.lusing.qimen
 
 
 open class LiuQin constructor(lq : Int){
-    protected var liuqin = XIONGDI
+    var liuqin = XIONGDI
 
     init {
         this.liuqin = lq
@@ -21,6 +21,14 @@ open class LiuQin constructor(lq : Int){
             XIONGDI -> return "兄弟"
         }
         return ""
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return if(other!! is LiuQin){
+            this.liuqin == (other as LiuQin).liuqin
+        }else{
+            false
+        }
     }
 
     companion object {

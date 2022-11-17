@@ -121,6 +121,25 @@ class Gua64 {
         this.paiPan()
     }
 
+    /**
+     * 根据上下卦来生成六爻
+     */
+    constructor(xiaGua: Gua8, shangGua: Gua8, rg: Int) {
+        this.value = (shangGua.value.shl(3)) + xiaGua.value
+        this.riGan = TianGan(rg)
+        var yao = Yao(8)
+        this.yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+        for (i in 0..2) {
+            this.yaos[i] = Yao(8)
+            this.yaos[i].isYang = xiaGua.value.and(0b00000001.shl(i)) != 0
+        }
+        for(i in 3..5) {
+            this.yaos[i] = Yao(8)
+            this.yaos[i].isYang = shangGua.value.and(0b00000001.shl(i-3)) != 0
+        }
+        this.paiPan()
+    }
+
     fun getBianGua(): Gua64 {
         var bianYao = this.yaos.clone()
         for (i in 0..5) {
@@ -176,11 +195,6 @@ class Gua64 {
         var shangGua = this.getHigh()
 
         println("下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
-
-        for (i in 0..5) {
-            this.yaos[i].naZhi = DiZhi(DiZhi.ZI + i)
-            println(this.yaos[i].naZhi.getName())
-        }
 
         when (xiaGua.value % 8) {
             0b000 -> // 坤 未巳卯
@@ -404,6 +418,24 @@ class Gua64 {
         //println(missedLq.size)
         for (i in missedLq){
             println("缺少六亲：${LiuQin(i).getName()}")
+            findFuYao(liuQin = LiuQin(i))
+        }
+    }
+
+    fun findFuYao(liuQin: LiuQin){
+        val gong2 = this.gong
+        val gua2 = Gua64(gong2,gong2,this.riGan.tianGan)
+        println("首卦为：${gua2.getName()}")
+        println("首卦的六亲")
+        for (i in 5 downTo 0) {
+            if(liuQin.equals(gua2.yaos[i].lq)){
+                println("${i}爻")
+                print(gua2.yaos[i].lq.getName())
+                print(gua2.yaos[i].naZhi.getName())
+                val xing = gua2.yaos[i].naZhi.xing
+                print(xing.toString())
+                println()
+            }
         }
     }
 
