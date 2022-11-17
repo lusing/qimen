@@ -375,23 +375,35 @@ class Gua64 {
     }
 
     fun updateLiuQin(gong: Gua8) {
+        val fullLq = setOf(LiuQin.QICAI,LiuQin.FUMU, (LiuQin.ZISUN), (LiuQin.GUANGUI), (LiuQin.XIONGDI))
+        var lqSet = setOf<Int>()
         for (i in 0..5) {
             if (this.yaos[i].naZhi.xing.xing == gong.xing) {
                 //println("兄弟")
                 this.yaos[i].lq = LiuQin(LiuQin.XIONGDI)
+                lqSet = lqSet.plusElement((LiuQin.XIONGDI))
             } else if (this.yaos[i].naZhi.xing.isSheng(gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.FUMU)
                 //println("父母")
+                lqSet = lqSet.plusElement((LiuQin.FUMU))
             } else if (this.yaos[i].naZhi.xing.isKe(gong.getWuXing())) {
                 this.yaos[i].lq = LiuQin(LiuQin.GUANGUI)
                 //println("官鬼")
+                lqSet = lqSet.plusElement((LiuQin.GUANGUI))
             } else if (gong.getWuXing().isSheng(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.ZISUN)
                 //println("子孙")
+                lqSet = lqSet.plusElement((LiuQin.ZISUN))
             } else if (gong.getWuXing().isKe(this.yaos[i].naZhi.xing)) {
                 this.yaos[i].lq = LiuQin(LiuQin.QICAI)
                 //println("妻财")
+                lqSet = lqSet.plusElement((LiuQin.QICAI))
             }
+        }
+        val missedLq = fullLq.minus(lqSet)
+        //println(missedLq.size)
+        for (i in missedLq){
+            println("缺少六亲：${LiuQin(i).getName()}")
         }
     }
 
