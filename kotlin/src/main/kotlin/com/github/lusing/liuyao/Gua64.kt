@@ -189,19 +189,10 @@ class Gua64 {
 
             0b001, 0b111 -> // 震 子寅辰
             {
-                println("下卦：震，乾")
+                //println("下卦：震，乾")
                 this.yaos[0].naZhi = DiZhi(DiZhi.ZI)
-                println("纳支0：${this.yaos[0].naZhi.getName()}")
-                println("纳支1：${this.yaos[1].naZhi.getName()}")
-                println("纳支2：${this.yaos[2].naZhi.getName()}")
                 this.yaos[1].naZhi = DiZhi(DiZhi.YIN)
-                println("纳支0：${this.yaos[0].naZhi.getName()}")
-                println("纳支1：${this.yaos[1].naZhi.getName()}")
-                println("纳支2：${this.yaos[2].naZhi.getName()}")
                 this.yaos[2].naZhi = DiZhi(DiZhi.CHEN)
-                println("纳支0：${this.yaos[0].naZhi.getName()}")
-                println("纳支1：${this.yaos[1].naZhi.getName()}")
-                println("纳支2：${this.yaos[2].naZhi.getName()}")
             }
 
             0b010 -> // 坎 寅辰午
@@ -250,7 +241,7 @@ class Gua64 {
 
             0b001, 0b111 -> // 震 午申戌
             {
-                println("上卦：震，乾")
+                //println("上卦：震，乾")
                 this.yaos[3].naZhi = DiZhi(DiZhi.WU)
                 this.yaos[4].naZhi = DiZhi(DiZhi.SHEN)
                 this.yaos[5].naZhi = DiZhi(DiZhi.XU)
@@ -265,7 +256,7 @@ class Gua64 {
 
             0b011 -> // 兑 亥酉未
             {
-                println("兑")
+                //println("兑")
                 this.yaos[3].naZhi = DiZhi(DiZhi.HAI)
                 this.yaos[4].naZhi = DiZhi(DiZhi.YOU)
                 this.yaos[5].naZhi = DiZhi(DiZhi.WEI)
@@ -291,10 +282,6 @@ class Gua64 {
                 this.yaos[4].naZhi = DiZhi(DiZhi.SI)
                 this.yaos[5].naZhi = DiZhi(DiZhi.MAO)
             }
-        }
-
-        for(i in 0..5){
-            println("[Debug1]${this.yaos[i].naZhi.getName()} ${this.yaos[i].isShi} ${this.yaos[i].isYing}")
         }
 
         this.gong = shangGua
