@@ -7,7 +7,10 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
     val yueJian = DiZhi(yueJian)
     lateinit var bianGua: Gua64
     fun paiPan() {
-        println(this.benGua.getName())
+        print(this.benGua.getName())
+        print("            ")
+        this.bianGua = benGua.getBianGua()
+        println(this.bianGua.getName())
 
         println("宫:${benGua.gong.getName()}")
 
@@ -18,22 +21,28 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
             } else {
                 print("= ")
             }
+            if (benGua.yaos[i].fuShen != null) {
+                print(benGua.yaos[i].fuShen!!.lq.getName())
+                print(benGua.yaos[i].fuShen!!.naZhi.getName())
+                val xing2 = benGua.yaos[i].fuShen!!.naZhi.xing
+                print(xing2.toString())
+                print(" ")
+            }else{
+                print("       ")
+            }
+
             print(benGua.yaos[i].lq.getName())
             print(benGua.yaos[i].naZhi.getName())
             var xing = benGua.yaos[i].naZhi.xing
             print(xing.toString())
             if (benGua.yaos[i].isShi) {
-                print(" 世")
+                print(" 世 ")
             } else if (benGua.yaos[i].isYing) {
-                print(" 应")
+                print(" 应 ")
+            }else{
+                print("   ")
             }
-            println()
-        }
 
-        this.bianGua = benGua.getBianGua()
-        println(this.bianGua.getName())
-        for (i in 5 downTo 0) {
-            print("${this.bianGua.yaos[i].liuShen.getName()} ")
             if (this.bianGua.yaos[i].isYang) {
                 print("- ")
             } else {
@@ -41,8 +50,8 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
             }
             print(this.bianGua.yaos[i].lq.getName())
             print(this.bianGua.yaos[i].naZhi.getName())
-            var xing = this.bianGua.yaos[i].naZhi.xing
-            print(xing.toString())
+            val xing3 = this.bianGua.yaos[i].naZhi.xing
+            print(xing3.toString())
             if (this.bianGua.yaos[i].isShi) {
                 print(" 世")
             } else if (this.bianGua.yaos[i].isYing) {

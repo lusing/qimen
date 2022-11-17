@@ -9,6 +9,7 @@ class Yao {
     lateinit var naZhi : DiZhi // 纳支
     lateinit var lq : LiuQin // 六亲
     lateinit var liuShen : LiuShen // 六神
+    var fuShen: Yao? = null
     var isShi: Boolean = false
     var isYing = false
 

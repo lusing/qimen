@@ -429,12 +429,7 @@ class Gua64 {
         println("首卦的六亲")
         for (i in 5 downTo 0) {
             if(liuQin.equals(gua2.yaos[i].lq)){
-                println("${i}爻")
-                print(gua2.yaos[i].lq.getName())
-                print(gua2.yaos[i].naZhi.getName())
-                val xing = gua2.yaos[i].naZhi.xing
-                print(xing.toString())
-                println()
+                this.yaos[i].fuShen = gua2.yaos[i]
             }
         }
     }
