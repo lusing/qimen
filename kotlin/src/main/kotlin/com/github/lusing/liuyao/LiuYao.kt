@@ -17,9 +17,14 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
         for (i in 5 downTo 0) {
             print("${benGua.yaos[i].liuShen.getName()} ")
             if (benGua.yaos[i].isYang) {
-                print("- ")
+                print("-")
             } else {
-                print("= ")
+                print("=")
+            }
+            if(benGua.yaos[i].isChange){
+                print("*")
+            }else{
+                print(" ")
             }
             if (benGua.yaos[i].fuShen != null) {
                 print(benGua.yaos[i].fuShen!!.lq.getName())

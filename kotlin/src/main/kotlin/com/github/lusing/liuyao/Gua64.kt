@@ -143,6 +143,7 @@ class Gua64 {
     fun getBianGua(): Gua64 {
         var bianYao = this.yaos.clone()
         for (i in 0..5) {
+            bianYao[i] = Yao(8)
             if (this.yaos[i].isChange) {
                 bianYao[i].isYang = this.yaos[i].isYang.not()
                 bianYao[i].isChange = false
