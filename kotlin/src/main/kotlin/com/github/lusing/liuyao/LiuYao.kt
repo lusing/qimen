@@ -9,8 +9,8 @@ class LiuYao constructor(gua: Gua64, yueJian: Int) {
     fun paiPan() {
         // TODO: 变卦有bug
         println(this.benGua.getName())
-//        this.bianGua = benGua.getBianGua()
-//        println(this.bianGua.getName())
+        this.bianGua = benGua.getBianGua()
+        println(this.bianGua.getName())
 
         println("宫:${benGua.gong.getName()}")
 
