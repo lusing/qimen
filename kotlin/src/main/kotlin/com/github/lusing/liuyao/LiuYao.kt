@@ -101,7 +101,39 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int, yongShen: Int) 
         }
         if (yongshen != null){
             var yao1 = yongshen!!
-
+            this.checkJueJian(yao1)
         }
     }
+
+    fun checkJueJian(yao: Yao){
+        if(yao.naZhi.xing.xing == this.yueJian.xing.xing){
+            println("爻五行同月建为最旺")
+        }else if(this.yueJian.isHe(yao.naZhi)) {
+            println("爻地支合月建为次旺")
+        }else if(this.yueJian.isSheng(yao.naZhi)) {
+            println("爻被月建生为再旺")
+        }else if(yao.naZhi.isSheng(this.yueJian)) {
+            println("爻生月建为衰")
+        }else if(yao.naZhi.isKe(this.yueJian)) {
+            println("爻克月建为衰")
+        }else if(this.yueJian.isKe(yao.naZhi)){
+            println("爻被月建克为更衰")
+        }
+        if(this.yueJian.isChong(yao.naZhi)) {
+            println("爻被月建冲为最衰")
+        }
+
+        if(yao.naZhi.xing.xing == this.riJian.xing.xing) {
+            println("爻五行同日建为最旺")
+        }else if(this.riJian.isSheng(yao.naZhi)) {
+            println("爻被日建生为次旺")
+        }else if(yao.naZhi.isSheng(this.riJian)) {
+            println("爻生日建为衰")
+        }else if(yao.naZhi.isKe(this.riJian)) {
+            println("爻克日建为衰")
+        }else if(this.riJian.isKe(yao.naZhi)) {
+            println("爻被日建克为更衰")
+        }
+    }
+
 }
