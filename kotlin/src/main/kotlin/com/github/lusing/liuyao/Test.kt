@@ -25,16 +25,5 @@ class Test {
         //val bgua = ly2.benGua.getBianGua()
         //bgua.debug()
         ly2.paiPan()
-
-        val dz1 = DiZhi(DiZhi.ZI)
-        val dz2 = DiZhi(DiZhi.WU)
-        val dz3 = DiZhi(DiZhi.CHOU)
-        val dz4 = DiZhi(DiZhi.WEI)
-        println(dz1.isChong(dz2))
-        println(dz1.isHe(dz2))
-        println(dz1.isChong(dz3))
-        println(dz1.isHe(dz3))
-        println(dz2.isChong(dz4))
-        println(dz2.isHe(dz4))
     }
 }
