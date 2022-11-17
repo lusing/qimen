@@ -10,7 +10,7 @@ import com.github.lusing.qimen.TianGan
 class Gua64 {
     val value: Int
     val riGan: TianGan
-    lateinit var yaos: Array<Yao>
+    var yaos: Array<Yao>
     lateinit var gong: Gua8
 
 //    constructor(value: Int) {

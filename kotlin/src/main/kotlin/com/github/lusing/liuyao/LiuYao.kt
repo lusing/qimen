@@ -67,5 +67,41 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int, yongShen: Int) 
             }
             println()
         }
+        checkYongShen()
+    }
+
+    fun getYaoName(yao: Yao) :String{
+        var name = ""
+        name = name.plus(yao.lq.getName())
+        name = name.plus(yao.naZhi.getName())
+        var xing = yao.naZhi.xing
+        name = name.plus(xing.toString())
+        return name
+    }
+
+    fun checkYongShen(){
+        var yongshen: Yao? = null
+        var level = 0
+        var yaoSet = setOf<Yao>()
+        for(i in 0..5){
+            if(this.benGua.yaos[i].lq == this.yongShen){
+                println("用神在本卦第${i+1}爻")
+                val yao = this.benGua.yaos[i]
+                println(this.getYaoName(yao))
+                yaoSet = yaoSet.plus(yao)
+            }
+        }
+        if(yaoSet.size > 1){
+            for (yao in yaoSet){
+                if(yao.isChange){
+                    println("取动爻${this.getYaoName(yao)}为用神")
+                    yongshen = yao
+                }
+            }
+        }
+        if (yongshen != null){
+            var yao1 = yongshen!!
+
+        }
     }
 }

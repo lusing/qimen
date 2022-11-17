@@ -119,6 +119,22 @@ class DiZhi(idz: Int) {
         return xing!!.isSheng(dz2.xing!!)
     }
 
+    fun isChong(dz2: DiZhi): Boolean {
+        return dz2.diZhi == (this.diZhi + 6) % 12
+    }
+
+    /*
+     * 0与1合
+     * 2与11合
+     * 3与10合
+     * 4与9合
+     * 5与8合
+     * 6与7合
+     */
+    fun isHe(dz2: DiZhi): Boolean {
+        return (dz2.diZhi + this.diZhi + 12) % 12 == 1
+    }
+
     companion object {
         /**
          * 子
