@@ -15,7 +15,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int, yongShen: Int) 
         this.bianGua = benGua.getBianGua()
         println(this.bianGua.getName())
 
-        println("宫:${benGua.gong.getName()}")
+        //println("宫:${benGua.gong.getName()}")
 
         for (i in 5 downTo 0) {
             print("${benGua.yaos[i].liuShen.getName()} ")
