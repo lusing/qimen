@@ -88,8 +88,7 @@ class Gua64 {
         if (values[4] % 2 == 1) value = value.or(0b00010000)
         if (values[5] % 2 == 1) value = value.or(0b00100000)
 
-        var yao = Yao(8)
-        yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+        this.yaos = arrayOf(Yao(8), Yao(8), Yao(8), Yao(8), Yao(8), Yao(8))
 
         for (i in 0..5) {
             this.yaos[i] = Yao(values[i])
@@ -110,10 +109,8 @@ class Gua64 {
         this.value = value
         //this.yaos = yaos
         this.riGan = TianGan(rg)
-        var yao = Yao(8)
-        this.yaos = arrayOf(yao, yao, yao, yao, yao, yao)
+        this.yaos = arrayOf(Yao(8), Yao(8), Yao(8), Yao(8), Yao(8), Yao(8))
         for (i in 0..5) {
-            this.yaos[i] = Yao(8)
             this.yaos[i].isYang = yaos[i].isYang
             //println("this.yaos[$i].isYang = ${this.yaos[i].isYang}")
             //println("this.yaos[$i].isShi = ${this.yaos[i].isShi}")
@@ -133,20 +130,20 @@ class Gua64 {
             this.yaos[i] = Yao(8)
             this.yaos[i].isYang = xiaGua.value.and(0b00000001.shl(i)) != 0
         }
-        for(i in 3..5) {
+        for (i in 3..5) {
             this.yaos[i] = Yao(8)
-            this.yaos[i].isYang = shangGua.value.and(0b00000001.shl(i-3)) != 0
+            this.yaos[i].isYang = shangGua.value.and(0b00000001.shl(i - 3)) != 0
         }
         this.paiPan()
     }
 
     fun getBianGua(): Gua64 {
 
-        var bianYao = arrayOf<Yao>(Yao(8),Yao(8),Yao(8),Yao(8),Yao(8),Yao(8))
+        var bianYao = arrayOf<Yao>(Yao(8), Yao(8), Yao(8), Yao(8), Yao(8), Yao(8))
         for (i in 0..5) {
             if (this.yaos[i].isChange) {
                 bianYao[i].isYang = this.yaos[i].isYang.not()
-            }else{
+            } else {
                 bianYao[i].isYang = this.yaos[i].isYang
             }
             bianYao[i].isChange = false
@@ -199,7 +196,7 @@ class Gua64 {
         var xiaGua = this.getLow()
         var shangGua = this.getHigh()
 
-        println("下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
+        //println("下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
 
         when (xiaGua.value % 8) {
             0b000 -> // 坤 未巳卯
@@ -394,7 +391,7 @@ class Gua64 {
     }
 
     fun updateLiuQin(gong: Gua8) {
-        val fullLq = setOf(LiuQin.QICAI,LiuQin.FUMU, (LiuQin.ZISUN), (LiuQin.GUANGUI), (LiuQin.XIONGDI))
+        val fullLq = setOf(LiuQin.QICAI, LiuQin.FUMU, (LiuQin.ZISUN), (LiuQin.GUANGUI), (LiuQin.XIONGDI))
         var lqSet = setOf<Int>()
         for (i in 0..5) {
             if (this.yaos[i].naZhi.xing.xing == gong.xing) {
@@ -421,19 +418,19 @@ class Gua64 {
         }
         val missedLq = fullLq.minus(lqSet)
         //println(missedLq.size)
-        for (i in missedLq){
+        for (i in missedLq) {
             println("缺少六亲：${LiuQin(i).getName()}")
             findFuYao(liuQin = LiuQin(i))
         }
     }
 
-    fun findFuYao(liuQin: LiuQin){
+    fun findFuYao(liuQin: LiuQin) {
         val gong2 = this.gong
-        val gua2 = Gua64(gong2,gong2,this.riGan.tianGan)
+        val gua2 = Gua64(gong2, gong2, this.riGan.tianGan)
         println("首卦为：${gua2.getName()}")
         println("首卦的六亲")
         for (i in 5 downTo 0) {
-            if(liuQin.equals(gua2.yaos[i].lq)){
+            if (liuQin == gua2.yaos[i].lq) {
                 this.yaos[i].fuShen = gua2.yaos[i]
             }
         }

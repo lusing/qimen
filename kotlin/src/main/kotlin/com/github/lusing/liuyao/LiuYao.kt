@@ -106,34 +106,54 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian : Int, yongShen: Int) 
     }
 
     fun checkJueJian(yao: Yao){
+        var value = 0
         if(yao.naZhi.xing.xing == this.yueJian.xing.xing){
             println("爻五行同月建为最旺")
+            value += 50
         }else if(this.yueJian.isHe(yao.naZhi)) {
             println("爻地支合月建为次旺")
+            value += 30
         }else if(this.yueJian.isSheng(yao.naZhi)) {
             println("爻被月建生为再旺")
+            value += 20
         }else if(yao.naZhi.isSheng(this.yueJian)) {
             println("爻生月建为衰")
+            value -= 10
         }else if(yao.naZhi.isKe(this.yueJian)) {
             println("爻克月建为衰")
+            value -= 10
         }else if(this.yueJian.isKe(yao.naZhi)){
             println("爻被月建克为更衰")
+            value -= 20
         }
         if(this.yueJian.isChong(yao.naZhi)) {
             println("爻被月建冲为最衰")
+            value -= 50
         }
 
         if(yao.naZhi.xing.xing == this.riJian.xing.xing) {
             println("爻五行同日建为最旺")
+            value += 50
         }else if(this.riJian.isSheng(yao.naZhi)) {
             println("爻被日建生为次旺")
+            value += 20
         }else if(yao.naZhi.isSheng(this.riJian)) {
             println("爻生日建为衰")
+            value -= 10
         }else if(yao.naZhi.isKe(this.riJian)) {
             println("爻克日建为衰")
+            value -= 10
         }else if(this.riJian.isKe(yao.naZhi)) {
             println("爻被日建克为更衰")
+            value -= 20
+        }
+        println(value)
+        if(value > 0){
+            println("爻为旺")
+        }else if(value < 0) {
+            println("爻为衰")
+        }else{
+            println("爻为平")
         }
     }
-
 }
