@@ -84,6 +84,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         var yongshen: Yao? = null
         var level = 0
         var yaoSet = setOf<Yao>()
+        var isFuShen = false
         for (i in 0..5) {
             if (this.benGua.yaos[i].lq == this.yongShen) {
                 println("用神在本卦第${i + 1}爻")
@@ -95,18 +96,36 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         if (yaoSet.size > 1) {
             for (yao in yaoSet) {
                 if (yao.isChange) {
-                    println("取动爻${this.getYaoName(yao)}为用神")
                     yongshen = yao
+                }
+            }
+        }else if (yaoSet.size == 1) {
+            yongshen = yaoSet.first()
+        }else{
+            for (i in 0..5) {
+                if(this.benGua.yaos[i].fuShen != null){
+                    yongshen = this.benGua.yaos[i]
+                    isFuShen = true
                 }
             }
         }
         if (yongshen != null) {
             var yao1 = yongshen!!
-            this.checkYueJian(yao1)
+            if(isFuShen){
+                println("用神为伏神${this.getYaoName(yao1.fuShen!!)}")
+            }else{
+                println("用神为${this.getYaoName(yao1)}")
+            }
+
+            var wang = this.checkYueJian(yao1)
+            if (isFuShen){
+                this.checkFuShen(yao1,wang)
+            }
         }
     }
 
     fun checkAll() {
+        println("====全体爻的情况：")
         for (i in 0..5) {
             val yao = this.benGua.yaos[i]
             print(this.getYaoName(yao))
@@ -115,21 +134,40 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
             } else if (yao.isYing) {
                 println("为应")
             }
+            var wang = this.checkYueJian(yao)
             if (yao.isChange) {
                 print("动:")
                 var bianYao = this.bianGua.yaos[i]
                 println(this.getYaoName(bianYao))
-                this.checkBian(yao, bianYao)
+                this.checkBian(yao, bianYao, wang)
             }
-            this.checkYueJian(yao)
             if(yao.fuShen != null) {
                 print("伏神：")
-                this.checkYueJian(yao)
+                wang = this.checkYueJian(yao)
+                this.checkBian(yao, yao.fuShen!!, wang)
             }
         }
     }
 
-    fun checkBian(yao: Yao, bianYao: Yao) {
+    fun checkFuShen(yao: Yao, wang : Int){
+        if(yao.naZhi.isSheng(yao.fuShen!!.naZhi)){
+            println("飞神生伏神")
+            if(wang>=0){
+                println("用旺逢生：锦上添花，吉")
+            }else{
+                println("用衰逢生：危中有救，吉")
+            }
+        }else if(yao.naZhi.isSheng(yao.fuShen!!.naZhi)){
+            println("飞神克伏神")
+            if(wang>=0) {
+                println("用旺受克：易有不利，凶")
+            }else{
+                println("用衰受克：屋漏逢雨，凶")
+            }
+        }
+    }
+
+    fun checkBian(yao: Yao, bianYao: Yao, wang :Int) {
         // 化进：寅化卯，丑化辰，申化酉，未化戌称为化进
         if (yao.naZhi.diZhi == DiZhi.YIN && bianYao.naZhi.diZhi == DiZhi.MAO) {
             println("化进")
@@ -164,12 +202,22 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
 
         if (bianYao.naZhi.isKe(yao.naZhi)) {
             println("动爻克变爻:(")
+            if(wang>=0) {
+                println("用旺受克：易有不利，凶")
+            }else{
+                println("用衰受克：屋漏逢雨，凶")
+            }
         }else if(bianYao.naZhi.isSheng(yao.naZhi)){
             println("动爻生变爻:)")
+            if(wang>=0){
+                println("用旺逢生：锦上添花，吉")
+            }else{
+                println("用衰逢生：危中有救，吉")
+            }
         }
     }
 
-    fun checkYueJian(yao: Yao) {
+    fun checkYueJian(yao: Yao) :Int {
         var value = 0
         if (yao.naZhi.xing.xing == this.yueJian.xing.xing) {
             println("爻五行同月建为最旺")
@@ -219,5 +267,6 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         } else {
             println("爻为平")
         }
+        return value
     }
 }
