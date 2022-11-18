@@ -24,7 +24,7 @@ class Test {
         val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
         //val bgua = ly2.benGua.getBianGua()
         //bgua.debug()
-        ly2.paiPan()
+        //ly2.paiPan()
 
         val yao3 = arrayOf(7, 8, 7, 6, 7, 8)
         val gua3 = Gua64(yao3, TianGan.BING)
