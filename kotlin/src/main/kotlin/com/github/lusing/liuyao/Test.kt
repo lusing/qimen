@@ -35,5 +35,11 @@ class Test {
         val gua4 = Gua64(yao4, TianGan.BING)
         val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
         ly4.paiPan()
+
+        // TODO:这个世应安的不对
+        val yao5 = arrayOf(7, 6, 8, 8, 7, 7)
+        val gua5 = Gua64(yao5, TianGan.WU)
+        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.QICAI)
+        ly5.paiPan()
     }
 }
