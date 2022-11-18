@@ -122,6 +122,10 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
                 this.checkBian(yao, bianYao)
             }
             this.checkYueJian(yao)
+            if(yao.fuShen != null) {
+                print("伏神：")
+                this.checkYueJian(yao)
+            }
         }
     }
 
@@ -156,6 +160,12 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         // 变爻与动爻地支相同，称为伏吟，代表痛苦煎熬
         if (bianYao.naZhi.diZhi == yao.naZhi.diZhi) {
             println("伏吟")
+        }
+
+        if (bianYao.naZhi.isKe(yao.naZhi)) {
+            println("动爻克变爻:(")
+        }else if(bianYao.naZhi.isSheng(yao.naZhi)){
+            println("动爻生变爻:)")
         }
     }
 
@@ -201,7 +211,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
             println("爻被日建克为更衰")
             value -= 20
         }
-        println(value)
+        print(value)
         if (value > 0) {
             println("爻为旺")
         } else if (value < 0) {

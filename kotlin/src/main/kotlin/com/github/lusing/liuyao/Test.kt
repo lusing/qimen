@@ -30,5 +30,10 @@ class Test {
         val gua3 = Gua64(yao3, TianGan.BING)
         val ly3 = LiuYao(gua = gua3, yueJian = DiZhi.CHEN, riJian = DiZhi.SHEN, yongShen = LiuQin.XIONGDI)
         ly3.paiPan()
+
+        val yao4 = arrayOf(7, 8, 8, 8, 8, 8)
+        val gua4 = Gua64(yao4, TianGan.BING)
+        val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
+        ly4.paiPan()
     }
 }
