@@ -141,17 +141,21 @@ class Gua64 {
     }
 
     fun getBianGua(): Gua64 {
-        var bianYao = this.yaos.clone()
+
+        var bianYao = arrayOf<Yao>(Yao(8),Yao(8),Yao(8),Yao(8),Yao(8),Yao(8))
         for (i in 0..5) {
-            bianYao[i] = Yao(8)
             if (this.yaos[i].isChange) {
                 bianYao[i].isYang = this.yaos[i].isYang.not()
-                bianYao[i].isChange = false
+            }else{
+                bianYao[i].isYang = this.yaos[i].isYang
             }
+            bianYao[i].isChange = false
         }
         var bg = Gua64(bianYao, this.riGan.tianGan)
         println(this.gong.getName())
         bg.updateLiuQin(this.gong)
+        //println("[debug]本卦为：${this.getName()}")
+        //println("[debug]变卦为：${bg.getName()}")
         return bg
     }
 
