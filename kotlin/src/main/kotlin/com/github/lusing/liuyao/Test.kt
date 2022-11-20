@@ -70,10 +70,19 @@ class Test {
 //        ly9.paiPan()
 
         // 巳月戊午日，一老人自测病
-        val yao10 = arrayOf(6, 7, 8, 7, 8, 7)
-        val gua10 = Gua64(yao10, TianGan.WU)
-        val ly10 = LiuYao(gua = gua10, yueJian = DiZhi.SI, riJian = DiZhi.WU, yongShen = LiuQin.XIONGDI) // TODO:世爻
-        ly10.paiPan()
+//        val yao10 = arrayOf(6, 7, 8, 7, 8, 7)
+//        val gua10 = Gua64(yao10, TianGan.WU)
+//        val ly10 = LiuYao(gua = gua10, yueJian = DiZhi.SI, riJian = DiZhi.WU, yongShen = LiuQin.XIONGDI) // TODO:世爻
+//        ly10.paiPan()
+
+        // 得失占
+
+        // 未月丁巳日，一个刚刚离婚的男子后悔了，占问能否复合
+        // 冲中逢合
+        val yao11 = arrayOf(9, 8, 7, 7, 8, 7)
+        val gua11 = Gua64(yao11, TianGan.DING)
+        val ly11 = LiuYao(gua = gua11, yueJian = DiZhi.WEI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
+        ly11.paiPan()
 
         // TODO:世爻，应爻，克
     }

@@ -69,6 +69,28 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         }
         checkYongShen()
         checkAll()
+        val isHe1 = this.checkLiuHe(this.benGua)
+        val isChong1 = this.checkLiuChong(this.benGua)
+        val isHe2 = this.checkLiuHe(this.bianGua)
+        val isChong2 = this.checkLiuChong(this.bianGua)
+        if (isHe1) {
+            if(isHe2) {
+                println("六合化六合")
+            } else if (isChong2) {
+                println("六合化六冲")
+            } else {
+                println("六合")
+            }
+        }
+        if (isChong1){
+            if(isHe2) {
+                println("六冲化六合")
+            } else if (isChong2) {
+                println("六冲化六冲")
+            } else {
+                println("六冲")
+            }
+        }
     }
 
     fun getYaoName(yao: Yao): String {
@@ -270,5 +292,29 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
             println("爻为平")
         }
         return value
+    }
+
+    fun checkLiuChong(gua: Gua64): Boolean {
+        if (gua.yaos[0].naZhi.isChong(gua.yaos[3].naZhi)
+            && gua.yaos[1].naZhi.isChong(gua.yaos[4].naZhi)
+            && gua.yaos[2].naZhi.isChong(gua.yaos[5].naZhi)
+        ) {
+            println("${gua.getName()} 六冲卦")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    fun checkLiuHe(gua: Gua64): Boolean {
+        if (gua.yaos[0].naZhi.isHe(gua.yaos[3].naZhi)
+            && gua.yaos[1].naZhi.isHe(gua.yaos[4].naZhi)
+            && gua.yaos[2].naZhi.isHe(gua.yaos[5].naZhi)
+        ) {
+            println("${gua.getName()} 六合卦")
+            return true
+        } else {
+            return false
+        }
     }
 }
