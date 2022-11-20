@@ -56,9 +56,16 @@ class Test {
 //        ly6.paiPan()
 
         // 酉月丙辰日，测孩子疾病
-        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
-        val gua8 = Gua64(yao8, TianGan.BING)
-        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
-        ly8.paiPan()
+        // 用衰无克，勉力支撑
+//        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
+//        val gua8 = Gua64(yao8, TianGan.BING)
+//        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
+//        ly8.paiPan()
+
+        // 戌月丁卯日，占官司胜败
+        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
+        val gua9 = Gua64(yao9, TianGan.DING)
+        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.XIONGDI) // TODO:世爻
+        ly9.paiPan()
     }
 }
