@@ -99,11 +99,11 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
                     yongshen = yao
                 }
             }
-        }else if (yaoSet.size == 1) {
+        } else if (yaoSet.size == 1) {
             yongshen = yaoSet.first()
-        }else{
+        } else {
             for (i in 0..5) {
-                if(this.benGua.yaos[i].fuShen != null){
+                if (this.benGua.yaos[i].fuShen != null) {
                     yongshen = this.benGua.yaos[i]
                     isFuShen = true
                 }
@@ -111,16 +111,16 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         }
         if (yongshen != null) {
             var yao1 = yongshen!!
-            if(isFuShen){
+            if (isFuShen) {
                 println("用神为伏神${this.getYaoName(yao1.fuShen!!)}")
-            }else{
+            } else {
                 println("用神为${this.getYaoName(yao1)}")
             }
 
-            if (isFuShen){
+            if (isFuShen) {
                 var wang = this.checkYueJian(yao1.fuShen!!)
-                this.checkFuShen(yao1,wang)
-            }else{
+                this.checkFuShen(yao1, wang)
+            } else {
                 this.checkYueJian(yao1)
             }
         }
@@ -143,7 +143,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
                 println(this.getYaoName(bianYao))
                 this.checkBian(yao, bianYao, wang)
             }
-            if(yao.fuShen != null) {
+            if (yao.fuShen != null) {
                 print("伏神：")
                 wang = this.checkYueJian(yao)
                 this.checkBian(yao, yao.fuShen!!, wang)
@@ -151,25 +151,25 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         }
     }
 
-    fun checkFuShen(yao: Yao, wang : Int){
-        if(yao.naZhi.isSheng(yao.fuShen!!.naZhi)){
+    fun checkFuShen(yao: Yao, wang: Int) {
+        if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
             println("飞神生伏神")
-            if(wang>=0){
+            if (wang >= 0) {
                 println("用旺逢生：锦上添花，吉")
-            }else{
+            } else {
                 println("用衰逢生：危中有救，吉")
             }
-        }else if(yao.naZhi.isSheng(yao.fuShen!!.naZhi)){
+        } else if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
             println("飞神克伏神")
-            if(wang>=0) {
+            if (wang >= 0) {
                 println("用旺受克：易有不利，凶")
-            }else{
+            } else {
                 println("用衰受克：屋漏逢雨，凶")
             }
         }
     }
 
-    fun checkBian(yao: Yao, bianYao: Yao, wang :Int) {
+    fun checkBian(yao: Yao, bianYao: Yao, wang: Int) {
         // 化进：寅化卯，丑化辰，申化酉，未化戌称为化进
         if (yao.naZhi.diZhi == DiZhi.YIN && bianYao.naZhi.diZhi == DiZhi.MAO) {
             println("化进")
@@ -204,24 +204,27 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
 
         if (bianYao.naZhi.isKe(yao.naZhi)) {
             println("动爻克变爻:(")
-            if(wang>=0) {
+            if (wang >= 0) {
                 println("用旺受克：易有不利，凶")
-            }else{
+            } else {
                 println("用衰受克：屋漏逢雨，凶")
             }
-        }else if(bianYao.naZhi.isSheng(yao.naZhi)){
+        } else if (bianYao.naZhi.isSheng(yao.naZhi)) {
             println("动爻生变爻:)")
-            if(wang>=0){
+            if (wang >= 0) {
                 println("用旺逢生：锦上添花，吉")
-            }else{
+            } else {
                 println("用衰逢生：危中有救，吉")
             }
         }
     }
 
-    fun checkYueJian(yao: Yao) :Int {
+    fun checkYueJian(yao: Yao): Int {
         var value = 0
-        if (yao.naZhi.xing.xing == this.yueJian.xing.xing) {
+        if (this.yueJian.isChong(yao.naZhi)) {
+            println("爻被月建冲为最衰")
+            value -= 50
+        } else if (yao.naZhi.xing.xing == this.yueJian.xing.xing) {
             println("爻五行同月建为最旺")
             value += 50
         } else if (this.yueJian.isHe(yao.naZhi)) {
@@ -240,10 +243,7 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
             println("爻被月建克为更衰")
             value -= 20
         }
-        if (this.yueJian.isChong(yao.naZhi)) {
-            println("爻被月建冲为最衰")
-            value -= 50
-        }
+
 
         if (yao.naZhi.xing.xing == this.riJian.xing.xing) {
             println("爻五行同日建为最旺")

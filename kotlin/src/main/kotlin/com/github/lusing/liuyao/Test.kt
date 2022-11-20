@@ -63,9 +63,18 @@ class Test {
 //        ly8.paiPan()
 
         // 戌月丁卯日，占官司胜败
-        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
-        val gua9 = Gua64(yao9, TianGan.DING)
-        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.XIONGDI) // TODO:世爻
-        ly9.paiPan()
+        // 用神弱极，衰极无救
+//        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
+//        val gua9 = Gua64(yao9, TianGan.DING)
+//        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.XIONGDI) // TODO:世爻
+//        ly9.paiPan()
+
+        // 巳月戊午日，一老人自测病
+        val yao10 = arrayOf(6, 7, 8, 7, 8, 7)
+        val gua10 = Gua64(yao10, TianGan.WU)
+        val ly10 = LiuYao(gua = gua10, yueJian = DiZhi.SI, riJian = DiZhi.WU, yongShen = LiuQin.XIONGDI) // TODO:世爻
+        ly10.paiPan()
+
+        // TODO:世爻，应爻，克
     }
 }
