@@ -117,9 +117,11 @@ class LiuYao constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
                 println("用神为${this.getYaoName(yao1)}")
             }
 
-            var wang = this.checkYueJian(yao1)
             if (isFuShen){
+                var wang = this.checkYueJian(yao1.fuShen!!)
                 this.checkFuShen(yao1,wang)
+            }else{
+                this.checkYueJian(yao1)
             }
         }
     }

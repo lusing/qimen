@@ -19,12 +19,13 @@ class Test {
         //var liuyao1 = LiuYao(gua, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
         //liuyao1.paiPan()
 
+//        // 卯月己卯日，弟弟为已经判为重罪的兄长问卦，想知道母亲去朝廷喊冤的话，能否把兄长救出。
 //        val yaos2 = arrayOf(7, 8, 8, 6, 8, 8)
 //        val gua2 = Gua64(yaos2, TianGan.JI)
 //        val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
 //        //val bgua = ly2.benGua.getBianGua()
 //        //bgua.debug()
-//        //ly2.paiPan()
+//        ly2.paiPan()
 //
 //        val yao3 = arrayOf(7, 8, 7, 6, 7, 8)
 //        val gua3 = Gua64(yao3, TianGan.BING)
@@ -36,10 +37,28 @@ class Test {
 //        val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
 //        //ly4.paiPan()
 
-        // TODO:这个世应安的不对
-        val yao5 = arrayOf(7, 6, 8, 8, 7, 7)
-        val gua5 = Gua64(yao5, TianGan.WU)
-        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.QICAI)
-        ly5.paiPan()
+//        // 丑月戊子日，某人觉得心惊肉跳，占吉凶
+//        val yao5 = arrayOf(7, 6, 8, 8, 7, 7)
+//        val gua5 = Gua64(yao5, TianGan.WU)
+//        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.QICAI)
+//        //ly5.paiPan()
+//
+        // 丑月庚子日，测父亲疾病
+//        val yao6 = arrayOf(8, 7, 7, 7, 7, 7)
+//        val gua6 = Gua64(yao6, TianGan.GENG)
+//        val ly6 = LiuYao(gua = gua6, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.FUMU)
+//        ly6.paiPan()
+
+        // 巳月乙丑日，测父亲身体
+//        val yao7 = arrayOf(6, 7, 7, 8, 7, 7)
+//        val gua6 = Gua64(yao7, TianGan.YI)
+//        val ly6 = LiuYao(gua = gua6, yueJian = DiZhi.SI, riJian = DiZhi.CHOU, yongShen = LiuQin.FUMU)
+//        ly6.paiPan()
+
+        // 酉月丙辰日，测孩子疾病
+        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
+        val gua8 = Gua64(yao8, TianGan.BING)
+        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
+        ly8.paiPan()
     }
 }
