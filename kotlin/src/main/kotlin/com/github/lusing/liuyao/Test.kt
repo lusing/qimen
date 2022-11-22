@@ -93,10 +93,16 @@ class Test {
 
         // 申月乙巳日，一男测考试成绩
         // 合而化冲
-        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
-        val gua13 = Gua64(yao13, TianGan.YI)
-        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = LiuQin.FUMU)
-        ly13.paiPan()
+//        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
+//        val gua13 = Gua64(yao13, TianGan.YI)
+//        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = LiuQin.FUMU)
+//        ly13.paiPan()
+
+        // 戌月丁卯日，某人问一生能否得到官职
+        val yao14 = arrayOf(7, 7, 7, 8, 7, 8)
+        val gua14 = Gua64(yao14, TianGan.DING)
+        val ly14 = LiuYao(gua = gua14, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.GUANGUI)
+        ly14.paiPan()
 
         // TODO:世爻，应爻，克
     }
