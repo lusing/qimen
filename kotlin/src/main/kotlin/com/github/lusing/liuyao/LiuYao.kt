@@ -133,28 +133,55 @@ class LiuYao {
         var yongshen: Yao? = null
         var level = 0
         var yaoSet = setOf<Yao>()
+        var shiYao: Yao? = null
         var isFuShen = false
+        var whatShen: YongShen = YongShen(YongShen.XIAN_SHEN)
+
         for (i in 0..5) {
-            if (this.benGua.yaos[i].lq == this.yongShen) {
-                println("用神在本卦第${i + 1}爻")
-                val yao = this.benGua.yaos[i]
-                println(this.getYaoName(yao))
-                yaoSet = yaoSet.plus(yao)
+            if (this.benGua.yaos[i].isShi) {
+                shiYao = this.benGua.yaos[i]
+                break
             }
         }
-        if (yaoSet.size > 1) {
-            for (yao in yaoSet) {
-                if (yao.isChange) {
-                    yongshen = yao
+
+        assert(shiYao == null)
+
+        // 世爻为用神
+        if (this.isShi) {
+            println("用神持世")
+            yongshen = shiYao
+            whatShen = YongShen(YongShen.YONG_SHEN)
+        } else if (this.isYing) {
+            for (i in 0..5) {
+                if (this.benGua.yaos[i].isYing) {
+                    yongshen = this.benGua.yaos[i]
+                    break
                 }
             }
-        } else if (yaoSet.size == 1) {
-            yongshen = yaoSet.first()
+            whatShen = YongShen(shiYao!!.naZhi, yongshen!!.naZhi)
         } else {
             for (i in 0..5) {
-                if (this.benGua.yaos[i].fuShen != null) {
-                    yongshen = this.benGua.yaos[i]
-                    isFuShen = true
+                if (this.benGua.yaos[i].lq == this.yongShen) {
+                    println("用神在本卦第${i + 1}爻")
+                    val yao = this.benGua.yaos[i]
+                    println(this.getYaoName(yao))
+                    yaoSet = yaoSet.plus(yao)
+                }
+            }
+            if (yaoSet.size > 1) {
+                for (yao in yaoSet) {
+                    if (yao.isChange) {
+                        yongshen = yao
+                    }
+                }
+            } else if (yaoSet.size == 1) {
+                yongshen = yaoSet.first()
+            } else {
+                for (i in 0..5) {
+                    if (this.benGua.yaos[i].fuShen != null) {
+                        yongshen = this.benGua.yaos[i]
+                        isFuShen = true
+                    }
                 }
             }
         }
@@ -169,10 +196,40 @@ class LiuYao {
             if (isFuShen) {
                 var wang = this.checkYueJian(yao1.fuShen!!)
                 this.checkFuShen(yao1, wang)
+                whatShen = YongShen(shiYao!!.naZhi, yongshen!!.naZhi)
+                println("${whatShen.getName()}持世")
             } else {
-                this.checkYueJian(yao1)
+                var yongWang = this.checkYueJian(yao1)
+                whatShen = YongShen(shiYao!!.naZhi, yongshen!!.naZhi)
+                println("${whatShen.getName()}持世")
+                var shiWang = this.checkYueJian(shiYao)
+                this.checkDeShi(whatShen, yongWang, shiWang)
             }
         }
+    }
+
+    fun checkDeShi(whatShen: YongShen, yongShenWang: Int, shiYaoWang: Int): JiXiong {
+        if (whatShen.yongShen == YongShen.YONG_SHEN) {
+            //用神持世：按世爻旺衰来直接断吉凶
+            println("用神持世：按世爻旺衰来直接断吉凶")
+            if (shiYaoWang > 0) {
+                println("世爻旺，吉")
+                return JiXiong(JiXiong.JI)
+            } else {
+                println("世爻衰，凶")
+                return JiXiong(JiXiong.XIONG)
+            }
+        }else if(whatShen.yongShen == YongShen.YUAN_SHEN) {
+            println("原神持世：自己追求目标，世旺用旺则以得断，有一方衰则断某方有问题，双方都衰则以失断")
+            if (shiYaoWang <0 && yongShenWang < 0) {
+                println("世爻衰，用神衰，凶")
+                JiXiong(JiXiong.XIONG)
+            } else {
+                println("世爻旺，用神旺，吉")
+                JiXiong(JiXiong.JI)
+            }
+        }
+        return JiXiong(JiXiong.JI)
     }
 
     fun checkAll() {
@@ -200,7 +257,7 @@ class LiuYao {
         }
     }
 
-    fun checkFuShen(yao: Yao, wang: Int) {
+    fun checkFuShen(yao: Yao, wang: Int): JiXiong {
         if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
             println("飞神生伏神")
             if (wang >= 0) {
@@ -208,6 +265,7 @@ class LiuYao {
             } else {
                 println("用衰逢生：危中有救，吉")
             }
+            return JiXiong(JiXiong.JI)
         } else if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
             println("飞神克伏神")
             if (wang >= 0) {
@@ -215,7 +273,9 @@ class LiuYao {
             } else {
                 println("用衰受克：屋漏逢雨，凶")
             }
+            return JiXiong(JiXiong.XIONG)
         }
+        return JiXiong(JiXiong.JI)
     }
 
     fun checkBian(yao: Yao, bianYao: Yao, wang: Int) {

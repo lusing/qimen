@@ -99,11 +99,17 @@ class Test {
 //        ly13.paiPan()
 
         // 戌月丁卯日，某人问一生能否得到官职
-        val yao14 = arrayOf(7, 7, 7, 8, 7, 8)
-        val gua14 = Gua64(yao14, TianGan.DING)
-        val ly14 = LiuYao(gua = gua14, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.GUANGUI)
-        ly14.paiPan()
+//        val yao14 = arrayOf(7, 7, 7, 8, 7, 8)
+//        val gua14 = Gua64(yao14, TianGan.DING)
+//        val ly14 = LiuYao(gua = gua14, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.GUANGUI)
+//        ly14.paiPan()
 
-        // TODO:世爻，应爻，克
+        // 卯月甲申日，占考试如何。父母爻为用神，原神持世
+        val yao15 = arrayOf(6, 8, 7, 8, 6, 7)
+        val gua15 = Gua64(yao15, TianGan.JIA)
+        val ly15 = LiuYao(gua = gua15, yueJian = DiZhi.MAO, riJian = DiZhi.SHEN, yongShen = LiuQin.FUMU)
+        ly15.paiPan()
+
+        // TODO:克
     }
 }

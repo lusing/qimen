@@ -5,23 +5,27 @@ import com.github.lusing.qimen.DiZhi
 class YongShen {
     var yongShen: Int = XIAN_SHEN
 
-    constructor(yongShen: DiZhi, thisShen: DiZhi) {
-        if (thisShen.isSheng(yongShen)) {
-            this.yongShen = YUAN_SHEN
+    constructor(yongShen: Int) {
+        this.yongShen = yongShen
+    }
+
+    constructor(shiShen: DiZhi, yongShen: DiZhi) {
+        if (yongShen.isSheng(shiShen)) {
+            this.yongShen = XIAN_SHEN
         }
-        if (thisShen.isKe(yongShen)) {
-            this.yongShen = JI_SHEN
-        }
-        if (yongShen.isKe(thisShen)) {
+        if (yongShen.isKe(shiShen)) {
             this.yongShen = CHOU_SHEN
         }
-        if (yongShen.isSheng(thisShen)) {
-            this.yongShen = XIAN_SHEN
+        if (shiShen.isKe(yongShen)) {
+            this.yongShen = JI_SHEN
+        }
+        if (shiShen.isSheng(yongShen)) {
+            this.yongShen = YUAN_SHEN
         }
     }
 
-    fun getName() {
-        when (this.yongShen) {
+    fun getName(): String {
+        return when (this.yongShen) {
             XIAN_SHEN -> "闲神"
             YUAN_SHEN -> "原神"
             JI_SHEN -> "忌神"
