@@ -17,4 +17,9 @@ class Yao {
         this.isYang = number % 2 == 1
         this.isChange = number == 6 || number == 9
     }
+
+    companion object{
+        const val SHI_YAO = 100
+        const val YING_YAO = 101
+    }
 }

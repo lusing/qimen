@@ -1,7 +1,7 @@
 package com.github.lusing.qimen
 
 
-open class LiuQin constructor(lq : Int){
+open class LiuQin constructor(lq: Int) {
     var liuqin = XIONGDI
 
     init {
@@ -24,9 +24,9 @@ open class LiuQin constructor(lq : Int){
     }
 
     override fun equals(other: Any?): Boolean {
-        return if(other!! is LiuQin){
+        return if (other!! is LiuQin) {
             this.liuqin == (other as LiuQin).liuqin
-        }else{
+        } else {
             false
         }
     }

@@ -45,23 +45,17 @@ class LiuShen constructor(number: Int) : WuXing(number) {
 
     fun getName(): String {
         when (this.ls) {
-            QINGLONG ->
-                return "青龍"
+            QINGLONG -> return "青龍"
 
-            ZHUQUE ->
-                return "朱雀"
+            ZHUQUE -> return "朱雀"
 
-            GOUCHEN ->
-                return "勾陈"
+            GOUCHEN -> return "勾陈"
 
-            TENGSHE ->
-                return "腾蛇"
+            TENGSHE -> return "腾蛇"
 
-            BAIHU ->
-                return "白虎"
+            BAIHU -> return "白虎"
 
-            XUANWU ->
-                return "玄武"
+            XUANWU -> return "玄武"
         }
         return "达拉崩吧"
     }
