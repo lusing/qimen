@@ -116,6 +116,12 @@ class Test {
 //        val ly16 = LiuYao(gua = gua16, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.GUANGUI)
 //        ly16.paiPan()
 
+        // 子月gui酉日，用神妻财，闲神持世
+        val yao17 = arrayOf(8, 7, 7, 7, 8, 6)
+        val gua17 = Gua64(yao17, TianGan.GUI)
+        val ly17 = LiuYao(gua = gua17, yueJian = DiZhi.ZI, riJian = DiZhi.YOU, yongShen = LiuQin.QICAI)
+        ly17.paiPan()
+
         // TODO:克
     }
 }

@@ -208,6 +208,7 @@ class LiuYao {
         }
     }
 
+    // TODO: 结合生克
     fun checkDeShi(whatShen: YongShen, yongShenWang: Int, shiYaoWang: Int): JiXiong {
         if (whatShen.yongShen == YongShen.YONG_SHEN) {
             //用神持世：按世爻旺衰来直接断吉凶
@@ -219,27 +220,27 @@ class LiuYao {
                 println("世爻衰，凶")
                 return JiXiong(JiXiong.XIONG)
             }
-        }else if(whatShen.yongShen == YongShen.YUAN_SHEN) {
+        } else if (whatShen.yongShen == YongShen.YUAN_SHEN) {
             println("原神持世：自己追求目标，世旺用旺则以得断，有一方衰则断某方有问题，双方都衰则以失断")
-            if (shiYaoWang <0 && yongShenWang < 0) {
+            if (shiYaoWang < 0 && yongShenWang < 0) {
                 println("世爻衰，用神衰，凶")
                 JiXiong(JiXiong.XIONG)
             } else {
                 println("世爻旺，用神旺，吉")
                 JiXiong(JiXiong.JI)
             }
-        }else if(whatShen.yongShen == YongShen.CHOU_SHEN){
+        } else if (whatShen.yongShen == YongShen.CHOU_SHEN) {
             println("仇神持世：世爻用神均中平以上为得，世强用衰为意愿强而目标差，世衰用强为能力不足而先补能力，世用双衰为失")
-            if (shiYaoWang <0 && yongShenWang < 0) {
+            if (shiYaoWang < 0 && yongShenWang < 0) {
                 println("世爻衰，用神衰，凶")
                 JiXiong(JiXiong.XIONG)
             } else {
                 println("世爻旺，用神旺，吉")
                 JiXiong(JiXiong.JI)
             }
-        }else if(whatShen.yongShen == YongShen.JI_SHEN) {
+        } else if (whatShen.yongShen == YongShen.JI_SHEN) {
             //六静卦忌神持世为失
-            if(this.benGua.value == this.bianGua.value){
+            if (this.benGua.value == this.bianGua.value) {
                 println("六静卦忌神持世为失")
                 return JiXiong(JiXiong.XIONG)
             }
@@ -249,6 +250,15 @@ class LiuYao {
                 JiXiong(JiXiong.XIONG)
             } else {
                 println("世爻旺，用神旺，吉")
+                JiXiong(JiXiong.JI)
+            }
+        } else if (whatShen.yongShen == YongShen.XIAN_SHEN) {
+            println("闲神持世：（用神生世爻）只要用神不为衰，则为得")
+            if (yongShenWang < 0) {
+                println("用神衰，凶")
+                JiXiong(JiXiong.XIONG)
+            } else {
+                println("用神旺，吉")
                 JiXiong(JiXiong.JI)
             }
         }
