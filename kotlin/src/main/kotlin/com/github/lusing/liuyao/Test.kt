@@ -35,17 +35,17 @@ class Test {
 // ==== 吉凶判断 ====
 
          // 卯月丙辰日，占父亲的病。父母为用神。用旺逢生，吉。Pass
-        val yao4 = arrayOf(7, 8, 8, 8, 8, 8)
-        val gua4 = Gua64(yao4, TianGan.BING)
-        val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
-        ly4.paiPan()
+//        val yao4 = arrayOf(7, 8, 8, 8, 8, 8)
+//        val gua4 = Gua64(yao4, TianGan.BING)
+//        val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
+//        ly4.paiPan()
 
-//        // 丑月戊子日，某人觉得心惊肉跳，占吉凶
+        // 丑月戊子日，某人觉得心惊肉跳，占吉凶。用旺受克，易有不利。凶。Pass
 //        val yao5 = arrayOf(7, 6, 8, 8, 7, 7)
 //        val gua5 = Gua64(yao5, TianGan.WU)
-//        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.QICAI)
-//        //ly5.paiPan()
-//
+//        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = Yao.SHI_YAO)
+//        ly5.paiPan()
+
         // 丑月庚子日，测父亲疾病
 //        val yao6 = arrayOf(8, 7, 7, 7, 7, 7)
 //        val gua6 = Gua64(yao6, TianGan.GENG)
