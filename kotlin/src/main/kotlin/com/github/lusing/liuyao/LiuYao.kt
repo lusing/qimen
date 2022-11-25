@@ -93,6 +93,10 @@ class LiuYao {
                 print(" 应")
             }
             println()
+
+            if(benGua.yaos[i].isChange){
+                benGua.yaos[i].bianYao = this.bianGua.yaos[i]
+            }
         }
         checkYongShen()
         checkAll()
@@ -277,17 +281,20 @@ class LiuYao {
                 println("为应")
             }
             var wang = this.checkYueJian(yao)
-            this.checkShengKe(yao, wang)
             if (yao.isChange) {
                 print("动:")
                 var bianYao = this.bianGua.yaos[i]
                 println(this.getYaoName(bianYao))
-                this.checkBian(yao, bianYao, wang)
+                if(yao.bianYao == null){
+                    yao.bianYao = bianYao
+                }
+                this.checkBian(yao)
             }
+            this.checkShengKe(yao, wang)
             if (yao.fuShen != null) {
                 print("伏神：")
                 wang = this.checkYueJian(yao)
-                this.checkBian(yao, yao.fuShen!!, wang)
+                this.checkFuShen(yao, wang)
             }
         }
     }
@@ -313,54 +320,58 @@ class LiuYao {
         return JiXiong(JiXiong.JI)
     }
 
-    fun checkBian(yao: Yao, bianYao: Yao, wang: Int) {
+    fun checkBian(yao: Yao) : Int{
+        var result = 0;
         // 化进：寅化卯，丑化辰，申化酉，未化戌称为化进
-        if (yao.naZhi.diZhi == DiZhi.YIN && bianYao.naZhi.diZhi == DiZhi.MAO) {
+        if (yao.naZhi.diZhi == DiZhi.YIN && yao.bianYao!!.naZhi.diZhi == DiZhi.MAO) {
             println("化进")
-        } else if (yao.naZhi.diZhi == DiZhi.CHOU && bianYao.naZhi.diZhi == DiZhi.CHEN) {
+        } else if (yao.naZhi.diZhi == DiZhi.CHOU && yao.bianYao!!.naZhi.diZhi == DiZhi.CHEN) {
             println("化进")
-        } else if (yao.naZhi.diZhi == DiZhi.SHEN && bianYao.naZhi.diZhi == DiZhi.YOU) {
+        } else if (yao.naZhi.diZhi == DiZhi.SHEN && yao.bianYao!!.naZhi.diZhi == DiZhi.YOU) {
             println("化进")
-        } else if (yao.naZhi.diZhi == DiZhi.WEI && bianYao.naZhi.diZhi == DiZhi.XU) {
+        } else if (yao.naZhi.diZhi == DiZhi.WEI && yao.bianYao!!.naZhi.diZhi == DiZhi.XU) {
             println("化进")
         }
 
         // 卯化寅，辰化丑，酉化申，戌化未称为化退
-        if (yao.naZhi.diZhi == DiZhi.MAO && bianYao.naZhi.diZhi == DiZhi.YIN) {
+        if (yao.naZhi.diZhi == DiZhi.MAO && yao.bianYao!!.naZhi.diZhi == DiZhi.YIN) {
             println("化退")
-        } else if (yao.naZhi.diZhi == DiZhi.CHEN && bianYao.naZhi.diZhi == DiZhi.CHOU) {
+        } else if (yao.naZhi.diZhi == DiZhi.CHEN && yao.bianYao!!.naZhi.diZhi == DiZhi.CHOU) {
             println("化退")
-        } else if (yao.naZhi.diZhi == DiZhi.YOU && bianYao.naZhi.diZhi == DiZhi.SHEN) {
+        } else if (yao.naZhi.diZhi == DiZhi.YOU && yao.bianYao!!.naZhi.diZhi == DiZhi.SHEN) {
             println("化退")
-        } else if (yao.naZhi.diZhi == DiZhi.XU && bianYao.naZhi.diZhi == DiZhi.WEI) {
+        } else if (yao.naZhi.diZhi == DiZhi.XU && yao.bianYao!!.naZhi.diZhi == DiZhi.WEI) {
             println("化退")
         }
 
         // 变爻回头冲动爻，称为反吟，代表多有反复
-        if (bianYao.naZhi.isChong(yao.naZhi)) {
+        if (yao.bianYao!!.naZhi.isChong(yao.naZhi)) {
             println("反吟")
         }
 
         // 变爻与动爻地支相同，称为伏吟，代表痛苦煎熬
-        if (bianYao.naZhi.diZhi == yao.naZhi.diZhi) {
+        if (yao.bianYao!!.naZhi.diZhi == yao.naZhi.diZhi) {
             println("伏吟")
         }
 
-        if (bianYao.naZhi.isKe(yao.naZhi)) {
+        if (yao.bianYao!!.naZhi.isKe(yao.naZhi)) {
             println("动爻克变爻:(")
-            if (wang >= 0) {
-                println("用旺受克：易有不利，凶")
-            } else {
-                println("用衰受克：屋漏逢雨，凶")
-            }
-        } else if (bianYao.naZhi.isSheng(yao.naZhi)) {
+            result = -1
+//            if (wang >= 0) {
+//                println("用旺受克：易有不利，凶")
+//            } else {
+//                println("用衰受克：屋漏逢雨，凶")
+//            }
+        } else if (yao.bianYao!!.naZhi.isSheng(yao.naZhi)) {
             println("动爻生变爻:)")
-            if (wang >= 0) {
-                println("用旺逢生：锦上添花，吉")
-            } else {
-                println("用衰逢生：危中有救，吉")
-            }
+            result = 1
+//            if (wang >= 0) {
+//                println("用旺逢生：锦上添花，吉")
+//            } else {
+//                println("用衰逢生：危中有救，吉")
+//            }
         }
+        return result
     }
 
     fun checkYueJian(yao: Yao): Int {
@@ -452,6 +463,14 @@ class LiuYao {
                     println("动爻${this.getYaoName(this.benGua.yaos[i])}克爻${this.getYaoName(yao)}")
                     kes++;
                 }
+            }
+        }
+        if(yao.isChange){
+            var bian = this.checkBian(yao)
+            if (bian > 0) {
+                shengs++
+            } else if (bian < 0) {
+                kes++
             }
         }
         println("[Debug]生爻数：${shengs},克爻数：${kes}");

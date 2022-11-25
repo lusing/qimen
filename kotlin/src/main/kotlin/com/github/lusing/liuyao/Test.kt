@@ -19,13 +19,13 @@ class Test {
         //var liuyao1 = LiuYao(gua, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
         //liuyao1.paiPan()
 
-//        // 卯月己卯日，弟弟为已经判为重罪的兄长问卦，想知道母亲去朝廷喊冤的话，能否把兄长救出。
-//        val yaos2 = arrayOf(7, 8, 8, 6, 8, 8)
-//        val gua2 = Gua64(yaos2, TianGan.JI)
-//        val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
-//        //val bgua = ly2.benGua.getBianGua()
-//        //bgua.debug()
-//        ly2.paiPan()
+        // 卯月己卯日，弟弟为已经判为重罪的兄长问卦，想知道母亲去朝廷喊冤的话，能否把兄长救出。用衰逢生，危中有救
+        val yaos2 = arrayOf(7, 8, 8, 6, 8, 8)
+        val gua2 = Gua64(yaos2, TianGan.JI)
+        val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
+        //val bgua = ly2.benGua.getBianGua()
+        //bgua.debug()
+        ly2.paiPan()
 //
 //        val yao3 = arrayOf(7, 8, 7, 6, 7, 8)
 //        val gua3 = Gua64(yao3, TianGan.BING)
