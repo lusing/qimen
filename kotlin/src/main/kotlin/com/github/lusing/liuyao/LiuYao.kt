@@ -200,6 +200,7 @@ class LiuYao {
                 println("${whatShen.getName()}持世")
             } else {
                 var yongWang = this.checkYueJian(yao1)
+                var shengke = this.checkShengKe(yao1,yongWang)
                 whatShen = YongShen(shiYao!!.naZhi, yongshen!!.naZhi)
                 println("${whatShen.getName()}持世")
                 var shiWang = this.checkYueJian(shiYao)
@@ -276,6 +277,7 @@ class LiuYao {
                 println("为应")
             }
             var wang = this.checkYueJian(yao)
+            this.checkShengKe(yao, wang)
             if (yao.isChange) {
                 print("动:")
                 var bianYao = this.bianGua.yaos[i]
@@ -436,5 +438,41 @@ class LiuYao {
         } else {
             return false
         }
+    }
+
+    fun checkShengKe(yao: Yao, wang: Int): Pair<Int, Int> {
+        var shengs = 0;
+        var kes = 0;
+        for (i in 0..5) {
+            if (this.benGua.yaos[i].isChange) {
+                if (this.benGua.yaos[i].naZhi.isSheng(yao.naZhi)) {
+                    shengs++;
+                    println("动爻${this.getYaoName(this.benGua.yaos[i])}生爻${this.getYaoName(yao)}")
+                } else if (this.benGua.yaos[i].naZhi.isKe(yao.naZhi)) {
+                    println("动爻${this.getYaoName(this.benGua.yaos[i])}克爻${this.getYaoName(yao)}")
+                    kes++;
+                }
+            }
+        }
+        println("[Debug]生爻数：${shengs},克爻数：${kes}");
+        if (wang >= 0) {
+            if (shengs > 0) {
+                println("用旺逢生：锦上添花，吉")
+            }
+            if (kes > 0) {
+                println("用旺受克：易有不利，凶")
+            } else if(shengs == 0){
+                println("用旺无克：平平无奇，平")
+            }
+        } else {
+            if (shengs > 0) {
+                println("用衰逢生：危中有救，吉")
+            } else if (kes > 0) {
+                println("用衰受克：屋漏逢雨，凶")
+            } else if (shengs == 0){
+                println("用衰无克：勉力支撑，吉")
+            }
+        }
+        return Pair(shengs, kes)
     }
 }
