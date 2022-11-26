@@ -466,7 +466,11 @@ class LiuYao {
         println("[Debug]生爻数：${shengs},克爻数：${kes}");
         if (wang >= 0) {
             if (shengs > 0) {
-                println("用旺逢生：锦上添花，吉")
+                if(wang==100){
+                    println("用神旺极：刚脆则折，凶。")
+                }else{
+                    println("用旺逢生：锦上添花，吉")
+                }
             }
             if (kes > 0) {
                 println("用旺受克：易有不利，凶")
