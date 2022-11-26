@@ -19,13 +19,7 @@ class Test {
         //var liuyao1 = LiuYao(gua, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
         //liuyao1.paiPan()
 
-        // 卯月己卯日，弟弟为已经判为重罪的兄长问卦，想知道母亲去朝廷喊冤的话，能否把兄长救出。用衰逢生，危中有救
-        val yaos2 = arrayOf(7, 8, 8, 6, 8, 8)
-        val gua2 = Gua64(yaos2, TianGan.JI)
-        val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
-        //val bgua = ly2.benGua.getBianGua()
-        //bgua.debug()
-        ly2.paiPan()
+
 //
 //        val yao3 = arrayOf(7, 8, 7, 6, 7, 8)
 //        val gua3 = Gua64(yao3, TianGan.BING)
@@ -46,24 +40,30 @@ class Test {
 //        val ly5 = LiuYao(gua = gua5, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = Yao.SHI_YAO)
 //        ly5.paiPan()
 
-        // 丑月庚子日，测父亲疾病
+        // 卯月己卯日，弟弟为已经判为重罪的兄长问卦，想知道母亲去朝廷喊冤的话，能否把兄长救出。用衰逢生，危中有救。Pass
+//        val yaos2 = arrayOf(7, 8, 8, 6, 8, 8)
+//        val gua2 = Gua64(yaos2, TianGan.JI)
+//        val ly2 = LiuYao(gua2, DiZhi.MAO, DiZhi.MAO, LiuQin.XIONGDI)
+//        ly2.paiPan()
+
+        // 丑月庚子日，测父亲疾病。用旺无克，平而无伤。用神双现，没有取近的。Pass.
 //        val yao6 = arrayOf(8, 7, 7, 7, 7, 7)
 //        val gua6 = Gua64(yao6, TianGan.GENG)
 //        val ly6 = LiuYao(gua = gua6, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.FUMU)
 //        ly6.paiPan()
 
-        // 巳月乙丑日，测父亲身体
-//        val yao7 = arrayOf(6, 7, 7, 8, 7, 7)
-//        val gua6 = Gua64(yao7, TianGan.YI)
-//        val ly6 = LiuYao(gua = gua6, yueJian = DiZhi.SI, riJian = DiZhi.CHOU, yongShen = LiuQin.FUMU)
-//        ly6.paiPan()
+        // 巳月乙酉日，测父亲身体。用衰受克：屋漏逢雨，凶。Pass
+//        val yao7 = arrayOf(8, 7, 7, 6, 7, 7)
+//        val gua7 = Gua64(yao7, TianGan.YI)
+//        val ly7 = LiuYao(gua = gua7, yueJian = DiZhi.SI, riJian = DiZhi.YOU, yongShen = LiuQin.FUMU)
+//        ly7.paiPan()
 
         // 酉月丙辰日，测孩子疾病
         // 用衰无克，勉力支撑
-//        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
-//        val gua8 = Gua64(yao8, TianGan.BING)
-//        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
-//        ly8.paiPan()
+        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
+        val gua8 = Gua64(yao8, TianGan.BING)
+        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
+        ly8.paiPan()
 
         // 戌月丁卯日，占官司胜败
         // 用神弱极，衰极无救
@@ -151,7 +151,41 @@ class Test {
 //        val ly_xulun003 = LiuYao(gua = gua_xulun003, yueJian = DiZhi.HAI, riJian = DiZhi.WU, yongShen = LiuQin.QICAI)
 //        ly_xulun003.paiPan()
 
-        // TODO:克
+        // 亥月庚辰日，占工作
+//        val yao_yuanheng001 = arrayOf(8, 8, 8, 7, 8, 8)
+//        val gua_yuanheng001 = Gua64(yao_yuanheng001, TianGan.GENG)
+//        val ly_yuanheng001 = LiuYao(gua = gua_yuanheng001, yueJian = DiZhi.HAI, riJian = DiZhi.CHEN, yongShen = LiuQin.GUANGUI)
+//        ly_yuanheng001.paiPan()
+
+        // 亥月辛巳日，占和好
+//        val yao_yuanheng002 = arrayOf(7, 8, 8, 8, 8, 8)
+//        val gua_yuanheng002 = Gua64(yao_yuanheng002, TianGan.XIN)
+//        val ly_yuanheng002 = LiuYao(gua = gua_yuanheng002, yueJian = DiZhi.HAI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
+//        ly_yuanheng002.paiPan()
+
+        // 亥月壬午日，占跟女朋友吵架
+//        val yao_yuanheng003 = arrayOf(8, 6, 9, 8, 7, 8)
+//        val gua_yuanheng003 = Gua64(yao_yuanheng003, TianGan.REN)
+//        val ly_yuanheng003 = LiuYao(gua = gua_yuanheng003, yueJian = DiZhi.HAI, riJian = DiZhi.WU, yongShen = LiuQin.QICAI)
+//        ly_yuanheng003.paiPan()
+
+        // 亥月　癸未日，占领导能不能被调走
+//        val yao_yuanheng004 = arrayOf(8, 7, 7, 8, 7, 7)
+//        val gua_yuanheng004 = Gua64(yao_yuanheng004, TianGan.GUI)
+//        val ly_yuanheng004 = LiuYao(gua = gua_yuanheng004, yueJian = DiZhi.HAI, riJian = DiZhi.WEI, yongShen = LiuQin.GUANGUI)
+//        ly_yuanheng004.paiPan()
+
+        // 亥月　癸未日，占表白能不能成功
+//        val yao_yuanheng005 = arrayOf(6, 9, 8, 7, 7, 8)
+//        val gua_yuanheng005 = Gua64(yao_yuanheng005, TianGan.GUI)
+//        val ly_yuanheng005 = LiuYao(gua = gua_yuanheng005, yueJian = DiZhi.HAI, riJian = DiZhi.WEI, yongShen = LiuQin.QICAI)
+//        ly_yuanheng005.paiPan()
+
+        // 亥月　癸未日, 占与女生的缘分
+//        val yao_yuanheng006 = arrayOf(8, 8, 9, 8, 8, 8)
+//        val gua_yuanheng006 = Gua64(yao_yuanheng006, TianGan.GUI)
+//        val ly_yuanheng006 = LiuYao(gua = gua_yuanheng006, yueJian = DiZhi.HAI, riJian = DiZhi.WEI, yongShen = LiuQin.QICAI)
+//        ly_yuanheng006.paiPan()
 
         // 黎光吉凶占标准特例，申月乙卯日，占乱兵到，一家当避何处
 //        val yao_lg001 = arrayOf(7, 6, 6, 7, 9, 9)

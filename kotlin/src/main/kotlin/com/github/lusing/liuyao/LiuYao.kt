@@ -308,7 +308,7 @@ class LiuYao {
                 println("用衰逢生：危中有救，吉")
             }
             return JiXiong(JiXiong.JI)
-        } else if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
+        } else if (yao.naZhi.isKe(yao.fuShen!!.naZhi)) {
             println("飞神克伏神")
             if (wang >= 0) {
                 println("用旺受克：易有不利，凶")
