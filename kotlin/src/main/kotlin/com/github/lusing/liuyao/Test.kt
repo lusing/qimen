@@ -95,7 +95,7 @@ class Test {
 //        ly12.paiPan()
 
         // 申月乙巳日，一男测考试成绩
-        // 合而化冲
+        // 用神持世。TODO: 一生一克
         val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
         val gua13 = Gua64(yao13, TianGan.YI)
         val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = Yao.SHI_YAO)
