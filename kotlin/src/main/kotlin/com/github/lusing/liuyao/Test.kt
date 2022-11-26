@@ -82,10 +82,10 @@ class Test {
 
         // 未月丁巳日，一个刚刚离婚的男子后悔了，占问能否复合
         // 冲中逢合
-        val yao11 = arrayOf(9, 8, 7, 7, 8, 7)
-        val gua11 = Gua64(yao11, TianGan.DING)
-        val ly11 = LiuYao(gua = gua11, yueJian = DiZhi.WEI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
-        ly11.paiPan()
+//        val yao11 = arrayOf(9, 8, 7, 7, 8, 7)
+//        val gua11 = Gua64(yao11, TianGan.DING)
+//        val ly11 = LiuYao(gua = gua11, yueJian = DiZhi.WEI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
+//        ly11.paiPan()
 
         // 丑月戊寅日，一男子占孩子上学发展如何
         // 合而化冲
@@ -96,10 +96,10 @@ class Test {
 
         // 申月乙巳日，一男测考试成绩
         // 合而化冲
-//        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
-//        val gua13 = Gua64(yao13, TianGan.YI)
-//        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = LiuQin.FUMU)
-//        ly13.paiPan()
+        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
+        val gua13 = Gua64(yao13, TianGan.YI)
+        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = Yao.SHI_YAO)
+        ly13.paiPan()
 
         // 戌月丁卯日，某人问一生能否得到官职
 //        val yao14 = arrayOf(7, 7, 7, 8, 7, 8)

@@ -28,7 +28,7 @@ class YongShen {
             println("[Debug]用神生者为闲神")
             this.yongShen = XIAN_SHEN
         }
-        if (yongShen.xing == shiShen.xing) {
+        if (yongShen.xing.xing == shiShen.xing.xing) {
             println("[Debug]用神")
             this.yongShen = YONG_SHEN
         }
