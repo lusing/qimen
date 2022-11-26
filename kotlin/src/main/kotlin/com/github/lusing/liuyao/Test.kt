@@ -59,11 +59,11 @@ class Test {
 //        ly7.paiPan()
 
         // 酉月丙辰日，测孩子疾病
-        // 用衰无克，勉力支撑
-        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
-        val gua8 = Gua64(yao8, TianGan.BING)
-        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
-        ly8.paiPan()
+        // 用衰无克，勉力支撑。Pass
+//        val yao8 = arrayOf(8, 7, 7, 8, 8, 8)
+//        val gua8 = Gua64(yao8, TianGan.BING)
+//        val ly8 = LiuYao(gua = gua8, yueJian = DiZhi.YOU, riJian = DiZhi.CHEN, yongShen = LiuQin.ZISUN)
+//        ly8.paiPan()
 
         // 戌月丁卯日，占官司胜败
         // 用神弱极，衰极无救

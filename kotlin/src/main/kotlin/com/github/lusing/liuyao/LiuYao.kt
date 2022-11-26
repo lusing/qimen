@@ -199,7 +199,8 @@ class LiuYao {
 
             if (isFuShen) {
                 var wang = this.checkYueJian(yao1.fuShen!!)
-                this.checkFuShen(yao1, wang)
+                var fu = this.checkFuShen(yao1)
+                var shengke = this.checkShengKe(yao1.fuShen!!,wang, fu)
                 whatShen = YongShen(shiYao!!.naZhi, yongshen!!.naZhi)
                 println("${whatShen.getName()}持世")
             } else {
@@ -294,30 +295,22 @@ class LiuYao {
             if (yao.fuShen != null) {
                 print("伏神：")
                 wang = this.checkYueJian(yao)
-                this.checkFuShen(yao, wang)
+                var fuYao = this.checkFuShen(yao)
+                this.checkShengKe(yao, wang, fuYao)
             }
         }
     }
 
-    fun checkFuShen(yao: Yao, wang: Int): JiXiong {
+    // 检查伏神被飞神生与克的状态
+    fun checkFuShen(yao: Yao): Int {
         if (yao.naZhi.isSheng(yao.fuShen!!.naZhi)) {
             println("飞神生伏神")
-            if (wang >= 0) {
-                println("用旺逢生：锦上添花，吉")
-            } else {
-                println("用衰逢生：危中有救，吉")
-            }
-            return JiXiong(JiXiong.JI)
+            return 1
         } else if (yao.naZhi.isKe(yao.fuShen!!.naZhi)) {
             println("飞神克伏神")
-            if (wang >= 0) {
-                println("用旺受克：易有不利，凶")
-            } else {
-                println("用衰受克：屋漏逢雨，凶")
-            }
-            return JiXiong(JiXiong.XIONG)
+            return -1
         }
-        return JiXiong(JiXiong.JI)
+        return 0
     }
 
     fun checkBian(yao: Yao) : Int{
@@ -357,19 +350,9 @@ class LiuYao {
         if (yao.bianYao!!.naZhi.isKe(yao.naZhi)) {
             println("动爻克变爻:(")
             result = -1
-//            if (wang >= 0) {
-//                println("用旺受克：易有不利，凶")
-//            } else {
-//                println("用衰受克：屋漏逢雨，凶")
-//            }
         } else if (yao.bianYao!!.naZhi.isSheng(yao.naZhi)) {
             println("动爻生变爻:)")
             result = 1
-//            if (wang >= 0) {
-//                println("用旺逢生：锦上添花，吉")
-//            } else {
-//                println("用衰逢生：危中有救，吉")
-//            }
         }
         return result
     }
@@ -451,7 +434,7 @@ class LiuYao {
         }
     }
 
-    fun checkShengKe(yao: Yao, wang: Int): Pair<Int, Int> {
+    fun checkShengKe(yao: Yao, wang: Int, fuYao: Int =0): Pair<Int, Int> {
         var shengs = 0;
         var kes = 0;
         for (i in 0..5) {
@@ -473,6 +456,13 @@ class LiuYao {
                 kes++
             }
         }
+
+        if(fuYao>0){
+            shengs++
+        }else if(fuYao<0){
+            kes++
+        }
+
         println("[Debug]生爻数：${shengs},克爻数：${kes}");
         if (wang >= 0) {
             if (shengs > 0) {
