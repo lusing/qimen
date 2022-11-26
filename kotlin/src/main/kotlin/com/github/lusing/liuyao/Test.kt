@@ -67,25 +67,25 @@ class Test {
 
         // 戌月丁卯日，占官司胜败
         // 用神弱极，衰极无救
-        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
-        val gua9 = Gua64(yao9, TianGan.DING)
-        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = Yao.SHI_YAO)
-        ly9.paiPan()
+//        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
+//        val gua9 = Gua64(yao9, TianGan.DING)
+//        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = Yao.SHI_YAO)
+//        ly9.paiPan()
 
-        // 巳月戊午日，一老人自测病
+        // 巳月戊午日，一老人自测病。用神旺极
 //        val yao10 = arrayOf(6, 7, 8, 7, 8, 7)
 //        val gua10 = Gua64(yao10, TianGan.WU)
-//        val ly10 = LiuYao(gua = gua10, yueJian = DiZhi.SI, riJian = DiZhi.WU, yongShen = LiuQin.XIONGDI) // TODO:世爻
+//        val ly10 = LiuYao(gua = gua10, yueJian = DiZhi.SI, riJian = DiZhi.WU, yongShen = Yao.SHI_YAO)
 //        ly10.paiPan()
 
         // 得失占
 
         // 未月丁巳日，一个刚刚离婚的男子后悔了，占问能否复合
         // 冲中逢合
-//        val yao11 = arrayOf(9, 8, 7, 7, 8, 7)
-//        val gua11 = Gua64(yao11, TianGan.DING)
-//        val ly11 = LiuYao(gua = gua11, yueJian = DiZhi.WEI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
-//        ly11.paiPan()
+        val yao11 = arrayOf(9, 8, 7, 7, 8, 7)
+        val gua11 = Gua64(yao11, TianGan.DING)
+        val ly11 = LiuYao(gua = gua11, yueJian = DiZhi.WEI, riJian = DiZhi.SI, yongShen = LiuQin.QICAI)
+        ly11.paiPan()
 
         // 丑月戊寅日，一男子占孩子上学发展如何
         // 合而化冲
