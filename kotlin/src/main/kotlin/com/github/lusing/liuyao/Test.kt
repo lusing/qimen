@@ -67,10 +67,10 @@ class Test {
 
         // 戌月丁卯日，占官司胜败
         // 用神弱极，衰极无救
-//        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
-//        val gua9 = Gua64(yao9, TianGan.DING)
-//        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.XIONGDI) // TODO:世爻
-//        ly9.paiPan()
+        val yao9 = arrayOf(7, 7, 7, 8, 8, 8)
+        val gua9 = Gua64(yao9, TianGan.DING)
+        val ly9 = LiuYao(gua = gua9, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = Yao.SHI_YAO)
+        ly9.paiPan()
 
         // 巳月戊午日，一老人自测病
 //        val yao10 = arrayOf(6, 7, 8, 7, 8, 7)

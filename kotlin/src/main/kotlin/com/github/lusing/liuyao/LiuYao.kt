@@ -479,7 +479,11 @@ class LiuYao {
             } else if (kes > 0) {
                 println("用衰受克：屋漏逢雨，凶")
             } else if (shengs == 0){
-                println("用衰无克：勉力支撑，吉")
+                if(wang<=-70){
+                    println("用神弱极，衰极无救,凶")
+                }else {
+                    println("用衰无克：勉力支撑，吉")
+                }
             }
         }
         return Pair(shengs, kes)
