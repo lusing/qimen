@@ -121,6 +121,81 @@ class Test {
 //        val ly16 = LiuYao(gua = gua16, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.GUANGUI)
 //        ly16.paiPan()
 
+        // 分类占断 =====================================================
+
+        // 申月己亥日，问考试情况如何
+        // 得失占法看官父。实力一般，发挥不错，考上了
+        // 世爻化回头克，入校后因为打架被开除了。如果世爻担不起来也是不行的
+//        val yao17 = arrayOf(6, 9, 8, 8, 9, 7)
+//        val gua17 = Gua64(yao17, TianGan.JI)
+//        val ly17 = LiuYao(gua = gua17, yueJian = DiZhi.SHEN, riJian = DiZhi.HAI, yongShen = LiuQin.FUMU)
+//        ly17.paiPan()
+
+        // 丑月壬申日，占出版情况如何
+        // 得失占法看父母。
+        // 妻财爻化回头克，赚不到什么钱
+        // 官鬼动化进，赚了些名声
+//        val yao18 = arrayOf(7, 6, 8, 8, 6, 8)
+//        val gua18 = Gua64(yao18, TianGan.REN)
+//        val ly18 = LiuYao(gua = gua18, yueJian = DiZhi.CHOU, riJian = DiZhi.SHEN, yongShen = LiuQin.FUMU)
+//        ly18.paiPan()
+
+        // 丑月乙亥日，某女问职位能否调动
+        // 官鬼爻为用神，伏藏而被飞神压制，没有行动之象。后来果然没有调动
+        // 世爻旺，憋着一股气，但是没有动作
+//        val yao19 = arrayOf(7, 8, 7, 8, 9, 7)
+//        val gua19 = Gua64(yao19, TianGan.YI)
+//        val ly19 = LiuYao(gua = gua19, yueJian = DiZhi.CHOU, riJian = DiZhi.HAI, yongShen = LiuQin.GUANGUI)
+//        ly19.paiPan()
+
+        // 卯月壬申日，出门学易，是否可行
+        // 父母爻偏旺，能学有所成。
+        // 但世爻化回头克，对自己不利
+//        val yao20 = arrayOf(8, 7, 6, 8, 9, 7)
+//        val gua20 = Gua64(yao20, TianGan.YI)
+//        val ly20 = LiuYao(gua = gua20, yueJian = DiZhi.CHOU, riJian = DiZhi.HAI, yongShen = LiuQin.FUMU)
+//        ly20.paiPan()
+
+
+        // 酉月辛卯日，销售摩托车，前景如何？
+        // 世用双旺，财爻发动克世爻，为财来靠近我
+//        val yao21 = arrayOf(7, 8, 7, 9, 8, 8)
+//        val gua21 = Gua64(yao21, TianGan.XIN)
+//        val ly21 = LiuYao(gua = gua21, yueJian = DiZhi.YOU, riJian = DiZhi.MAO, yongShen = LiuQin.QICAI)
+//        ly21.paiPan()
+
+        // 卯月庚寅日，男子占妻子疾病
+        // 辰月病重，夏天凶险
+//        val yao22 = arrayOf(9, 9, 7, 8, 7, 8)
+//        val gua22 = Gua64(yao22, TianGan.GENG)
+//        val ly22 = LiuYao(gua = gua22, yueJian = DiZhi.MAO, riJian = DiZhi.YIN, yongShen = LiuQin.QICAI)
+//        ly22.paiPan()
+
+        // 子年未月己未日，男占婚
+        // 世爻月破又旬空，但化回头生。
+        // 妻财没有上卦，不是好事。但世爻化出妻财。虽然这个人很烂，但是有女生倒贴。压在兄弟爻下面的女生是他得不到的，因为兄弟克妻财。
+        // 子年，子与丑合，不至于有什么坏事。子与午冲，本年异性缘是不好的
+//        val yao23 = arrayOf(7, 8, 7, 6, 8, 8)
+//        val gua23 = Gua64(yao23, TianGan.JI)
+//        val ly23 = LiuYao(gua = gua23, yueJian = DiZhi.WEI, riJian = DiZhi.WEI, yongShen = LiuQin.QICAI)
+//        ly23.paiPan()
+
+        // 女生占婚姻，得失占法看官鬼
+        // 亥月戊子日。
+        // 官鬼木得多个水来生，说明女生缘好。
+        // 卯戌相合，男生和兄弟爻相合。
+//        val yao24 = arrayOf(7, 7, 8, 7, 7, 9)
+//        val gua24 = Gua64(yao24, TianGan.WU)
+//        val ly24 = LiuYao(gua = gua24, yueJian = DiZhi.HAI, riJian = DiZhi.ZI, yongShen = LiuQin.GUANGUI)
+//        ly24.paiPan()
+
+        // 比赛：世爻与应爻的旺衰比较
+        // 申月乙未日，占比赛
+        val yao25 = arrayOf(7, 7, 8, 8, 7, 8)
+        val gua25 = Gua64(yao25, TianGan.YI)
+        val ly25 = LiuYao(gua = gua25, yueJian = DiZhi.SHEN, riJian = DiZhi.WEI, yongShen = Yao.YING_YAO)
+        ly25.paiPan()
+
         // 子月gui酉日，用神妻财，闲神持世
 //        val yao17 = arrayOf(8, 7, 7, 7, 8, 6)
 //        val gua17 = Gua64(yao17, TianGan.GUI)
