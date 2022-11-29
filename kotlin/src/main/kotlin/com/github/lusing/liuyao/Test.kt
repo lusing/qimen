@@ -28,7 +28,7 @@ class Test {
 
 // ==== 吉凶判断 ====
 
-         // 卯月丙辰日，占父亲的病。父母为用神。用旺逢生，吉。Pass
+        // 卯月丙辰日，占父亲的病。父母为用神。用旺逢生，吉。Pass
 //        val yao4 = arrayOf(7, 8, 8, 8, 8, 8)
 //        val gua4 = Gua64(yao4, TianGan.BING)
 //        val ly4 = LiuYao(gua = gua4, yueJian = DiZhi.MAO, riJian = DiZhi.CHEN, yongShen = LiuQin.FUMU)
@@ -94,26 +94,28 @@ class Test {
 //        val ly12 = LiuYao(gua = gua12, yueJian = DiZhi.CHOU, riJian = DiZhi.YIN, yongShen = LiuQin.FUMU)
 //        ly12.paiPan()
 
-        // 申月乙巳日，一男测考试成绩
+        // 申月乙巳日，一男测考试成绩。吉
         // 用神持世。TODO: 一生一克
-        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
-        val gua13 = Gua64(yao13, TianGan.YI)
-        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = Yao.SHI_YAO)
-        ly13.paiPan()
+//        val yao13 = arrayOf(8, 7, 7, 7, 9, 6)
+//        val gua13 = Gua64(yao13, TianGan.YI)
+//        val ly13 = LiuYao(gua = gua13, yueJian = DiZhi.SHEN, riJian = DiZhi.SI, yongShen = Yao.SHI_YAO)
+//        ly13.paiPan()
 
         // 戌月丁卯日，某人问一生能否得到官职
+        // 忌神持世，六静卦忌神持世为失
+        // 自带属性，没有变化。子孙持世，休问功名
 //        val yao14 = arrayOf(7, 7, 7, 8, 7, 8)
 //        val gua14 = Gua64(yao14, TianGan.DING)
 //        val ly14 = LiuYao(gua = gua14, yueJian = DiZhi.XU, riJian = DiZhi.MAO, yongShen = LiuQin.GUANGUI)
 //        ly14.paiPan()
 
-        // 卯月甲申日，占考试如何。父母爻为用神，原神持世
+        // 卯月甲申日，占考试如何。父母爻为用神，原神持世。二者皆旺。
 //        val yao15 = arrayOf(6, 8, 7, 8, 6, 7)
 //        val gua15 = Gua64(yao15, TianGan.JIA)
 //        val ly15 = LiuYao(gua = gua15, yueJian = DiZhi.MAO, riJian = DiZhi.SHEN, yongShen = LiuQin.FUMU)
 //        ly15.paiPan()
 
-        // 丑月庚子日，占问求官。官鬼爻为用神，仇神持世
+        // 丑月庚子日，占问求官。官鬼爻为用神，仇神持世。旺，可以得官。但是吉凶不佳，死于任上。
 //        val yao16 = arrayOf(7, 9, 7, 8, 8, 8)
 //        val gua16 = Gua64(yao16, TianGan.GENG)
 //        val ly16 = LiuYao(gua = gua16, yueJian = DiZhi.CHOU, riJian = DiZhi.ZI, yongShen = LiuQin.GUANGUI)
@@ -122,7 +124,7 @@ class Test {
         // 子月gui酉日，用神妻财，闲神持世
 //        val yao17 = arrayOf(8, 7, 7, 7, 8, 6)
 //        val gua17 = Gua64(yao17, TianGan.GUI)
-//        val ly17 = LiuYao(gua = gua17, yueJian = DiZhi.ZI, riJian = DiZhi.YOU, yongShen = LiuQin.QICAI)
+//        val ly17 = LiuYao(gua = gua17, yueJian = DiZhi.ZI, riJian = DiZhi.YOU, yongShen = Yao.YING_YAO)
 //        ly17.paiPan()
 
         // 亥月壬午日，占法国在世界杯是否可以夺冠
@@ -186,6 +188,33 @@ class Test {
 //        val gua_yuanheng006 = Gua64(yao_yuanheng006, TianGan.GUI)
 //        val ly_yuanheng006 = LiuYao(gua = gua_yuanheng006, yueJian = DiZhi.HAI, riJian = DiZhi.WEI, yongShen = LiuQin.QICAI)
 //        ly_yuanheng006.paiPan()
+
+        // 亥月　癸未日, 占与女生能不能在一起
+//        val yao_yuanheng007 = arrayOf(9, 7,7, 7, 7, 7)
+//        val gua_yuanheng007 = Gua64(yao_yuanheng007, TianGan.GUI)
+//        val ly_yuanheng007 = LiuYao(gua = gua_yuanheng007, yueJian = DiZhi.HAI, riJian = DiZhi.WEI, yongShen = LiuQin.QICAI)
+//        ly_yuanheng007.paiPan()
+
+        // 亥月　乙酉日，女生占异性缘
+//        val yao_yuanheng008 = arrayOf(9, 6, 8, 8, 9, 9)
+//        val gua_yuanheng008 = Gua64(yao_yuanheng008, TianGan.YI)
+//        val ly_yuanheng008 =
+//            LiuYao(gua = gua_yuanheng008, yueJian = DiZhi.HAI, riJian = DiZhi.YOU, yongShen = LiuQin.GUANGUI)
+//        ly_yuanheng008.paiPan()
+
+        // 亥月  丙戌日，占领导谈话原因
+//        val yao_yuanheng009 = arrayOf(7, 8, 7, 9, 6, 8)
+//        val gua_yuanheng009 = Gua64(yao_yuanheng009, TianGan.BING)
+//        val ly_yuanheng009 =
+//            LiuYao(gua = gua_yuanheng009, yueJian = DiZhi.HAI, riJian = DiZhi.XU, yongShen = LiuQin.GUANGUI)
+//        ly_yuanheng009.paiPan()
+
+        // 亥月　丙戌日，占财运
+//        val yao_yuanheng0010 = arrayOf(8, 7, 6, 8, 8, 9)
+//        val gua_yuanheng0010 = Gua64(yao_yuanheng0010, TianGan.BING)
+//        val ly_yuanheng0010 =
+//            LiuYao(gua = gua_yuanheng0010, yueJian = DiZhi.HAI, riJian = DiZhi.XU, yongShen = LiuQin.QICAI)
+//        ly_yuanheng0010.paiPan()
 
         // 黎光吉凶占标准特例，申月乙卯日，占乱兵到，一家当避何处
 //        val yao_lg001 = arrayOf(7, 6, 6, 7, 9, 9)
