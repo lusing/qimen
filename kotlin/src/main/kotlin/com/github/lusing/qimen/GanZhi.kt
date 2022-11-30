@@ -6,8 +6,8 @@ package com.github.lusing.qimen
  * @author Louis
  */
 class GanZhi {
-    var mTg: TianGan
-    var mDz: DiZhi
+    val mTg: TianGan
+    val mDz: DiZhi
 
     constructor(tg: TianGan, dz: DiZhi) {
         mTg = tg
@@ -17,5 +17,30 @@ class GanZhi {
     constructor(tg: Int, dz: Int) {
         mTg = TianGan(tg)
         mDz = DiZhi(dz)
+    }
+
+    fun getXunKong(): Set<Int> {
+        val diff = (this.mDz.diZhi - this.mTg.tianGan + 12) % 12
+        var xunKong = setOf<Int>()
+        val dz1 = DiZhi((diff + 11) % 12).diZhi
+        val dz2 = DiZhi((diff + 10) % 12).diZhi
+        xunKong = xunKong.plusElement(dz1)
+        xunKong = xunKong.plusElement(dz2)
+        //println(xunKong)
+        return xunKong
+    }
+
+    fun getXunKongNames(): String {
+        val xk = getXunKong()
+        var xkNames = ""
+        for (dz in xk) {
+            xkNames += DiZhi(dz).getName()
+        }
+        return xkNames
+    }
+
+    fun isXunKong(dz: DiZhi): Boolean {
+        val xk = getXunKong()
+        return xk.contains(dz.diZhi)
     }
 }
