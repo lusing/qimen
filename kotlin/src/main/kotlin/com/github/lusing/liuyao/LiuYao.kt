@@ -37,9 +37,10 @@ class LiuYao {
     }
 
     fun paiPan() {
-        print(this.benGua.getName())
-        print("            ")
         this.bianGua = benGua.getBianGua()
+        println("${this.yueJian.getName()}月${this.benGua.riGan}${this.riJian.getName()}日${this.yongShen?.getName()}为用神")
+        print(this.benGua.getName())
+        print("    ==>        ")
         println(this.bianGua.getName())
 
         //println("宫:${benGua.gong.getName()}")

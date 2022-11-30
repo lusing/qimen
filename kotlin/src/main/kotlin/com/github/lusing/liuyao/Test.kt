@@ -191,10 +191,12 @@ class Test {
 
         // 比赛：世爻与应爻的旺衰比较
         // 申月乙未日，占比赛
-        val yao25 = arrayOf(7, 7, 8, 8, 7, 8)
-        val gua25 = Gua64(yao25, TianGan.YI)
-        val ly25 = LiuYao(gua = gua25, yueJian = DiZhi.SHEN, riJian = DiZhi.WEI, yongShen = Yao.YING_YAO)
-        ly25.paiPan()
+//        val yao25 = arrayOf(7, 7, 8, 8, 7, 8)
+//        val gua25 = Gua64(yao25, TianGan.YI)
+//        val ly25 = LiuYao(gua = gua25, yueJian = DiZhi.SHEN, riJian = DiZhi.WEI, yongShen = Yao.YING_YAO)
+//        ly25.paiPan()
+
+
 
         // 子月gui酉日，用神妻财，闲神持世
 //        val yao17 = arrayOf(8, 7, 7, 7, 8, 6)
@@ -227,6 +229,18 @@ class Test {
 //        val gua_xulun003 = Gua64(yao_xulun003, TianGan.REN)
 //        val ly_xulun003 = LiuYao(gua = gua_xulun003, yueJian = DiZhi.HAI, riJian = DiZhi.WU, yongShen = LiuQin.QICAI)
 //        ly_xulun003.paiPan()
+
+        // 亥月壬午日，占纳斯达克指数涨跌
+//        val yao_xulun003 = arrayOf(8, 8, 8, 8, 9, 6)
+//        val gua_xulun003 = Gua64(yao_xulun003, TianGan.REN)
+//        val ly_xulun003 = LiuYao(gua = gua_xulun003, yueJian = DiZhi.HAI, riJian = DiZhi.WU, yongShen = LiuQin.QICAI)
+//        ly_xulun003.paiPan()
+
+        // 亥月丁亥日，占77的小弟转正是否成功
+        val yao_xulun004 = arrayOf(7, 6, 7, 8, 7, 9)
+        val gua_xulun004 = Gua64(yao_xulun004, TianGan.DING)
+        val ly_xulun004 = LiuYao(gua = gua_xulun004, yueJian = DiZhi.HAI, riJian = DiZhi.HAI, yongShen = LiuQin.GUANGUI)
+        ly_xulun004.paiPan()
 
         // 亥月庚辰日，占工作
 //        val yao_yuanheng001 = arrayOf(8, 8, 8, 7, 8, 8)

@@ -16,6 +16,10 @@ class TianGan(tg: Int) {
     val isYang: Boolean
         get() = tianGan % 2 == 0
 
+    fun getName() : String {
+        return sTianGan[tianGan].toString()
+    }
+
     /**
      * 生
      * @param tg2

@@ -149,7 +149,7 @@ class Gua64 {
             bianYao[i].isChange = false
         }
         var bg = Gua64(bianYao, this.riGan.tianGan)
-        println(this.gong.getName())
+        //println(this.gong.getName())
         bg.updateLiuQin(this.gong)
         //println("[debug]本卦为：${this.getName()}")
         //println("[debug]变卦为：${bg.getName()}")
@@ -196,7 +196,7 @@ class Gua64 {
         var xiaGua = this.getLow()
         var shangGua = this.getHigh()
 
-        println("[Debug]下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
+        //println("[Debug]下卦：${xiaGua.getName()}, 上卦：${shangGua.getName()}")
 
         when (xiaGua.value % 8) {
             0b000 -> // 坤 未巳卯
@@ -313,7 +313,7 @@ class Gua64 {
             this.yaos[1].isShi = true
             this.yaos[4].isYing = true
             this.gong = shangGua
-            println("天同二世")
+            //println("[Debug]天同二世")
         } else if (this.yaos[2].isYang != this.yaos[5].isYang &&
             this.yaos[1].isYang == this.yaos[4].isYang &&
             this.yaos[0].isYang == this.yaos[3].isYang
@@ -321,7 +321,7 @@ class Gua64 {
             this.yaos[4].isShi = true
             this.yaos[1].isYing = true
             gong = xiaGua.getFan()
-            println("天变五")
+            //println("[Debug]天变五")
         } else if ((this.yaos[0].isYang == this.yaos[3].isYang) &&
             (this.yaos[1].isYang != this.yaos[4].isYang) &&
             (this.yaos[2].isYang != this.yaos[5].isYang)
@@ -329,7 +329,7 @@ class Gua64 {
             this.yaos[3].isShi = true
             this.yaos[0].isYing = true
             gong = xiaGua.getFan()
-            println("地同四世")
+            //println("[Debug]地同四世")
         } else if (this.yaos[0].isYang != this.yaos[3].isYang &&
             this.yaos[1].isYang == this.yaos[4].isYang &&
             this.yaos[2].isYang == this.yaos[5].isYang
@@ -337,7 +337,7 @@ class Gua64 {
             this.yaos[0].isShi = true
             this.yaos[3].isYing = true
             this.gong = shangGua
-            println("地变初，一世")
+            //println("[Debug]地变初，一世")
         } else if (this.yaos[1].isYang == this.yaos[4].isYang &&
             this.yaos[0].isYang != this.yaos[3].isYang &&
             this.yaos[2].isYang != this.yaos[5].isYang
@@ -345,9 +345,9 @@ class Gua64 {
             this.yaos[3].isShi = true
             this.yaos[0].isYing = true
             gong = xiaGua.getFan()
-            println(xiaGua.getName())
-            println(gong.getName())
-            println("人同游魂")
+            //println(xiaGua.getName())
+            //println(gong.getName())
+            //println("[Debug]人同游魂")
         } else if (this.yaos[1].isYang != this.yaos[4].isYang &&
             this.yaos[0].isYang == this.yaos[3].isYang &&
             this.yaos[2].isYang == this.yaos[5].isYang
@@ -355,23 +355,23 @@ class Gua64 {
             this.yaos[2].isShi = true
             this.yaos[5].isYing = true
             this.gong = xiaGua
-            println("人变归魂")
+            //println("[Debug]人变归魂")
         }
 
         // 宫主
         if (xiaGua.value == shangGua.value) {
-            println("本卦六世")
+            //println("[Debug]本卦六世")
             this.yaos[5].isShi = true
             this.yaos[2].isYing = true
             this.gong = xiaGua
         } else if (xiaGua.value == shangGua.getFan().value) {
-            println("三世卦")
+            //println("[Debug]三世卦")
             this.yaos[2].isShi = true
             this.yaos[5].isYing = true
             this.gong = shangGua
         }
 
-        println("[Debug]宫主：${this.gong.getName()}")
+        //println("[Debug]宫主：${this.gong.getName()}")
 //        for(i in 0..5){
 //            println("[Debug]${this.yaos[i].naZhi.getName()} ${this.yaos[i].isShi} ${this.yaos[i].isYing}")
 //        }
@@ -420,7 +420,7 @@ class Gua64 {
         val missedLq = fullLq.minus(lqSet)
         //println(missedLq.size)
         for (i in missedLq) {
-            println("缺少六亲：${LiuQin(i).getName()}")
+            //println("[Debug]缺少六亲：${LiuQin(i).getName()}")
             findFuYao(liuQin = LiuQin(i))
         }
     }
@@ -428,8 +428,8 @@ class Gua64 {
     fun findFuYao(liuQin: LiuQin) {
         val gong2 = this.gong
         val gua2 = Gua64(gong2, gong2, this.riGan.tianGan)
-        println("[伏神]首卦为：${gua2.getName()}")
-        println("[伏神]首卦的六亲")
+        //println("[伏神]首卦为：${gua2.getName()}")
+        //println("[伏神]首卦的六亲")
         for (i in 5 downTo 0) {
             if (liuQin == gua2.yaos[i].lq) {
                 this.yaos[i].fuShen = gua2.yaos[i]
