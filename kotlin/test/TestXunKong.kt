@@ -9,7 +9,7 @@ class TestXunKong {
     @Test
     fun testXunKong() {
         val gz = GanZhi(TianGan.JIA, DiZhi.ZI)
-        val xk = gz.getXunKong()
+        val xk = gz.getXunKongNames()
         println(xk)
         assertEquals(true, gz.isXunKong(DiZhi(DiZhi.HAI)))
         assertEquals(true, gz.isXunKong(DiZhi(DiZhi.XU)))

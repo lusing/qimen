@@ -1,6 +1,7 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.GanZhi
 import com.github.lusing.qimen.LiuQin
 
 class LiuYao {
@@ -11,12 +12,16 @@ class LiuYao {
     var yongShen: LiuQin?
     var isShi: Boolean
     var isYing: Boolean
+    var ganZhi: GanZhi
+    var xunKongs : String
     lateinit var bianGua: Gua64
 
     constructor(gua: Gua64, yueJian: Int, riJian: Int, yongShen: Int) {
         this.benGua = gua
         this.yueJian = DiZhi(yueJian)
         this.riJian = DiZhi(riJian)
+        this.ganZhi = GanZhi(this.benGua.riGan, this.riJian)
+        this.xunKongs = ganZhi.getXunKongNames()
         if (yongShen in LiuQin.XIONGDI..LiuQin.QICAI) {
             this.yongShen = LiuQin(yongShen)
             this.isShi = false
@@ -39,6 +44,7 @@ class LiuYao {
     fun paiPan() {
         this.bianGua = benGua.getBianGua()
         println("${this.yueJian.getName()}月${this.benGua.riGan}${this.riJian.getName()}日${this.yongShen?.getName()}为用神")
+        println("")
         print(this.benGua.getName())
         print("    ==>        ")
         println(this.bianGua.getName())
