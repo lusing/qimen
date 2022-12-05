@@ -19,6 +19,17 @@ open class WuXing(xing: Int) {
         return isKe(xing, xing2.xing)
     }
 
+    fun isRuMu(dz: DiZhi): Boolean {
+        return when(this.xing){
+            MU -> dz.diZhi == DiZhi.WEI
+            TU -> dz.diZhi == DiZhi.CHEN
+            JIN -> dz.diZhi == DiZhi.CHOU
+            SHUI -> dz.diZhi == DiZhi.CHEN
+            HUO -> dz.diZhi == DiZhi.XU
+            else -> false
+        }
+    }
+
     override fun toString(): String {
         return getWuXingName(xing)!!
     }
