@@ -11,8 +11,9 @@ class TestWuXing {
         assertEquals(true, w1.isSheng(w2))
     }
 
+    // 入墓测试
     @Test
-    fun TestRuMu() {
+    fun testRuMu() {
         val w1 = WuXing(WuXing.SHUI)
         val w2 = WuXing(WuXing.MU)
         val w3 = WuXing(WuXing.HUO)
