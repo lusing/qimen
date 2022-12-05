@@ -1,7 +1,6 @@
 package com.github.lusing.liuyao
 
 import com.github.lusing.qimen.DiZhi
-import com.github.lusing.qimen.WuXing
 
 class WangXiang constructor(value: Int) {
     val wang = value
@@ -25,13 +24,8 @@ class WangXiang constructor(value: Int) {
         val YuQi = 4
         val PingPing = 5
 
-        fun checkWang(yue: DiZhi, dz: DiZhi): WangXiang {
-            if (yue.diZhi == dz.diZhi) {
-                return WangXiang(Wang)
-            }else if (yue.xing.xing == dz.xing.xing){
-                return WangXiang(CiWang)
-            }
-            return WangXiang(XiuQiu)
+        fun checkWang(yue: DiZhi, dz: DiZhi): Boolean {
+            return dz.diZhi == yue.diZhi || yue.isSheng(dz)
         }
     }
 }
