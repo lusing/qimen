@@ -446,12 +446,6 @@ class LiuYao {
             value -= 20
         }
 
-        if (yao.naZhi.isHe(this.riJian)) {
-            println("爻与日建相合")
-        } else if (yao.naZhi.isChong(this.riJian)) {
-            println("爻与日建相冲")
-        }
-
         print(value)
         if (value > 0) {
             println("爻为旺")
@@ -460,6 +454,17 @@ class LiuYao {
         } else {
             println("爻为平")
         }
+        if (yao.naZhi.isHe(this.riJian)) {
+            println("爻与日建相合")
+        } else if (yao.naZhi.isChong(this.riJian)) {
+            //println("爻与日建相冲")
+            if(value>=0){
+                println("暗动")
+            }else{
+                println("日破")
+            }
+        }
+
         return value
     }
 
