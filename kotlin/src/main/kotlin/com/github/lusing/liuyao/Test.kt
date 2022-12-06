@@ -449,9 +449,15 @@ class Test {
 //        ly_lg003.paiPan()
 
         // 戌月甲辰日，占能否借到钱
-        val yao_lg004 = arrayOf(8, 8, 8, 8, 8, 8)
-        val gua_lg004 = Gua64(yao_lg004, TianGan.JIA)
-        val ly_lg004 = LiuYao(gua = gua_lg004, yueJian = DiZhi.XU, riJian = DiZhi.CHEN, yongShen = LiuQin.QICAI)
-        ly_lg004.paiPan()
+//        val yao_lg004 = arrayOf(8, 8, 8, 8, 8, 8)
+//        val gua_lg004 = Gua64(yao_lg004, TianGan.JIA)
+//        val ly_lg004 = LiuYao(gua = gua_lg004, yueJian = DiZhi.XU, riJian = DiZhi.CHEN, yongShen = LiuQin.QICAI)
+//        ly_lg004.paiPan()
+
+        // 午月丙辰日，占外出贸易财运如何
+        val yao_lg005 = arrayOf(8, 9, 9, 7, 8, 8)
+        val gua_lg005 = Gua64(yao_lg005, TianGan.BING)
+        val ly_lg005 = LiuYao(gua = gua_lg005, yueJian = DiZhi.WU, riJian = DiZhi.CHEN, yongShen = LiuQin.QICAI)
+        ly_lg005.paiPan()
     }
 }
