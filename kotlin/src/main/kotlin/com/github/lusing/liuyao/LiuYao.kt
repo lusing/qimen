@@ -388,7 +388,12 @@ class LiuYao {
             println("伏吟")
         }
 
-        if (yao.bianYao!!.naZhi.isKe(yao.naZhi)) {
+        if (yao.bianYao!!.naZhi.isHe(yao.naZhi)) {
+            println("动爻合变爻！")
+            result = 1
+        } else if (yao.bianYao!!.naZhi.isChong(yao.naZhi)) {
+            println("动爻冲变爻！")
+        } else if (yao.bianYao!!.naZhi.isKe(yao.naZhi)) {
             println("动爻克变爻:(")
             result = -1
         } else if (yao.bianYao!!.naZhi.isSheng(yao.naZhi)) {
@@ -440,6 +445,13 @@ class LiuYao {
             println("爻被日建克为更衰")
             value -= 20
         }
+
+        if (yao.naZhi.isHe(this.riJian)) {
+            println("爻与日建相合")
+        } else if (yao.naZhi.isChong(this.riJian)) {
+            println("爻与日建相冲")
+        }
+
         print(value)
         if (value > 0) {
             println("爻为旺")
@@ -480,7 +492,11 @@ class LiuYao {
         var kes = 0;
         for (i in 0..5) {
             if (this.benGua.yaos[i].isChange) {
-                if (this.benGua.yaos[i].naZhi.isSheng(yao.naZhi)) {
+                if (this.benGua.yaos[i].naZhi.isHe(yao.naZhi)) {
+                    println("动爻${this.getYaoName(this.benGua.yaos[i])}合爻${this.getYaoName(yao)}")
+                } else if (this.benGua.yaos[i].naZhi.isHe(yao.naZhi)) {
+                    println("动爻${this.getYaoName(this.benGua.yaos[i])}冲爻${this.getYaoName(yao)}")
+                } else if (this.benGua.yaos[i].naZhi.isSheng(yao.naZhi)) {
                     shengs++;
                     println("动爻${this.getYaoName(this.benGua.yaos[i])}生爻${this.getYaoName(yao)}")
                 } else if (this.benGua.yaos[i].naZhi.isKe(yao.naZhi)) {
