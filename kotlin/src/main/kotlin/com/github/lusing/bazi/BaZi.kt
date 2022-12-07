@@ -11,6 +11,9 @@ class BaZi {
     val ri: GanZhi
     val shi: GanZhi
     var wang: Int
+    var male: Boolean
+    var qinYun: Int
+    var year: Int
 
     constructor(
         nianGan: Int,
@@ -20,15 +23,19 @@ class BaZi {
         riGan: Int,
         riZhi: Int,
         shiGan: Int,
-        shiZhi: Int
+        shiZhi: Int,
+        male: Boolean,
+        qiyun: Int = 0,
+        cal: Int = 0
     ) {
         this.nian = GanZhi(nianGan, nianZhi)
         this.yue = GanZhi(yueGan, yueZhi)
         this.ri = GanZhi(riGan, riZhi)
         this.shi = GanZhi(shiGan, shiZhi)
         this.wang = 0
-
-
+        this.male = male
+        this.qinYun = qiyun
+        this.year = cal
     }
 
     fun calcWang() {
@@ -61,14 +68,82 @@ class BaZi {
 
         println(result[0] + result[1] + result[2] + result[3] + result[4])
 
-        println("木: ${nianGan[0]}, 火: ${nianGan[1]}, 土: ${nianGan[2]}, 金: ${nianGan[3]}, 水: ${nianGan[4]}")
-        println("木：${yueGan[0]}, 火: ${yueGan[1]}, 土: ${yueGan[2]}, 金: ${yueGan[3]}, 水: ${yueGan[4]}")
-        println("木: ${riGan[0]}, 火: ${riGan[1]}, 土: ${riGan[2]}, 金: ${riGan[3]}, 水: ${riGan[4]}")
-        println("木: ${shiGan[0]}, 火: ${shiGan[1]}, 土: ${shiGan[2]}, 金: ${shiGan[3]}, 水: ${shiGan[4]}")
-        println("木: ${nianZhi[0]}, 火: ${nianZhi[1]}, 土: ${nianZhi[2]}, 金: ${nianZhi[3]}, 水: ${nianZhi[4]}")
-        println("木: ${yueZhi[0]}, 火: ${yueZhi[1]}, 土: ${yueZhi[2]}, 金: ${yueZhi[3]}, 水: ${yueZhi[4]}")
-        println("木: ${riZhi[0]}, 火: ${riZhi[1]}, 土: ${riZhi[2]}, 金: ${riZhi[3]}, 水: ${riZhi[4]}")
-        println("木: ${shiZhi[0]}, 火: ${shiZhi[1]}, 土: ${shiZhi[2]}, 金: ${shiZhi[3]}, 水: ${shiZhi[4]}")
+//        println("木: ${nianGan[0]}, 火: ${nianGan[1]}, 土: ${nianGan[2]}, 金: ${nianGan[3]}, 水: ${nianGan[4]}")
+//        println("木：${yueGan[0]}, 火: ${yueGan[1]}, 土: ${yueGan[2]}, 金: ${yueGan[3]}, 水: ${yueGan[4]}")
+//        println("木: ${riGan[0]}, 火: ${riGan[1]}, 土: ${riGan[2]}, 金: ${riGan[3]}, 水: ${riGan[4]}")
+//        println("木: ${shiGan[0]}, 火: ${shiGan[1]}, 土: ${shiGan[2]}, 金: ${shiGan[3]}, 水: ${shiGan[4]}")
+//        println("木: ${nianZhi[0]}, 火: ${nianZhi[1]}, 土: ${nianZhi[2]}, 金: ${nianZhi[3]}, 水: ${nianZhi[4]}")
+//        println("木: ${yueZhi[0]}, 火: ${yueZhi[1]}, 土: ${yueZhi[2]}, 金: ${yueZhi[3]}, 水: ${yueZhi[4]}")
+//        println("木: ${riZhi[0]}, 火: ${riZhi[1]}, 土: ${riZhi[2]}, 金: ${riZhi[3]}, 水: ${riZhi[4]}")
+//        println("木: ${shiZhi[0]}, 火: ${shiZhi[1]}, 土: ${shiZhi[2]}, 金: ${shiZhi[3]}, 水: ${shiZhi[4]}")
+    }
+
+    fun checkDaYun() {
+        println("大运：")
+        val yang = this.nian.mTg.isYang
+        var year = this.nian.add(this.qinYun)
+        var sui = this.qinYun
+        if (yang == this.male) {
+            var dy = this.yue.getNext()
+            for (i in 0..9) {
+                print("${dy.getName()}")
+                var dyfen = calcDaYun(dy)
+                println(dyfen)
+                dy = dy.getNext()
+                for (j in 0..9) {
+                    print("----${year.getName()}")
+                    if (this.year != 0) {
+                        print(" ${this.year + sui}年")
+                    }
+                    print(" ${sui}岁 ")
+                    print((dyfen * 0.6 + calcDaYun(year) * 0.4).toInt())
+                    print(" ")
+                    println(checkTaoHua(year))
+                    year = year.getNext()
+                    sui++
+                }
+            }
+        } else {
+            var dy = this.yue.getPrev()
+            for (i in 0..9) {
+                print("${dy.getName()} ")
+                var dyfen = calcDaYun(dy)
+                println(dyfen)
+                dy = dy.getPrev()
+                (0..9).forEach { j ->
+                    print("----${year.getName()}")
+                    if (this.year != 0) {
+                        print(" ${this.year + sui}年")
+                    }
+                    print(" ${sui}岁 ")
+                    print((dyfen * 0.6 + calcDaYun(year) * 0.4).toInt())
+                    print(" ")
+                    println(checkTaoHua(year))
+                    year = year.getNext()
+                    sui++
+                }
+            }
+        }
+    }
+
+    fun calcDaYun(gz: GanZhi): Int {
+        var value = 0.0
+        var gan = gz.mTg
+        var zhi = gz.mDz
+        var ri = this.ri.mTg
+
+        if (gan.xing.xing == ri.xing.xing || gan.isSheng(ri)) {
+            value = 40 * 0.8
+        } else {
+            value = 40 * 0.3
+        }
+
+        if (zhi.xing.xing == ri.xing.xing || zhi.xing.isSheng(ri.xing)) {
+            value += 60 * 0.8
+        } else {
+            value += 60 * 0.3
+        }
+        return value.toInt()
     }
 
     fun calcTianGan(tg: TianGan, factor: Double): Array<Int> {
@@ -163,6 +238,32 @@ class BaZi {
         for (i in 0..4) {
             result[i] = a[i] + b[i]
         }
+        return result
+    }
+
+    fun checkTaoHua(gz: GanZhi): String {
+        val riGan = this.ri.mTg
+        val riZhi = this.ri.mDz
+        val ngan = gz.mTg
+        val nzhi = gz.mDz
+        var result = ""
+
+        if (riGan.isKe(ngan)) {
+            result = result.plus(" 桃花年")
+        }
+
+        if (riZhi.isChong(nzhi)) {
+            result = result.plus(" 烂桃花")
+        }
+
+        if (riZhi.isHe(nzhi)) {
+            result = result.plus(" 好桃花")
+        }
+
+        if (riZhi.diZhi == nzhi.diZhi) {
+            result = result.plus(" 婚恋年")
+        }
+
         return result
     }
 }

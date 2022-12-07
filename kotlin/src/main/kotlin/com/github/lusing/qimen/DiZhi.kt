@@ -7,6 +7,14 @@ class DiZhi(idz: Int) {
         diZhi = (idz + 12) % 12
     }
 
+    fun getNext(): DiZhi {
+        return DiZhi((diZhi + 1) % 12)
+    }
+
+    fun getPrev(): DiZhi {
+        return DiZhi((diZhi + 11) % 12)
+    }
+
     override fun toString(): String {
         return (sDiZhi[diZhi]).toString()
     }

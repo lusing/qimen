@@ -19,6 +19,22 @@ class GanZhi {
         mDz = DiZhi(dz)
     }
 
+    fun getNext(): GanZhi {
+        return GanZhi(mTg.getNext(), mDz.getNext())
+    }
+
+    fun getPrev(): GanZhi {
+        return GanZhi(mTg.getPrev(), mDz.getPrev())
+    }
+
+    fun add(i: Int): GanZhi {
+        var gz = this
+        for (j in 1..i) {
+            gz = gz.getNext()
+        }
+        return gz
+    }
+
     fun getXunKong(): Set<Int> {
         val diff = (this.mDz.diZhi - this.mTg.tianGan + 12) % 12
         var xunKong = setOf<Int>()
@@ -42,5 +58,9 @@ class GanZhi {
     fun isXunKong(dz: DiZhi): Boolean {
         val xk = getXunKong()
         return xk.contains(dz.diZhi)
+    }
+
+    fun getName(): String {
+        return mTg.getName() + mDz.getName()
     }
 }

@@ -11,12 +11,20 @@ class TianGan(tg: Int) {
         tianGan = tg % 10
     }
 
+    fun getNext(): TianGan {
+        return TianGan((tianGan + 1) % 10)
+    }
+
+    fun getPrev(): TianGan {
+        return TianGan((tianGan + 9) % 10)
+    }
+
     val xing: WuXing
         get() = WuXing(tianGan / 2)
     val isYang: Boolean
         get() = tianGan % 2 == 0
 
-    fun getName() : String {
+    fun getName(): String {
         return sTianGan[tianGan].toString()
     }
 
