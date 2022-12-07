@@ -11,7 +11,7 @@ class DiZhi(idz: Int) {
         return (sDiZhi[diZhi]).toString()
     }
 
-    fun getName() :String {
+    fun getName(): String {
         return this.toString()
     }
 
@@ -33,56 +33,50 @@ class DiZhi(idz: Int) {
      * 获取地支中的藏干
      * @return
      */
-    val cangGan: ArrayList<TianGan>
+    val cangGan: List<TianGan>
         get() {
-            val tgList = ArrayList<TianGan>()
+            var tgList = listOf<TianGan>()
             when (diZhi) {
-                ZI -> tgList.add(TianGan(TianGan.GUI))
+                ZI -> tgList = tgList.plusElement(TianGan(TianGan.GUI))
                 CHOU -> {
-                    tgList.add(TianGan(TianGan.JI))
-                    tgList.add(TianGan(TianGan.GUI))
-                    tgList.add(TianGan(TianGan.XIN))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.JI), TianGan(TianGan.GUI), TianGan(TianGan.XIN)))
                 }
+
                 YIN -> {
-                    tgList.add(TianGan(TianGan.JIA))
-                    tgList.add(TianGan(TianGan.BING))
-                    tgList.add(TianGan(TianGan.WU))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.JIA), TianGan(TianGan.BING), TianGan(TianGan.WU)))
                 }
-                MAO -> tgList.add(TianGan(TianGan.YI))
+
+                MAO -> tgList = tgList.plusElement(TianGan(TianGan.YI))
                 CHEN -> {
-                    tgList.add(TianGan(TianGan.WU))
-                    tgList.add(TianGan(TianGan.JI))
-                    tgList.add(TianGan(TianGan.GUI))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.WU), TianGan(TianGan.JI), TianGan(TianGan.GUI)))
                 }
+
                 SI -> {
-                    tgList.add(TianGan(TianGan.BING))
-                    tgList.add(TianGan(TianGan.WU))
-                    tgList.add(TianGan(TianGan.GENG))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.BING), TianGan(TianGan.WU), TianGan(TianGan.GENG)))
                 }
+
                 WU -> {
-                    tgList.add(TianGan(TianGan.DING))
-                    tgList.add(TianGan(TianGan.JI))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.DING), TianGan(TianGan.JI)))
                 }
+
                 WEI -> {
-                    tgList.add(TianGan(TianGan.JI))
-                    tgList.add(TianGan(TianGan.YI))
-                    tgList.add(TianGan(TianGan.DING))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.JI), TianGan(TianGan.YI), TianGan(TianGan.DING)))
                 }
+
                 SHEN -> {
-                    tgList.add(TianGan(TianGan.GENG))
-                    tgList.add(TianGan(TianGan.REN))
-                    tgList.add(TianGan(TianGan.WU))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.GENG), TianGan(TianGan.REN), TianGan(TianGan.WU)))
                 }
-                YOU -> tgList.add(TianGan(TianGan.XIN))
+
+                YOU -> tgList = tgList.plusElement(TianGan(TianGan.XIN))
+
                 XU -> {
-                    tgList.add(TianGan(TianGan.WU))
-                    tgList.add(TianGan(TianGan.XIN))
-                    tgList.add(TianGan(TianGan.DING))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.WU), TianGan(TianGan.XIN), TianGan(TianGan.DING)))
                 }
+
                 HAI -> {
-                    tgList.add(TianGan(TianGan.REN))
-                    tgList.add(TianGan(TianGan.JIA))
+                    tgList = tgList.plus(listOf(TianGan(TianGan.REN), TianGan(TianGan.JIA)))
                 }
+
                 else -> {}
             }
             return tgList
