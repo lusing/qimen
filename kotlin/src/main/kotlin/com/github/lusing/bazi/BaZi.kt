@@ -136,8 +136,8 @@ class BaZi {
 
             DiZhi.SHEN -> {
                 result = calcTianGan(TianGan(TianGan.GENG), factor * 0.7)
-                result = addArray(result, calcTianGan(TianGan(TianGan.WU), factor * 0.2))
-                result = addArray(result, calcTianGan(TianGan(TianGan.REN), factor * 0.1))
+                result = addArray(result, calcTianGan(TianGan(TianGan.REN), factor * 0.2))
+                result = addArray(result, calcTianGan(TianGan(TianGan.WU), factor * 0.1))
             }
 
             DiZhi.YOU -> {
@@ -146,8 +146,8 @@ class BaZi {
 
             DiZhi.XU -> {
                 result = calcTianGan(TianGan(TianGan.WU), factor * 0.7)
-                result = addArray(result, calcTianGan(TianGan(TianGan.DING), factor * 0.2))
-                result = addArray(result, calcTianGan(TianGan(TianGan.XIN), factor * 0.1))
+                result = addArray(result, calcTianGan(TianGan(TianGan.XIN), factor * 0.2))
+                result = addArray(result, calcTianGan(TianGan(TianGan.DING), factor * 0.1))
             }
 
             DiZhi.HAI -> {

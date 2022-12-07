@@ -11,5 +11,8 @@ class TestBaZi {
 
         var bz2 = BaZi(TianGan.YI, DiZhi.HAI, TianGan.JI, DiZhi.MAO, TianGan.JIA, DiZhi.ZI, TianGan.XIN, DiZhi.WEI)
         bz2.calcWang()
+
+        var bz3 = BaZi(TianGan.WU, DiZhi.CHEN, TianGan.GUI, DiZhi.HAI, TianGan.JI, DiZhi.MAO, TianGan.JI, DiZhi.SI)
+        bz3.calcWang()
     }
 }
