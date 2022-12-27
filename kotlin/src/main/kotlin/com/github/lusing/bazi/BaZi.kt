@@ -45,6 +45,8 @@ class BaZi {
         var jin = 0
         var shui = 0
 
+        checkLingDiZhu()
+
         var nianGan = calcTianGan(this.nian.mTg, 1.0)
         var yueGan = calcTianGan(this.yue.mTg, 1.0)
         var riGan = calcTianGan(this.ri.mTg, 1.0)
@@ -241,6 +243,7 @@ class BaZi {
         return result
     }
 
+    // 桃花
     fun checkTaoHua(gz: GanZhi): String {
         val riGan = this.ri.mTg
         val riZhi = this.ri.mDz
@@ -265,5 +268,75 @@ class BaZi {
         }
 
         return result
+    }
+
+    private fun checkLingDiZhu() {
+        // 得令：得月令之五行本气生助为得令
+        val ling = this.yue.mDz
+        val riZhu = this.ri.mTg
+
+        var des = 0
+
+        if (isShengFu(ling.xing, riZhu.xing)) {
+            println("得令")
+            des++
+        } else {
+            println("不得令")
+        }
+
+        // 得地：得非月令地支之五行本气本助为得地
+        var count = 0
+        val nZhi = this.nian.mDz
+        val rZhi = this.ri.mDz
+        val sZhi = this.shi.mDz
+
+        if (isShengFu(nZhi.xing, riZhu.xing)) {
+            count++
+        }
+        if (isShengFu(rZhi.xing, riZhu.xing)) {
+            count++
+        }
+        if (isShengFu(sZhi.xing, riZhu.xing)) {
+            count++
+        }
+        if (count >= 2) {
+            println("得地")
+            des++
+        } else {
+            println("不得地")
+        }
+
+        // 得助：得天干之生助为得助
+        val nGan = this.nian.mTg
+        val yGan = this.yue.mTg
+        val sGan = this.shi.mTg
+
+        var count2 = 0
+        if (isShengFu(nGan.xing, riZhu.xing)) {
+            count2++
+        }
+        if (isShengFu(yGan.xing, riZhu.xing)) {
+            count2++
+        }
+        if (isShengFu(sGan.xing, riZhu.xing)) {
+            count2++
+        }
+
+        if (count2 >= 2) {
+            println("得助")
+            des++
+        } else {
+            println("不得助")
+        }
+
+        if (des >= 2) {
+            println("日主旺")
+        }else{
+            println("日主弱")
+        }
+    }
+
+    fun isShengFu(x1: WuXing, x2: WuXing): Boolean {
+        return x1.xing == x2.xing || x1.isSheng(x2)
     }
 }
