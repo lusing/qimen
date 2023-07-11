@@ -2,15 +2,16 @@ package com.github.lusing.qimen
 
 class Cell {
     var id : Int = 0
-    var baGua: BaGua? = null
-    var diPanQiYi: QiYi? = null
-    var tianPanQiYi: QiYi? = null
+    lateinit var baGua: BaGua
+    var diPanQiYi: QiYi = QiYi()
+    var tianPanQiYi: QiYi = QiYi()
+    lateinit var diPanJiuXing : JiuXing
     var jiuXing: JiuXing? = null
     var baMen: BaMen? = null
     var baShen: BaShen? = null
 
     fun display() {
-        println("ID: $id")
-        println("八卦：$baGua")
+        //print("$baGua$id")
+        print("${diPanQiYi.qiyi.toString()}${diPanQiYi.jigong?.toString() ?: ""}")
     }
 }

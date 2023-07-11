@@ -61,16 +61,19 @@ class YinPanDunJia(
     init {
         mDay = day
         mYang = yang
-        dunJiaPan.display()
         setJu()
+        //dunJiaPan.setJu(mJu, mYang)
         setDiPan()
         setTianPan()
+        dunJiaPan.display()
     }
 
     private fun setJu() {
         val yearNo = yearGZ.mDz.diZhi + 1
         val hourNo = hourGZ.mDz.diZhi + 1
         mJu = (yearNo + mMonth + mDay + hourNo) % 9
+        dunJiaPan.setJu(mJu, mYang)
+        dunJiaPan.mShiGan = hourGZ.mTg
     }
 
     private fun getQiyi(i: Int): Int {
@@ -94,6 +97,8 @@ class YinPanDunJia(
         println("旬首为$mXunShou")
         zhifu = -1
         val xunshou = mXunShou!!.tianGan
+        this.dunJiaPan.mXunShou = this.mXunShou!!
+        this.dunJiaPan.findXunShou()
         for (i in diPan_qiyi.indices) {
             if (diPan_qiyi[i]!!.tianGan == xunshou) {
                 zhifu = i
