@@ -57,15 +57,26 @@ class QiMenEngine {
 //        )
 //        println(yd5)
 
-        val yd6 = YinPanDunJia(
-            GanZhi(TianGan.REN, DiZhi.YIN),
-            GanZhi(TianGan.JIA, DiZhi.CHEN),
-            GanZhi(TianGan.GENG, DiZhi.XU),
-            GanZhi(TianGan.GUI, DiZhi.WEI),
-            3,
-            27,
-            true
+//        val yd6 = YinPanDunJia(
+////            GanZhi(TianGan.REN, DiZhi.YIN),
+////            GanZhi(TianGan.JIA, DiZhi.CHEN),
+////            GanZhi(TianGan.GENG, DiZhi.XU),
+////            GanZhi(TianGan.GUI, DiZhi.WEI),
+////            3,
+////            27,
+////            true
+////        )
+////        println(yd6)
+
+        val yd2023071118 = YinPanDunJia(
+            GanZhi(TianGan.GUI, DiZhi.MAO),
+            GanZhi(TianGan.JI, DiZhi.WEI),
+            GanZhi(TianGan.GENG, DiZhi.WU),
+            GanZhi(TianGan.YI, DiZhi.YOU),
+            5,
+            24,
+            false
         )
-        println(yd6)
+        println(yd2023071118)
     }
 }

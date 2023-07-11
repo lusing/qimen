@@ -28,6 +28,8 @@ class YinPanDunJia(
     private val mYang: Boolean
     private val diPan_bagua = arrayOfNulls<BaGua>(8)
 
+    private val dunJiaPan : DunJiaPan = DunJiaPan()
+
     /**
      * 地盘上的奇仪
      */
@@ -57,9 +59,9 @@ class YinPanDunJia(
      * @param yang 阳遁还是阴遁
      */
     init {
-        mMonth = mMonth
         mDay = day
         mYang = yang
+        dunJiaPan.display()
         setJu()
         setDiPan()
         setTianPan()
@@ -265,8 +267,7 @@ class YinPanDunJia(
         }
 
     private fun isKongWang(gong: Int): Boolean {
-        val xunshou = findXunShou(hourGZ)!!.tianGan
-        when (xunshou) {
+        when (findXunShou(hourGZ)!!.tianGan) {
             TianGan.WU -> return gong == 7
             TianGan.JI -> return gong == 5 || gong == 6
             TianGan.GENG -> return gong == 4 || gong == 5
@@ -298,8 +299,7 @@ class YinPanDunJia(
         val dz = shiZhu.mDz.diZhi
 
         //得到的差值是地支
-        val value = (dz - tg + 12) % 12
-        when (value) {
+        when ((dz - tg + 12) % 12) {
             0 ->                 //甲子戊
                 return TianGan(TianGan.WU)
 
