@@ -32,6 +32,13 @@ class DunJiaPan {
         cells[2][1].baGua = BaGua(BaGua.KAN)
         cells[2][2].baGua = BaGua(BaGua.QIAN)
 
+        var next = Pair(2, 1)
+        for (i in 0..7) {
+            cells[next.first][next.second].diPanJiuXing = JiuXing(i)
+            cells[next.first][next.second].diPanBaMen = BaMen(i)
+            next = getClockwise(next.first, next.second)
+        }
+
 //        for (i in 0..2) {
 //            for (j in 0..2) {
 //                cells[i][j].display()
@@ -231,13 +238,89 @@ class DunJiaPan {
         var xunShou = 1
         for (i in 0..2) {
             for (j in 0..2) {
-                if (this.cells[i][j].diPanQiYi.qiyi.tianGan == this.mXunShou.tianGan) {
+                if (this.cells[i][j].diPanQiYi.qiyi!!.tianGan == this.mXunShou.tianGan) {
                     xunShou = this.cells[i][j].id
                     println("旬首落在${xunShou}宫")
                 }
             }
         }
         return xunShou
+    }
+
+    fun findShiGan(): Int {
+        var shiGan = 1
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (this.cells[i][j].diPanQiYi.qiyi!!.tianGan == this.mShiGan.tianGan) {
+                    shiGan = this.cells[i][j].id
+                    println("时干落在${shiGan}宫")
+                }
+            }
+        }
+        return shiGan
+    }
+
+    fun setTianPan() : Unit {
+        val shiGan = findShiGan()
+        var gong = shiGan
+
+        // 如果时干落中五宫，则取寄宫坤二宫
+        if(shiGan==5){
+            gong = 2
+        }
+
+        val xunshou = findXunShou()
+        var xun_gong = xunshou
+
+        if(xunshou == 5){
+            xun_gong = 2
+        }
+
+        var pos1 = findCellById(gong)
+        var pos2 = findCellById(xun_gong)
+
+        val jx = getZhiFu()
+        var jx_id = jx.id
+
+        for(i in 0..7){
+            cells[pos1.first][pos1.second].tianPanQiYi = cells[pos2.first][pos2.second].diPanQiYi
+            cells[pos1.first][pos1.second].jiuXing = JiuXing(jx_id+i)
+            cells[pos1.first][pos1.second].baShen = BaShen(i)
+            pos1 = getClockwise(pos1.first, pos1.second)
+            pos2 = getClockwise(pos2.first, pos2.second)
+        }
+
+        cells[1][1].tianPanQiYi = cells[1][1].diPanQiYi
+
+        var rpos = findCellById(gong)
+
+        if(!mYinYang){
+            for(i in 0..7){
+                cells[rpos.first][rpos.second].baShen = BaShen(i)
+                rpos = getAnitClockwise(rpos.first, rpos.second)
+            }
+        }
+    }
+
+    fun getZhiFu(): JiuXing {
+        val gong = this.findXunShou()
+        if (gong == 5) {
+            return this.cells[0][2].diPanJiuXing!!
+        } else {
+            var pos = findCellById(gong)
+            return this.cells[pos.first][pos.second].diPanJiuXing!!
+        }
+    }
+
+    fun findCellById(id: Int): Pair<Int, Int> {
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (this.cells[i][j].id == id) {
+                    return Pair(i, j)
+                }
+            }
+        }
+        return Pair(2, 1)
     }
 
     fun display() {

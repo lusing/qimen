@@ -5,13 +5,16 @@ class Cell {
     lateinit var baGua: BaGua
     var diPanQiYi: QiYi = QiYi()
     var tianPanQiYi: QiYi = QiYi()
-    lateinit var diPanJiuXing : JiuXing
+    var diPanJiuXing : JiuXing? = null
+    var diPanBaMen : BaMen? = null
     var jiuXing: JiuXing? = null
     var baMen: BaMen? = null
     var baShen: BaShen? = null
 
     fun display() {
         //print("$baGua$id")
-        print("${diPanQiYi.qiyi.toString()}${diPanQiYi.jigong?.toString() ?: ""}")
+        print("${diPanQiYi.qiyi.toString()}${diPanQiYi.jigong?.toString() ?: ""}${jiuXing.toString()}${tianPanQiYi.qiyi.toString()}")
+        print("${baShen}")
+        print("${diPanBaMen}")
     }
 }

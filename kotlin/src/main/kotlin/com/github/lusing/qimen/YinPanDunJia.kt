@@ -99,6 +99,11 @@ class YinPanDunJia(
         val xunshou = mXunShou!!.tianGan
         this.dunJiaPan.mXunShou = this.mXunShou!!
         this.dunJiaPan.findXunShou()
+        val zhifu2 = this.dunJiaPan.getZhiFu()
+        println("值符2为:" + zhifu2)
+        val shiGan2 = this.dunJiaPan.findShiGan()
+        println("时干2落${shiGan2}宫")
+        this.dunJiaPan.setTianPan()
         for (i in diPan_qiyi.indices) {
             if (diPan_qiyi[i]!!.tianGan == xunshou) {
                 zhifu = i
