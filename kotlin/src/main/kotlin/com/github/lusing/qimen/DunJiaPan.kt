@@ -327,7 +327,6 @@ class DunJiaPan {
 
         for (i in 0..7) {
             cells[posMen.first][posMen.second].baMen = BaMen(menId + i)
-            posMen = getClockwise(posMen.first, posMen.second)
             if (!fuYin){
                 cells[posMen.first][posMen.second].yinGan = cells[posYinGan.first][posYinGan.second].diPanQiYi
                 posYinGan = getClockwise(posYinGan.first, posYinGan.second)
@@ -335,6 +334,7 @@ class DunJiaPan {
                 cells[posMen.first][posMen.second].yinGan = QiYi()
                 posYinGan = getClockwise(posYinGan.first, posYinGan.second)
             }
+            posMen = getClockwise(posMen.first, posMen.second)
         }
 
         for (i in 0..2) {
