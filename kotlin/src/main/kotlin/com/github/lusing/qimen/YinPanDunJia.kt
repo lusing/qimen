@@ -33,20 +33,10 @@ class YinPanDunJia(
     /**
      * 地盘上的奇仪
      */
-    private val diPan_qiyi = arrayOfNulls<TianGan>(9)
     private val tianPan_qiyi = arrayOfNulls<TianGan>(9)
-    private val tianPan_Jiuxing = arrayOfNulls<JiuXing>(8)
     private val tianPan_BaMen = arrayOfNulls<BaMen>(8)
-    private val baShen = arrayOfNulls<BaShen>(8)
-    private val yinGan = arrayOfNulls<TianGan>(8)
-    private var zhifu = -1
     private var mXunShou: TianGan? = null
     private val mKongMa = arrayOfNulls<String>(8)
-
-    //final private int[] houTianBaGua = {1, 8, 3, 4, 9, 2, 7, 6};
-    private val houTianBaGua_full = intArrayOf(1, 8, 3, 4, 9, 2, 7, 6, 5)
-    private val yangDunOrder = intArrayOf(0, 5, 2, 3, 8, 7, 6, 1, 4)
-    private val yinDunOrder = intArrayOf(0, 4, 1, 6, 7, 8, 3, 2, 5)
 
     /**
      *
@@ -62,8 +52,6 @@ class YinPanDunJia(
         mDay = day
         mYang = yang
         setJu()
-        //dunJiaPan.setJu(mJu, mYang)
-        //setDiPan()
         setTianPan()
         dunJiaPan.display()
     }
@@ -77,17 +65,14 @@ class YinPanDunJia(
     }
 
     private fun setTianPan() {
-        val stg = hourGZ.mTg.tianGan
         mXunShou = findXunShou(hourGZ)
         println("旬首为$mXunShou")
-        zhifu = -1
-        val xunshou = mXunShou!!.tianGan
         this.dunJiaPan.mXunShou = this.mXunShou!!
         this.dunJiaPan.findXunShou()
         val zhifu2 = this.dunJiaPan.getZhiFu()
-        println("值符2为:" + zhifu2)
+        println("值符为:" + zhifu2)
         val shiGan2 = this.dunJiaPan.findShiGan()
-        println("时干2落${shiGan2}宫")
+        println("时干落${shiGan2}宫")
         this.dunJiaPan.setTianPan()
     }
 
