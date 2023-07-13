@@ -142,7 +142,7 @@ class DunJiaPan {
         }
     }
 
-    fun getAnitClockwise(x: Int, y: Int): Pair<Int, Int> {
+    private fun getAnitClockwise(x: Int, y: Int): Pair<Int, Int> {
         if (x == 0 && y == 0) {
             return Pair(1, 0)
         } else if (x == 1 && y == 0) {
@@ -260,19 +260,19 @@ class DunJiaPan {
         return shiGan
     }
 
-    fun setTianPan() : Unit {
+    fun setTianPan(): Unit {
         val shiGan = findShiGan()
         var gong = shiGan
 
         // 如果时干落中五宫，则取寄宫坤二宫
-        if(shiGan==5){
+        if (shiGan == 5) {
             gong = 2
         }
 
         val xunshou = findXunShou()
         var xun_gong = xunshou
 
-        if(xunshou == 5){
+        if (xunshou == 5) {
             xun_gong = 2
         }
 
@@ -282,9 +282,9 @@ class DunJiaPan {
         val jx = getZhiFu()
         var jx_id = jx.id
 
-        for(i in 0..7){
+        for (i in 0..7) {
             cells[pos1.first][pos1.second].tianPanQiYi = cells[pos2.first][pos2.second].diPanQiYi
-            cells[pos1.first][pos1.second].jiuXing = JiuXing(jx_id+i)
+            cells[pos1.first][pos1.second].jiuXing = JiuXing(jx_id + i)
             cells[pos1.first][pos1.second].baShen = BaShen(i)
             pos1 = getClockwise(pos1.first, pos1.second)
             pos2 = getClockwise(pos2.first, pos2.second)
@@ -294,21 +294,58 @@ class DunJiaPan {
 
         var rpos = findCellById(gong)
 
-        if(!mYinYang){
-            for(i in 0..7){
+        if (!mYinYang) {
+            for (i in 0..7) {
                 cells[rpos.first][rpos.second].baShen = BaShen(i)
                 rpos = getAnitClockwise(rpos.first, rpos.second)
             }
+        }
+
+        val steps = this.mShiGan.tianGan
+        println("到占时需要走${steps}步")
+
+        //val zhigan_gong = shiGan
+        var menGong = xunshou
+        println("旬首落宫：$menGong")
+        if (this.mYinYang) {
+            menGong = (xunshou + steps) % 9
+        } else {
+            menGong = (xunshou - steps + 9) % 9
+        }
+
+        // 如果旬首落中五宫，则取坤二宫，因为门落不了中五宫
+        if (menGong == 5) {
+            menGong = 2
+        }
+
+        println("值使门落在${menGong}宫")
+
+        val menId = getZhiShiMen().men
+        var posMen = findCellById(menGong)
+
+        for (i in 0..7) {
+            cells[posMen.first][posMen.second].baMen = BaMen(menId + i)
+            posMen = getClockwise(posMen.first, posMen.second)
         }
     }
 
     fun getZhiFu(): JiuXing {
         val gong = this.findXunShou()
-        if (gong == 5) {
-            return this.cells[0][2].diPanJiuXing!!
+        return if (gong == 5) {
+            this.cells[0][2].diPanJiuXing!!
         } else {
-            var pos = findCellById(gong)
-            return this.cells[pos.first][pos.second].diPanJiuXing!!
+            val pos = findCellById(gong)
+            this.cells[pos.first][pos.second].diPanJiuXing!!
+        }
+    }
+
+    fun getZhiShiMen(): BaMen {
+        val gong = this.findXunShou()
+        return if (gong == 5) {
+            this.cells[0][2].diPanBaMen!!
+        } else {
+            val pos = findCellById(gong)
+            this.cells[pos.first][pos.second].diPanBaMen!!
         }
     }
 

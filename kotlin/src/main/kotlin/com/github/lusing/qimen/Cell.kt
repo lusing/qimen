@@ -15,6 +15,6 @@ class Cell {
         //print("$baGua$id")
         print("${diPanQiYi.qiyi.toString()}${diPanQiYi.jigong?.toString() ?: ""}${jiuXing.toString()}${tianPanQiYi.qiyi.toString()}")
         print("${baShen}")
-        print("${diPanBaMen}")
+        print("${baMen}")
     }
 }
