@@ -34,9 +34,8 @@ class YinPanDunJia(
      * 地盘上的奇仪
      */
     private val tianPan_qiyi = arrayOfNulls<TianGan>(9)
-    private val tianPan_BaMen = arrayOfNulls<BaMen>(8)
     private var mXunShou: TianGan? = null
-    private val mKongMa = arrayOfNulls<String>(8)
+
 
     /**
      *
@@ -77,17 +76,7 @@ class YinPanDunJia(
         this.dunJiaPan.setTianPan()
     }
 
-    /**
-     * 检查是否有门迫 门迫为八门克所落之宫
-     */
-    private fun checkMenPo() {
-        for (i in 0..7) {
-            if (tianPan_BaMen[i]!!.isKe((diPan_bagua[i])!!)) {
-                println("门迫：" + tianPan_BaMen[i] + "克" + diPan_bagua[i])
-                println(tianPan_BaMen[i]!!.xing.toString() + "克" + diPan_bagua[i]!!.xing)
-            }
-        }
-    }
+
 
     /**
      * 击刑：十干也所落之宫构成三刑。
@@ -112,35 +101,7 @@ class YinPanDunJia(
      *
      *
      */
-    private fun checkJiXing() {
-        for (i in 0..7) {
-            when (tianPan_qiyi[i]!!.tianGan) {
-                TianGan.WU -> if (diPan_bagua[i]!!.gua == BaGua.ZHEN) {
-                    println("甲子戊落震三宫，子卯刑")
-                }
 
-                TianGan.JI -> if (diPan_bagua[i]!!.gua == BaGua.KUN) {
-                    println("甲戌己落坤二宫，戌未刑")
-                }
-
-                TianGan.GENG -> if (diPan_bagua[i]!!.gua == BaGua.GEN) {
-                    println("甲申庚落艮八宫，申寅刑")
-                }
-
-                TianGan.XIN -> if (diPan_bagua[i]!!.gua == BaGua.LI) {
-                    println("甲午辛落离九宫，午自刑")
-                }
-
-                TianGan.REN -> if (diPan_bagua[i]!!.gua == BaGua.XUN) {
-                    println("甲辰壬落巽四宫，辰自刑")
-                }
-
-                TianGan.GUI -> if (diPan_bagua[i]!!.gua == BaGua.XUN) {
-                    println("甲寅癸落巽四宫，寅巳刑")
-                }
-            }
-        }
-    }
 
 
     /**

@@ -189,7 +189,7 @@ class DunJiaPan {
 
         var cursor = TianGan(TianGan.WU)
 
-        for(i in 1..9){
+        for (i in 1..9) {
             if (yinYang) {
                 cells[next.first][next.second].diPanQiYi.qiyi = cursor
                 next = getNext(next.first, next.second)
@@ -327,10 +327,10 @@ class DunJiaPan {
 
         for (i in 0..7) {
             cells[posMen.first][posMen.second].baMen = BaMen(menId + i)
-            if (!fuYin){
+            if (!fuYin) {
                 cells[posMen.first][posMen.second].yinGan = cells[posYinGan.first][posYinGan.second].diPanQiYi
                 posYinGan = getClockwise(posYinGan.first, posYinGan.second)
-            }else{
+            } else {
                 cells[posMen.first][posMen.second].yinGan = QiYi()
                 posYinGan = getClockwise(posYinGan.first, posYinGan.second)
             }
@@ -345,27 +345,27 @@ class DunJiaPan {
         }
 
         //伏吟情况下的隐干
-        if(fuYin){
-            if(xunshou == 5){
-                var pos5 = Pair(1,1)
+        if (fuYin) {
+            if (xunshou == 5) {
+                var pos5 = Pair(1, 1)
                 var value = this.cells[0][2].diPanQiYi.qiyi
-                for(i in 1..9){
+                for (i in 1..9) {
                     this.cells[pos5.first][pos5.second].yinGan.qiyi = value
-                    pos5 = if(mYinYang){
+                    pos5 = if (mYinYang) {
                         getNext(pos5.first, pos5.second)
-                    }else{
+                    } else {
                         getPrev(pos5.first, pos5.second)
                     }
                     value = getNextQiYi(value)
                 }
-            }else{
-                var pos5 = Pair(1,1)
+            } else {
+                var pos5 = Pair(1, 1)
                 var value = cells[findCellById(xunshou).first][findCellById(xunshou).second].diPanQiYi.qiyi
-                for(i in 1..9){
+                for (i in 1..9) {
                     this.cells[pos5.first][pos5.second].yinGan.qiyi = value
-                    pos5 = if(mYinYang){
+                    pos5 = if (mYinYang) {
                         getNext(pos5.first, pos5.second)
-                    }else{
+                    } else {
                         getPrev(pos5.first, pos5.second)
                     }
                     value = getNextQiYi(value)
@@ -429,14 +429,9 @@ class DunJiaPan {
         return false
     }
 
+
     fun display() {
-//        for (i in 0..2) {
-//            for (j in 0..2) {
-//                cells[i][j].display()
-//                print("|")
-//            }
-//            println()
-//        }
+
 
         println("----------------------")
         println("|${cells[0][0].getYinGan()}${cells[0][0].getKongWang()}|${cells[0][1].getYinGan()}${cells[0][1].getKongWang()}|${cells[0][2].getYinGan()}${cells[0][2].getKongWang()}|")
@@ -454,5 +449,14 @@ class DunJiaPan {
         println("|${cells[2][0].getTianPanQiYi()}${cells[2][0].jiuXing.toString()}|${cells[2][1].getTianPanQiYi()}${cells[2][1].jiuXing.toString()}|${cells[2][2].getTianPanQiYi()}${cells[2][2].jiuXing.toString()}|")
         println("|${cells[2][0].getQiYi()}${cells[2][0].baMen.toString()}|${cells[2][1].getQiYi()}${cells[2][1].baMen.toString()}|${cells[2][2].getQiYi()}${cells[2][2].baMen.toString()}|")
         println("-----------------")
+
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (i==1 && j==1) continue
+                cells[i][j].checkMenPo()
+                cells[i][j].checkJiXing()
+            }
+            //println()
+        }
     }
 }
