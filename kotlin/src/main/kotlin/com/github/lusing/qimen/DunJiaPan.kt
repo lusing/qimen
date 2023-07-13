@@ -9,6 +9,7 @@ class DunJiaPan {
     var mJu: Int = 0
     var mYinYang: Boolean = true
     lateinit var mShiGan: TianGan
+    lateinit var mShiZhi: DiZhi
     lateinit var mXunShou: TianGan
 
     init {
@@ -38,12 +39,6 @@ class DunJiaPan {
             cells[next.first][next.second].diPanBaMen = BaMen(i)
             next = getClockwise(next.first, next.second)
         }
-
-//        for (i in 0..2) {
-//            for (j in 0..2) {
-//                cells[i][j].display()
-//            }
-//        }
     }
 
     /**
@@ -192,46 +187,46 @@ class DunJiaPan {
         var next = gotoCell(ju)
         var prev = next
 
-        if (yinYang) {
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.WU)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.JI)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.GENG)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.XIN)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.REN)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.GUI)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.DING)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.BING)
-            next = getNext(next.first, next.second)
-            cells[next.first][next.second].diPanQiYi.qiyi = TianGan(TianGan.YI)
-        } else {
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.WU)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.JI)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.GENG)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.XIN)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.REN)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.GUI)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.DING)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.BING)
-            prev = getPrev(prev.first, prev.second)
-            cells[prev.first][prev.second].diPanQiYi.qiyi = TianGan(TianGan.YI)
+        var cursor = TianGan(TianGan.WU)
+
+        for(i in 1..9){
+            if (yinYang) {
+                cells[next.first][next.second].diPanQiYi.qiyi = cursor
+                next = getNext(next.first, next.second)
+                cursor = getNextQiYi(cursor)
+            } else {
+                cells[prev.first][prev.second].diPanQiYi.qiyi = cursor
+                prev = getPrev(prev.first, prev.second)
+                cursor = getNextQiYi(cursor)
+            }
         }
 
         // 中五宫寄坤二宫
         cells[0][2].diPanQiYi.jigong = cells[1][1].diPanQiYi.qiyi
+    }
+
+    fun getNextQiYi(qiyi: TianGan): TianGan {
+        if (qiyi.tianGan == TianGan.WU) {
+            return TianGan(TianGan.JI)
+        } else if (qiyi.tianGan == TianGan.JI) {
+            return TianGan(TianGan.GENG)
+        } else if (qiyi.tianGan == TianGan.GENG) {
+            return TianGan(TianGan.XIN)
+        } else if (qiyi.tianGan == TianGan.XIN) {
+            return TianGan(TianGan.REN)
+        } else if (qiyi.tianGan == TianGan.REN) {
+            return TianGan(TianGan.GUI)
+        } else if (qiyi.tianGan == TianGan.GUI) {
+            return TianGan(TianGan.DING)
+        } else if (qiyi.tianGan == TianGan.DING) {
+            return TianGan(TianGan.BING)
+        } else if (qiyi.tianGan == TianGan.BING) {
+            return TianGan(TianGan.YI)
+        } else if (qiyi.tianGan == TianGan.YI) {
+            return TianGan(TianGan.WU)
+        } else {
+            return TianGan(TianGan.WU)
+        }
     }
 
     fun findXunShou(): Int {
@@ -240,7 +235,7 @@ class DunJiaPan {
             for (j in 0..2) {
                 if (this.cells[i][j].diPanQiYi.qiyi!!.tianGan == this.mXunShou.tianGan) {
                     xunShou = this.cells[i][j].id
-                    println("旬首落在${xunShou}宫")
+                    println("Found!旬首落在${xunShou}宫")
                 }
             }
         }
@@ -248,14 +243,18 @@ class DunJiaPan {
     }
 
     fun findShiGan(): Int {
-        var shiGan = 1
+        var shiGan = 0
         for (i in 0..2) {
             for (j in 0..2) {
                 if (this.cells[i][j].diPanQiYi.qiyi!!.tianGan == this.mShiGan.tianGan) {
                     shiGan = this.cells[i][j].id
-                    println("时干落在${shiGan}宫")
+                    println("Found!时干落在${shiGan}宫")
                 }
             }
+        }
+        //如果没找到，说明时干为甲。
+        if (shiGan == 0) {
+            shiGan = findXunShou()
         }
         return shiGan
     }
@@ -275,6 +274,8 @@ class DunJiaPan {
         if (xunshou == 5) {
             xun_gong = 2
         }
+
+        val fuYin = shiGan == xunshou
 
         var pos1 = findCellById(gong)
         var pos2 = findCellById(xun_gong)
@@ -322,10 +323,54 @@ class DunJiaPan {
 
         val menId = getZhiShiMen().men
         var posMen = findCellById(menGong)
+        var posYinGan = findCellById(gong)
 
         for (i in 0..7) {
             cells[posMen.first][posMen.second].baMen = BaMen(menId + i)
             posMen = getClockwise(posMen.first, posMen.second)
+            if (!fuYin){
+                cells[posMen.first][posMen.second].yinGan = cells[posYinGan.first][posYinGan.second].diPanQiYi
+                posYinGan = getClockwise(posYinGan.first, posYinGan.second)
+            }else{
+                cells[posMen.first][posMen.second].yinGan = QiYi()
+                posYinGan = getClockwise(posYinGan.first, posYinGan.second)
+            }
+        }
+
+        for (i in 0..2) {
+            for (j in 0..2) {
+                cells[i][j].maXing = isMaXing(cells[i][j].id)
+            }
+        }
+
+        //伏吟情况下的隐干
+        if(fuYin){
+            if(xunshou == 5){
+                var pos5 = Pair(1,1)
+                var value = this.cells[0][2].diPanQiYi.qiyi
+                for(i in 1..9){
+                    this.cells[pos5.first][pos5.second].yinGan.qiyi = value
+                    pos5 = if(mYinYang){
+                        getNext(pos5.first, pos5.second)
+                    }else{
+                        getPrev(pos5.first, pos5.second)
+                    }
+                    value = getNextQiYi(value)
+                }
+            }else{
+                var pos5 = Pair(1,1)
+                var value = cells[findCellById(xunshou).first][findCellById(xunshou).second].diPanQiYi.qiyi
+                for(i in 1..9){
+                    this.cells[pos5.first][pos5.second].yinGan.qiyi = value
+                    pos5 = if(mYinYang){
+                        getNext(pos5.first, pos5.second)
+                    }else{
+                        getPrev(pos5.first, pos5.second)
+                    }
+                    value = getNextQiYi(value)
+                }
+            }
+            cells[0][2].yinGan.jigong = cells[1][1].yinGan.qiyi
         }
     }
 
@@ -360,6 +405,17 @@ class DunJiaPan {
         return Pair(2, 1)
     }
 
+    private fun isMaXing(gong: Int): Boolean {
+        val shiZhi = this.mShiZhi.diZhi
+        when (shiZhi % 4) {
+            0 -> return gong == 8
+            1 -> return gong == 6
+            2 -> return gong == 2
+            3 -> return gong == 4
+        }
+        return false
+    }
+
     fun display() {
 //        for (i in 0..2) {
 //            for (j in 0..2) {
@@ -368,16 +424,20 @@ class DunJiaPan {
 //            }
 //            println()
 //        }
+
         println("----------------------")
-        println("|${cells[0][0].baShen.toString()}  |${cells[0][1].baShen.toString()}  |${cells[0][2].baShen.toString()}  |")
+        println("|${cells[0][0].getYinGan()} |${cells[0][1].getYinGan()} |${cells[0][2].getYinGan()} |")
+        println("|${cells[0][0].baShen.toString()} ${cells[0][0].getMaXing()}|${cells[0][1].baShen.toString()} ${cells[0][1].getMaXing()}|${cells[0][2].baShen.toString()} ${cells[0][2].getMaXing()}|")
         println("|${cells[0][0].getTianPanQiYi()}${cells[0][0].jiuXing.toString()}|${cells[0][1].getTianPanQiYi()}${cells[0][1].jiuXing.toString()}|${cells[0][2].getTianPanQiYi()}${cells[0][2].jiuXing.toString()}|")
         println("|${cells[0][0].getQiYi()}${cells[0][0].baMen.toString()}|${cells[0][1].getQiYi()}${cells[0][1].baMen.toString()}|${cells[0][2].getQiYi()}${cells[0][2].baMen.toString()}|")
         println("---------------------")
-        println("|${cells[1][0].baShen.toString()}  |   |${cells[1][2].baShen.toString()}  |")
+        println("|${cells[1][0].getYinGan()} |   |${cells[1][2].getYinGan()} |")
+        println("|${cells[1][0].baShen.toString()} ${cells[1][0].getMaXing()}|   |${cells[1][2].baShen.toString()} ${cells[1][2].getMaXing()}|")
         println("|${cells[1][0].getTianPanQiYi()}${cells[1][0].jiuXing.toString()}|   |${cells[1][2].getTianPanQiYi()}${cells[1][2].jiuXing.toString()}|")
         println("|${cells[1][0].getQiYi()}${cells[1][0].baMen.toString()}|${cells[1][1].getQiYi()} |${cells[1][2].getQiYi()}${cells[1][2].baMen.toString()}|")
         println("---------------------")
-        println("|${cells[2][0].baShen.toString()}  |${cells[2][1].baShen.toString()}  |${cells[2][2].baShen.toString()}  |")
+        println("|${cells[2][0].getYinGan()} |${cells[2][1].getYinGan()} |${cells[2][2].getYinGan()} |")
+        println("|${cells[2][0].baShen.toString()} ${cells[2][0].getMaXing()}|${cells[2][1].baShen.toString()} ${cells[2][1].getMaXing()}|${cells[2][2].baShen.toString()} ${cells[2][2].getMaXing()}|")
         println("|${cells[2][0].getTianPanQiYi()}${cells[2][0].jiuXing.toString()}|${cells[2][1].getTianPanQiYi()}${cells[2][1].jiuXing.toString()}|${cells[2][2].getTianPanQiYi()}${cells[2][2].jiuXing.toString()}|")
         println("|${cells[2][0].getQiYi()}${cells[2][0].baMen.toString()}|${cells[2][1].getQiYi()}${cells[2][1].baMen.toString()}|${cells[2][2].getQiYi()}${cells[2][2].baMen.toString()}|")
         println("-----------------")

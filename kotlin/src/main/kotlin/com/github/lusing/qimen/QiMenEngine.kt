@@ -78,5 +78,16 @@ class QiMenEngine {
             false
         )
         println(yd2023071118)
+
+        val yd2023040620 = YinPanDunJia(
+            GanZhi(TianGan.GUI, DiZhi.MAO),
+            GanZhi(TianGan.BING, DiZhi.CHEN),
+            GanZhi(TianGan.JIA, DiZhi.WU),
+            GanZhi(TianGan.JIA, DiZhi.XU),
+            2,
+            16,
+            true
+        )
+        println(yd2023040620)
     }
 }

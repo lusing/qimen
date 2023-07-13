@@ -62,6 +62,7 @@ class YinPanDunJia(
         mJu = (yearNo + mMonth + mDay + hourNo) % 9
         dunJiaPan.setJu(mJu, mYang)
         dunJiaPan.mShiGan = hourGZ.mTg
+        dunJiaPan.mShiZhi = hourGZ.mDz
     }
 
     private fun setTianPan() {
@@ -148,9 +149,6 @@ class YinPanDunJia(
                 if (isKongWang(i)) {
                     sb.append("空")
                 }
-                if (isMaXing(i)) {
-                    sb.append("马")
-                }
                 mKongMa[i] = sb.toString()
             }
         }
@@ -167,16 +165,7 @@ class YinPanDunJia(
         return false
     }
 
-    private fun isMaXing(gong: Int): Boolean {
-        val shiZhi = hourGZ.mDz.diZhi
-        when (shiZhi % 4) {
-            0 -> return gong == 1
-            1 -> return gong == 7
-            2 -> return gong == 5
-            3 -> return gong == 3
-        }
-        return false
-    }
+
 
     /**
      * 寻找旬首

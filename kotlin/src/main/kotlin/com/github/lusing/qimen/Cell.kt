@@ -10,6 +10,15 @@ class Cell {
     var jiuXing: JiuXing? = null
     var baMen: BaMen? = null
     var baShen: BaShen? = null
+    var yinGan : QiYi = QiYi()
+    var maXing : Boolean = false
+
+    fun getYinGan() : String{
+        var s = ""
+        s += yinGan.qiyi.toString()
+        s += yinGan.jigong?.toString() ?: " "
+        return s
+    }
 
     fun getQiYi() : String{
         var s = ""
@@ -23,6 +32,10 @@ class Cell {
         s += tianPanQiYi.qiyi.toString()
         s += tianPanQiYi.jigong?.toString() ?: " "
         return s
+    }
+
+    fun getMaXing() : String{
+        return if (this.maXing) "马" else " "
     }
 
     fun display() {
