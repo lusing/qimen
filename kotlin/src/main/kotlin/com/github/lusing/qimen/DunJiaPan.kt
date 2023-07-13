@@ -361,12 +361,25 @@ class DunJiaPan {
     }
 
     fun display() {
-        for (i in 0..2) {
-            for (j in 0..2) {
-                cells[i][j].display()
-                print("|")
-            }
-            println()
-        }
+//        for (i in 0..2) {
+//            for (j in 0..2) {
+//                cells[i][j].display()
+//                print("|")
+//            }
+//            println()
+//        }
+        println("----------------------")
+        println("|${cells[0][0].baShen.toString()}  |${cells[0][1].baShen.toString()}  |${cells[0][2].baShen.toString()}  |")
+        println("|${cells[0][0].getTianPanQiYi()}${cells[0][0].jiuXing.toString()}|${cells[0][1].getTianPanQiYi()}${cells[0][1].jiuXing.toString()}|${cells[0][2].getTianPanQiYi()}${cells[0][2].jiuXing.toString()}|")
+        println("|${cells[0][0].getQiYi()}${cells[0][0].baMen.toString()}|${cells[0][1].getQiYi()}${cells[0][1].baMen.toString()}|${cells[0][2].getQiYi()}${cells[0][2].baMen.toString()}|")
+        println("---------------------")
+        println("|${cells[1][0].baShen.toString()}  |   |${cells[1][2].baShen.toString()}  |")
+        println("|${cells[1][0].getTianPanQiYi()}${cells[1][0].jiuXing.toString()}|   |${cells[1][2].getTianPanQiYi()}${cells[1][2].jiuXing.toString()}|")
+        println("|${cells[1][0].getQiYi()}${cells[1][0].baMen.toString()}|${cells[1][1].getQiYi()} |${cells[1][2].getQiYi()}${cells[1][2].baMen.toString()}|")
+        println("---------------------")
+        println("|${cells[2][0].baShen.toString()}  |${cells[2][1].baShen.toString()}  |${cells[2][2].baShen.toString()}  |")
+        println("|${cells[2][0].getTianPanQiYi()}${cells[2][0].jiuXing.toString()}|${cells[2][1].getTianPanQiYi()}${cells[2][1].jiuXing.toString()}|${cells[2][2].getTianPanQiYi()}${cells[2][2].jiuXing.toString()}|")
+        println("|${cells[2][0].getQiYi()}${cells[2][0].baMen.toString()}|${cells[2][1].getQiYi()}${cells[2][1].baMen.toString()}|${cells[2][2].getQiYi()}${cells[2][2].baMen.toString()}|")
+        println("-----------------")
     }
 }

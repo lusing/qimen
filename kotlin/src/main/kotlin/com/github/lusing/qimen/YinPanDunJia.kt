@@ -28,7 +28,7 @@ class YinPanDunJia(
     private val mYang: Boolean
     private val diPan_bagua = arrayOfNulls<BaGua>(8)
 
-    private val dunJiaPan : DunJiaPan = DunJiaPan()
+    private val dunJiaPan: DunJiaPan = DunJiaPan()
 
     /**
      * 地盘上的奇仪
@@ -63,7 +63,7 @@ class YinPanDunJia(
         mYang = yang
         setJu()
         //dunJiaPan.setJu(mJu, mYang)
-        setDiPan()
+        //setDiPan()
         setTianPan()
         dunJiaPan.display()
     }
@@ -74,21 +74,6 @@ class YinPanDunJia(
         mJu = (yearNo + mMonth + mDay + hourNo) % 9
         dunJiaPan.setJu(mJu, mYang)
         dunJiaPan.mShiGan = hourGZ.mTg
-    }
-
-    private fun getQiyi(i: Int): Int {
-        when (i % 9) {
-            0 -> return TianGan.WU
-            1 -> return TianGan.JI
-            2 -> return TianGan.GENG
-            3 -> return TianGan.XIN
-            4 -> return TianGan.REN
-            5 -> return TianGan.GUI
-            6 -> return TianGan.DING
-            7 -> return TianGan.BING
-            8 -> return TianGan.YI
-        }
-        return 0
     }
 
     private fun setTianPan() {
@@ -104,97 +89,6 @@ class YinPanDunJia(
         val shiGan2 = this.dunJiaPan.findShiGan()
         println("时干2落${shiGan2}宫")
         this.dunJiaPan.setTianPan()
-        for (i in diPan_qiyi.indices) {
-            if (diPan_qiyi[i]!!.tianGan == xunshou) {
-                zhifu = i
-            }
-        }
-        println("值符为:" + JiuXing(zhifu))
-        println("值使门为:" + BaMen(zhifu))
-
-        //System.out.println("[值符落宫：]="+zhifu);
-        //查找值符的后天八卦序数
-        val htbgxs = houTianBaGua_full[zhifu]
-        //System.out.println("[值符门后天八卦序数：]="+htbgxs);
-        //时辰的天干落宫的后天八卦序数
-        val sghtbg = (htbgxs + hourGZ.mTg.tianGan) % 9
-        //System.out.println("[时辰天干落宫的后天八卦序数：]="+sghtbg);
-
-        //通过时干的后天八卦序数反查位置
-        var zhishimen = 0
-        for (i3 in houTianBaGua_full.indices) {
-            if (houTianBaGua_full[i3] == sghtbg) {
-                zhishimen = i3
-            }
-        }
-
-        //System.out.println("[值使门落宫：]="+zhishimen);
-        for (i4 in 0..7) {
-            tianPan_BaMen[(i4 + zhishimen) % 8] = BaMen(i4 + zhifu)
-        }
-        var shiganluogong = 0
-        //值符随时干，查找时干落宫
-        for (i6 in 0..7) {
-            if (diPan_qiyi[i6]!!.tianGan == stg) {
-                shiganluogong = i6
-            }
-        }
-        for (i1 in 0..7) {
-            tianPan_Jiuxing[(i1 + shiganluogong) % 8] = JiuXing(zhifu + i1)
-            tianPan_qiyi[(i1 + shiganluogong) % 8] = diPan_qiyi[(zhifu + i1) % 8]
-            baShen[(i1 + shiganluogong) % 8] = BaShen(i1)
-            //this.tianPan_BaMen[(i1+)%8]=new BaMen(i1);
-        }
-        tianPan_qiyi[8] = diPan_qiyi[8]
-
-        //排隐干
-        var yingan = 0
-        for (i5 in 0..7) {
-            if (tianPan_BaMen[i5]?.men == zhifu) {
-                yingan = i5
-            }
-        }
-        println("[Debug]yingan=$yingan")
-        for (i6 in 0..7) {
-            yinGan[(yingan + i6) % 8] = diPan_qiyi[(shiganluogong + i6) % 8]
-        }
-        kongAndMa
-        println("---------")
-        println("|" + yinGan[3].toString() + mKongMa[3] + "  |" + yinGan[4].toString() + mKongMa[4] + "  |" + yinGan[5] + mKongMa[5] + "  |")
-        println("|" + baShen[3].toString() + "  |" + baShen[4].toString() + "  |" + baShen[5] + "  |")
-        println(
-            "|" + tianPan_qiyi[3].toString() + tianPan_Jiuxing[3].toString() + "|" + tianPan_qiyi[4].toString() + tianPan_Jiuxing[4].toString() + "|"
-                    + tianPan_qiyi[5].toString() + tianPan_Jiuxing[5] + "|"
-        )
-        println(
-            ("|" + diPan_qiyi[3].toString() + tianPan_BaMen[3].toString() + "|" + diPan_qiyi[4].toString() + tianPan_BaMen[4].toString() + "|"
-                    + diPan_qiyi[5].toString() + tianPan_BaMen[5] + "|")
-        )
-        println("---------")
-        println("|" + yinGan[2].toString() + mKongMa[2] + "  |" + "  " + "  |" + yinGan[6] + mKongMa[6] + "  |")
-        println("|" + baShen[2].toString() + " |" + "中 " + " |" + baShen[6] + " |")
-        println(
-            ("|" + tianPan_qiyi[2].toString() + tianPan_Jiuxing[2].toString() + "|" + tianPan_qiyi[8].toString() + "禽" + "|"
-                    + tianPan_qiyi[6].toString() + tianPan_Jiuxing[6] + "|")
-        )
-        println(
-            ("|" + diPan_qiyi[2].toString() + tianPan_BaMen[2].toString() + "|" + diPan_qiyi[8].toString() + "中" + "|"
-                    + diPan_qiyi[6].toString() + tianPan_BaMen[6] + "|")
-        )
-        println("---------")
-        println("|" + yinGan[1].toString() + mKongMa[1] + "  |" + yinGan[0].toString() + mKongMa[0] + "  |" + yinGan[7] + mKongMa[7] + "  |")
-        println("|" + baShen[1].toString() + " |" + baShen[0].toString() + " |" + baShen[7] + " |")
-        println(
-            ("|" + tianPan_qiyi[1].toString() + tianPan_Jiuxing[1].toString() + "|" + tianPan_qiyi[0].toString() + tianPan_Jiuxing[0].toString() + "|"
-                    + tianPan_qiyi[7].toString() + tianPan_Jiuxing[7] + "|")
-        )
-        println(
-            ("|" + diPan_qiyi[1].toString() + tianPan_BaMen[1].toString() + "|" + diPan_qiyi[0].toString() + tianPan_BaMen[0].toString() + "|"
-                    + diPan_qiyi[7].toString() + tianPan_BaMen[7] + "|")
-        )
-        println("---------")
-        checkMenPo()
-        checkJiXing()
     }
 
     /**
@@ -329,33 +223,6 @@ class YinPanDunJia(
                 return TianGan(TianGan.GUI)
         }
         return null
-    }
-
-    /**
-     * 设置地盘六仪三奇
-     */
-    private fun setDiPan() {
-        if (mYang) {
-            //阳遁，后天八卦
-            for (i in 0..8) {
-                diPan_qiyi[(yangDunOrder[(i + mJu - 1) % 9]) % 9] = TianGan(getQiyi(i))
-            }
-        } else {
-            //阴遁
-            for (i in 0..8) {
-                diPan_qiyi[(yinDunOrder[(i + mJu - 1) % 9]) % 9] = TianGan(getQiyi(i))
-            }
-        }
-        for (i in 0..7) {
-            diPan_bagua[i] = BaGua(i + 1)
-        }
-        println("---------")
-        println("|" + diPan_qiyi[3].toString() + "|" + diPan_qiyi[4].toString() + "|" + diPan_qiyi[5] + "|")
-        println("---------")
-        println("|" + diPan_qiyi[2].toString() + "|" + diPan_qiyi[8].toString() + "|" + diPan_qiyi[6] + "|")
-        println("---------")
-        println("|" + diPan_qiyi[1].toString() + "|" + diPan_qiyi[0].toString() + "|" + diPan_qiyi[7] + "|")
-        println("---------")
     }
 
     override fun toString(): String {

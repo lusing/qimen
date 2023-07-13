@@ -11,9 +11,23 @@ class Cell {
     var baMen: BaMen? = null
     var baShen: BaShen? = null
 
+    fun getQiYi() : String{
+        var s = ""
+        s += diPanQiYi.qiyi.toString()
+        s += diPanQiYi.jigong?.toString() ?: " "
+        return s
+    }
+
+    fun getTianPanQiYi(): String {
+        var s = ""
+        s += tianPanQiYi.qiyi.toString()
+        s += tianPanQiYi.jigong?.toString() ?: " "
+        return s
+    }
+
     fun display() {
         //print("$baGua$id")
-        print("${diPanQiYi.qiyi.toString()}${diPanQiYi.jigong?.toString() ?: ""}${jiuXing.toString()}${tianPanQiYi.qiyi.toString()}")
+        print("${getQiYi()}${jiuXing.toString()}${tianPanQiYi.qiyi.toString()}")
         print("${baShen}")
         print("${baMen}")
     }
