@@ -340,6 +340,7 @@ class DunJiaPan {
         for (i in 0..2) {
             for (j in 0..2) {
                 cells[i][j].maXing = isMaXing(cells[i][j].id)
+                cells[i][j].kongWang = isKongWang(cells[i][j].id)
             }
         }
 
@@ -416,6 +417,18 @@ class DunJiaPan {
         return false
     }
 
+    private fun isKongWang(gong: Int): Boolean {
+        when (this.mXunShou.tianGan) {
+            TianGan.WU -> return gong == 6 // 乾六宫
+            TianGan.JI -> return gong == 2 || gong == 7 // 坤二宫、兑七宫
+            TianGan.GENG -> return gong == 9 || gong == 2 // 离九宫、坤二宫
+            TianGan.XIN -> return gong == 4 //巽四宫
+            TianGan.REN -> return gong == 8 || gong == 3 //艮八宫、震三宫
+            TianGan.GUI -> return gong == 1 || gong == 8 //坎一宫、艮八宫
+        }
+        return false
+    }
+
     fun display() {
 //        for (i in 0..2) {
 //            for (j in 0..2) {
@@ -426,17 +439,17 @@ class DunJiaPan {
 //        }
 
         println("----------------------")
-        println("|${cells[0][0].getYinGan()} |${cells[0][1].getYinGan()} |${cells[0][2].getYinGan()} |")
+        println("|${cells[0][0].getYinGan()}${cells[0][0].getKongWang()}|${cells[0][1].getYinGan()}${cells[0][1].getKongWang()}|${cells[0][2].getYinGan()}${cells[0][2].getKongWang()}|")
         println("|${cells[0][0].baShen.toString()} ${cells[0][0].getMaXing()}|${cells[0][1].baShen.toString()} ${cells[0][1].getMaXing()}|${cells[0][2].baShen.toString()} ${cells[0][2].getMaXing()}|")
         println("|${cells[0][0].getTianPanQiYi()}${cells[0][0].jiuXing.toString()}|${cells[0][1].getTianPanQiYi()}${cells[0][1].jiuXing.toString()}|${cells[0][2].getTianPanQiYi()}${cells[0][2].jiuXing.toString()}|")
         println("|${cells[0][0].getQiYi()}${cells[0][0].baMen.toString()}|${cells[0][1].getQiYi()}${cells[0][1].baMen.toString()}|${cells[0][2].getQiYi()}${cells[0][2].baMen.toString()}|")
         println("---------------------")
-        println("|${cells[1][0].getYinGan()} |   |${cells[1][2].getYinGan()} |")
+        println("|${cells[1][0].getYinGan()}${cells[1][0].getKongWang()}|   |${cells[1][2].getYinGan()}${cells[1][2].getKongWang()}|")
         println("|${cells[1][0].baShen.toString()} ${cells[1][0].getMaXing()}|   |${cells[1][2].baShen.toString()} ${cells[1][2].getMaXing()}|")
         println("|${cells[1][0].getTianPanQiYi()}${cells[1][0].jiuXing.toString()}|   |${cells[1][2].getTianPanQiYi()}${cells[1][2].jiuXing.toString()}|")
         println("|${cells[1][0].getQiYi()}${cells[1][0].baMen.toString()}|${cells[1][1].getQiYi()} |${cells[1][2].getQiYi()}${cells[1][2].baMen.toString()}|")
         println("---------------------")
-        println("|${cells[2][0].getYinGan()} |${cells[2][1].getYinGan()} |${cells[2][2].getYinGan()} |")
+        println("|${cells[2][0].getYinGan()}${cells[2][0].getKongWang()}|${cells[2][1].getYinGan()}${cells[2][1].getKongWang()}|${cells[2][2].getYinGan()}${cells[2][2].getKongWang()}|")
         println("|${cells[2][0].baShen.toString()} ${cells[2][0].getMaXing()}|${cells[2][1].baShen.toString()} ${cells[2][1].getMaXing()}|${cells[2][2].baShen.toString()} ${cells[2][2].getMaXing()}|")
         println("|${cells[2][0].getTianPanQiYi()}${cells[2][0].jiuXing.toString()}|${cells[2][1].getTianPanQiYi()}${cells[2][1].jiuXing.toString()}|${cells[2][2].getTianPanQiYi()}${cells[2][2].jiuXing.toString()}|")
         println("|${cells[2][0].getQiYi()}${cells[2][0].baMen.toString()}|${cells[2][1].getQiYi()}${cells[2][1].baMen.toString()}|${cells[2][2].getQiYi()}${cells[2][2].baMen.toString()}|")

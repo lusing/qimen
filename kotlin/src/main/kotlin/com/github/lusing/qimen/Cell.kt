@@ -12,6 +12,11 @@ class Cell {
     var baShen: BaShen? = null
     var yinGan : QiYi = QiYi()
     var maXing : Boolean = false
+    var kongWang : Boolean = false
+
+    fun getKongWang() : String {
+        return if (this.kongWang) "空" else " "
+    }
 
     fun getYinGan() : String{
         var s = ""

@@ -142,30 +142,6 @@ class YinPanDunJia(
         }
     }
 
-    private val kongAndMa: Unit
-        private get() {
-            for (i in 0..7) {
-                val sb = StringBuilder(2)
-                if (isKongWang(i)) {
-                    sb.append("空")
-                }
-                mKongMa[i] = sb.toString()
-            }
-        }
-
-    private fun isKongWang(gong: Int): Boolean {
-        when (findXunShou(hourGZ)!!.tianGan) {
-            TianGan.WU -> return gong == 7
-            TianGan.JI -> return gong == 5 || gong == 6
-            TianGan.GENG -> return gong == 4 || gong == 5
-            TianGan.XIN -> return gong == 3
-            TianGan.REN -> return gong == 1 || gong == 2
-            TianGan.GUI -> return gong == 0 || gong == 1
-        }
-        return false
-    }
-
-
 
     /**
      * 寻找旬首
