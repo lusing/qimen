@@ -395,7 +395,7 @@ class DunJiaPan {
         }
     }
 
-    fun findCellById(id: Int): Pair<Int, Int> {
+    private fun findCellById(id: Int): Pair<Int, Int> {
         for (i in 0..2) {
             for (j in 0..2) {
                 if (this.cells[i][j].id == id) {
