@@ -452,7 +452,7 @@ class DunJiaPan {
 
         for (i in 0..2) {
             for (j in 0..2) {
-                if (i==1 && j==1) continue
+                if (i == 1 && j == 1) continue
                 cells[i][j].checkMenPo()
                 cells[i][j].checkJiXing()
             }
