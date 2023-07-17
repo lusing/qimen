@@ -205,7 +205,7 @@ class DunJiaPan {
         cells[0][2].diPanQiYi.jigong = cells[1][1].diPanQiYi.qiyi
     }
 
-    fun getNextQiYi(qiyi: TianGan): TianGan {
+    private fun getNextQiYi(qiyi: TianGan): TianGan {
         if (qiyi.tianGan == TianGan.WU) {
             return TianGan(TianGan.JI)
         } else if (qiyi.tianGan == TianGan.JI) {
@@ -455,6 +455,7 @@ class DunJiaPan {
                 if (i == 1 && j == 1) continue
                 cells[i][j].checkMenPo()
                 cells[i][j].checkJiXing()
+                cells[i][j].checkRuMu()
             }
             //println()
         }

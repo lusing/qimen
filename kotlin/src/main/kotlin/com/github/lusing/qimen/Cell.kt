@@ -28,6 +28,7 @@ class Cell {
     }
 
     fun checkJiXing() {
+        // 戊三己二庚刑八，辛九壬四癸半八
         when (tianPanQiYi.qiyi.tianGan) {
             TianGan.WU -> if (this.baGua.gua == BaGua.ZHEN) {
                 println("甲子戊落震三宫，子卯刑")
@@ -57,6 +58,44 @@ class Cell {
 
     fun getKongWang(): String {
         return if (this.kongWang) "空" else " "
+    }
+
+    fun checkRuMu(): Boolean {
+        when (tianPanQiYi.qiyi.tianGan) {
+            TianGan.JIA, TianGan.GUI ->
+                return if (this.id == 2) {
+                    println("${this.tianPanQiYi.qiyi.toString()}落坤二宫入墓")
+                    true
+                } else {
+                    false
+                }
+
+            TianGan.XIN, TianGan.REN ->
+                return if (this.id == 4) {
+                    println("${this.tianPanQiYi.qiyi.toString()}落巽四宫入墓")
+                    true
+                } else {
+                    false
+                }
+
+            TianGan.YI, TianGan.BING, TianGan.WU ->
+                return if (this.id == 6) {
+                    println("${this.tianPanQiYi.qiyi.toString()}落乾六宫入墓")
+                    true
+                } else {
+                    false
+                }
+
+            TianGan.DING, TianGan.JI, TianGan.GENG ->
+                return if (this.id == 8) {
+                    println("${this.tianPanQiYi.qiyi.toString()}落艮八宫入墓")
+                    true
+                } else {
+                    false
+                }
+
+            else -> return false
+        }
     }
 
     fun getYinGan(): String {
