@@ -6,14 +6,14 @@ package com.github.lusing.qimen
  * @author Louis
  */
 class JiuXing(xing: Int) : WuXing(getWuXing(xing)) {
-    private val mXing: Int
+    val id: Int
 
     init {
-        mXing = xing % 8
+        id = xing % 8
     }
 
     override fun toString(): String {
-        return sBaMen[mXing].toString()
+        return sJiuXing[id].toString()
     }
 
     companion object {
@@ -25,7 +25,7 @@ class JiuXing(xing: Int) : WuXing(getWuXing(xing)) {
         const val RUI = 5
         const val ZHU = 6
         const val XIN = 7
-        const val sBaMen = "蓬任冲辅英芮柱心"
+        const val sJiuXing = "蓬任冲辅英芮柱心"
         private fun getWuXing(star: Int): Int {
             var xing = 0
             when (star) {
