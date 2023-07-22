@@ -16,6 +16,25 @@ class JiuXing(xing: Int) : WuXing(getWuXing(xing)) {
         return sJiuXing[id].toString()
     }
 
+    fun toLongString(): String {
+        return this.toString() + this.getConcept()
+    }
+
+    private fun getConcept(): String {
+        var str = ""
+        when (this.id) {
+            PENG -> str = "思考力、膨胀鼓起、蓬松、四面透风的、松软的、汹涌澎湃、聪明智慧"
+            REN -> str = "目标力、担当、承受、任劳任怨、任重道远"
+            CHONG -> str = "行动力、执行力、冲动、直往前闯、冲击、猛烈、矛盾"
+            FU -> str = "诚信力、帮助、奉献、辅佐、协助、指导、关爱、关怀、协调"
+            YING -> str = "关系力、社交力、卓越、杰出、贤明、秀丽、智勇"
+            RUI -> str = "保健力、问题、毛病、错误、联合、结交"
+            ZHU -> str = "驾驭力、惊恐怪异、顶天立地、力挽狂澜、中流砥柱、能独当一面、破坏毁折"
+            XIN -> str = "心态力、思想活动、想法、感情、中间、坚固、专制、压抑"
+        }
+        return str
+    }
+
     companion object {
         const val PENG = 0
         const val REN = 1
@@ -37,5 +56,7 @@ class JiuXing(xing: Int) : WuXing(getWuXing(xing)) {
             }
             return xing
         }
+
+
     }
 }
