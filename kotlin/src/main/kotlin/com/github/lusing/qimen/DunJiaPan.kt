@@ -259,6 +259,23 @@ class DunJiaPan {
         return shiGan
     }
 
+    fun findGongByTianGan(tg: TianGan): Int {
+        var luoGong = 0
+        for (i in 0..2) {
+            for (j in 0..2) {
+                if (this.cells[i][j].tianPanQiYi.qiyi!!.tianGan == tg.tianGan) {
+                    luoGong = this.cells[i][j].id
+                    println("天干${tg}落在${luoGong}宫")
+                }
+            }
+        }
+        //如果没找到，说明时干为甲。
+        if (luoGong == 0) {
+            luoGong = findXunShou()
+        }
+        return luoGong
+    }
+
     fun setTianPan(): Unit {
         val shiGan = findShiGan()
         var gong = shiGan
@@ -404,6 +421,15 @@ class DunJiaPan {
             }
         }
         return Pair(2, 1)
+    }
+
+    fun getCell(gong: Int): Cell {
+        val pos = findCellById(gong)
+        return this.cells[pos.first][pos.second]
+    }
+
+    fun getCell(tg: TianGan): Cell {
+        return getCell(findGongByTianGan(tg))
     }
 
     private fun isMaXing(gong: Int): Boolean {

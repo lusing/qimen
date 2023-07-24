@@ -68,48 +68,74 @@ class QiMenEngine {
 ////        )
 ////        println(yd6)
 
-        val yd2023071118 = YinPanDunJia(
-            GanZhi(TianGan.GUI, DiZhi.MAO),
-            GanZhi(TianGan.JI, DiZhi.WEI),
-            GanZhi(TianGan.GENG, DiZhi.WU),
-            GanZhi(TianGan.YI, DiZhi.YOU),
-            5,
-            24,
+//        val yd2023071118 = YinPanDunJia(
+//            GanZhi(TianGan.GUI, DiZhi.MAO),
+//            GanZhi(TianGan.JI, DiZhi.WEI),
+//            GanZhi(TianGan.GENG, DiZhi.WU),
+//            GanZhi(TianGan.YI, DiZhi.YOU),
+//            5,
+//            24,
+//            false
+//        )
+//        println(yd2023071118)
+//
+//        val yd2023040620 = YinPanDunJia(
+//            GanZhi(TianGan.GUI, DiZhi.MAO),
+//            GanZhi(TianGan.BING, DiZhi.CHEN),
+//            GanZhi(TianGan.JIA, DiZhi.WU),
+//            GanZhi(TianGan.JIA, DiZhi.XU),
+//            2,
+//            16,
+//            true
+//        )
+//        println(yd2023040620)
+//
+//        val yd200511181200 = YinPanDunJia(
+//            GanZhi(TianGan.DING, DiZhi.YOU),
+//            GanZhi(TianGan.BING, DiZhi.CHEN),
+//            GanZhi(TianGan.JIA, DiZhi.WU),
+//            GanZhi(TianGan.JIA, DiZhi.WU),
+//            10,
+//            17,
+//            false
+//        )
+//        println(yd200511181200)
+//
+//        val yd202304060600 = YinPanDunJia(
+//            GanZhi(TianGan.GUI, DiZhi.MAO),
+//            GanZhi(TianGan.BING, DiZhi.CHEN),
+//            GanZhi(TianGan.JIA, DiZhi.WU),
+//            GanZhi(TianGan.DING, DiZhi.MAO),
+//            2,
+//            16,
+//            true
+//        )
+//        println(yd202304060600)
+
+        // 王风麟 7-2-1
+        val yd200606271640 = YinPanDunJia(
+            GanZhi(TianGan.BING, DiZhi.XU),
+            GanZhi(TianGan.JIA, DiZhi.WU),
+            GanZhi(TianGan.DING, DiZhi.HAI),
+            GanZhi(TianGan.WU, DiZhi.SHEN),
+            6,
+            2,
             false
         )
-        println(yd2023071118)
+        println(yd200606271640)
+        yd200606271640.romance(TianGan(TianGan.DING), false)
 
-        val yd2023040620 = YinPanDunJia(
+        // 王风麟 7-2-2
+        val yd200703171000 = YinPanDunJia(
+            GanZhi(TianGan.DING, DiZhi.HAI),
             GanZhi(TianGan.GUI, DiZhi.MAO),
-            GanZhi(TianGan.BING, DiZhi.CHEN),
-            GanZhi(TianGan.JIA, DiZhi.WU),
-            GanZhi(TianGan.JIA, DiZhi.XU),
-            2,
-            16,
+            GanZhi(TianGan.GENG, DiZhi.XU),
+            GanZhi(TianGan.XIN, DiZhi.SI),
+            1,
+            28,
             true
         )
-        println(yd2023040620)
-
-        val yd200511181200 = YinPanDunJia(
-            GanZhi(TianGan.DING, DiZhi.YOU),
-            GanZhi(TianGan.BING, DiZhi.CHEN),
-            GanZhi(TianGan.JIA, DiZhi.WU),
-            GanZhi(TianGan.JIA, DiZhi.WU),
-            10,
-            17,
-            false
-        )
-        println(yd200511181200)
-
-        val yd202304060600 = YinPanDunJia(
-            GanZhi(TianGan.GUI, DiZhi.MAO),
-            GanZhi(TianGan.BING, DiZhi.CHEN),
-            GanZhi(TianGan.JIA, DiZhi.WU),
-            GanZhi(TianGan.DING, DiZhi.MAO),
-            2,
-            16,
-            true
-        )
-        println(yd202304060600)
+        println(yd200703171000)
+        yd200703171000.romance(TianGan(TianGan.GENG), false)
     }
 }

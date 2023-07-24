@@ -27,39 +27,49 @@ class Cell {
         }
     }
 
-    fun checkJiXing() {
+    // 击刑
+    fun checkJiXing(): Boolean {
+        var isJiXing = false
         // 戊三己二庚刑八，辛九壬四癸半八
         when (tianPanQiYi.qiyi.tianGan) {
             TianGan.WU -> if (this.baGua.gua == BaGua.ZHEN) {
                 println("甲子戊落震三宫，子卯刑")
+                isJiXing = true
             }
 
             TianGan.JI -> if (this.baGua.gua == BaGua.KUN) {
                 println("甲戌己落坤二宫，戌未刑")
+                isJiXing = true
             }
 
             TianGan.GENG -> if (this.baGua.gua == BaGua.GEN) {
                 println("甲申庚落艮八宫，申寅刑")
+                isJiXing = true
             }
 
             TianGan.XIN -> if (this.baGua.gua == BaGua.LI) {
                 println("甲午辛落离九宫，午自刑")
+                isJiXing = true
             }
 
             TianGan.REN -> if (this.baGua.gua == BaGua.XUN) {
                 println("甲辰壬落巽四宫，辰自刑")
+                isJiXing = true
             }
 
             TianGan.GUI -> if (this.baGua.gua == BaGua.XUN) {
                 println("甲寅癸落巽四宫，寅巳刑")
+                isJiXing = true
             }
         }
+        return isJiXing
     }
 
     fun getKongWang(): String {
         return if (this.kongWang) "空" else " "
     }
 
+    //入墓
     fun checkRuMu(): Boolean {
         when (tianPanQiYi.qiyi.tianGan) {
             TianGan.JIA, TianGan.GUI ->
@@ -128,5 +138,6 @@ class Cell {
         print("${getQiYi()}${jiuXing.toString()}${tianPanQiYi.qiyi.toString()}")
         print("${baShen}")
         print("${baMen}")
+        println()
     }
 }

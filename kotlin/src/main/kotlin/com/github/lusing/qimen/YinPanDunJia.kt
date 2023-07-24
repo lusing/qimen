@@ -1,5 +1,7 @@
 package com.github.lusing.qimen
 
+import com.github.lusing.liuyao.YongShen
+
 /**
  * 王凤林阴盘奇门遁甲
  *
@@ -76,7 +78,61 @@ class YinPanDunJia(
         this.dunJiaPan.setTianPan()
     }
 
+    // 婚恋
+    fun romance(yongShen: TianGan, isMan: Boolean) {
+        println("==================断婚姻=======================")
+        println("用神为：${yongShen.toString()}")
+        println("${yongShen.getRomance()}")
+        val cell_yong = this.dunJiaPan.getCell(yongShen)
+        println("${cell_yong.baShen?.getRomance()}")
+        println("${cell_yong.jiuXing?.getRomance()}")
+        println("${cell_yong.baMen?.getRomance()}")
 
+        if (cell_yong.diPanQiYi == cell_yong.tianPanQiYi) {
+            println("伏吟局：呻吟不安，有重叠之意。表示婚恋不利。未婚者找对象波澜曲折，阴差阳错，晚婚之象。已婚者必然二婚或多婚。")
+        }
+        if (cell_yong.baShen!!.mShen == BaShen.FU) {
+            println("用神遇值符，主婚姻会出现问题")
+        }
+        if (cell_yong.kongWang) {
+            println("虚无缥缈，捉摸不定。用神遇空亡，对婚恋不利。")
+        }
+        if (cell_yong.tianPanQiYi.jigong != null) {
+            println("寄人篱下，被人为奴。代表用神有双夫或双妻")
+        }
+
+        //与日干相合者为配偶
+        val peiOu = yongShen.getHe()
+        println("配偶为：${peiOu.toString()}")
+        println("${peiOu.getRomance()}")
+
+        if (yongShen.isYang == isMan) {
+            println("正配的婚姻一般比较好")
+        } else {
+            println("反配夫妻不太好，婚姻容易出问题")
+        }
+
+        val cell_darling = this.dunJiaPan.getCell(peiOu)
+        println("${cell_darling.baShen?.getRomance()}")
+        println("${cell_darling.jiuXing?.getRomance()}")
+        println("${cell_darling.baMen?.getRomance()}")
+
+        if (cell_darling.diPanQiYi == cell_darling.tianPanQiYi) {
+            println("伏吟局：呻吟不安，有重叠之意。表示婚恋不利。未婚者找对象波澜曲折，阴差阳错，晚婚之象。已婚者必然二婚或多婚。")
+        }
+        if (cell_darling.baShen?.mShen == BaShen.FU) {
+            println("配偶遇值符，主婚姻会出现问题")
+        }
+        if (cell_darling.kongWang) {
+            println("虚无缥缈，捉摸不定。配偶遇空亡，对婚恋不利。")
+        }
+        if (cell_darling.tianPanQiYi.jigong != null) {
+            println("寄人篱下，被人为奴。代表用神有双夫或双妻")
+        }
+
+
+        println("=========================================")
+    }
 
     /**
      * 击刑：十干也所落之宫构成三刑。
@@ -101,7 +157,6 @@ class YinPanDunJia(
      *
      *
      */
-
 
 
     /**
