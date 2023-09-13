@@ -19,6 +19,20 @@ class GanZhi {
         mDz = DiZhi(dz)
     }
 
+    constructor(year :Int){
+        val stemIndex = (year - 1984) % 10
+        val branchIndex = (year - 1984) % 12
+
+        mTg = TianGan(stemIndex+10 % 10)
+        mDz = DiZhi(branchIndex + 12 % 12)
+
+        println("${year}年为${this.getName()}年")
+    }
+
+    fun temp(year:Int) {
+
+    }
+
     fun getNext(): GanZhi {
         return GanZhi(mTg.getNext(), mDz.getNext())
     }
