@@ -4,15 +4,13 @@ import com.github.lusing.qimen.DiZhi
 import com.github.lusing.qimen.GanZhi
 
 class Taiyi (var year: Int){
-    val jiNianShu = 10155901 - 1984
+    val jinian = year + jiNianShu
     val gz = GanZhi(year)
     val taisui = getTaiSui()
     val heshen = getHeShen()
     val jishen = getJiShen(false)
-
     // 年家太乙的局数
     fun Ju() : Int{
-        val jinian = year + jiNianShu
         println("${year} 积年数：${jinian}")
         val A =  jinian % 360
         println("A=${A}")
@@ -43,5 +41,14 @@ class Taiyi (var year: Int){
         var js = DiZhi(12 - this.taisui.diZhi + start)
         println("计神为:${js.getName()}")
         return js
+    }
+
+    fun getTaiyi()  {
+        val A = this.jinian % 24
+        println("太乙要走的宫位数=${A}")
+    }
+
+    companion object{
+        const val jiNianShu = 10155901 - 1984
     }
 }

@@ -1,8 +1,10 @@
 package com.github.lusing.taiyi
 
 class Gong (gong :Int){
-    init{
-        val mGong = gong + 16 % 16
+    val mGong = gong + 16 % 16
+
+    fun getNext() : Gong{
+        return Gong((mGong + 1) % 16)
     }
 
     companion object{

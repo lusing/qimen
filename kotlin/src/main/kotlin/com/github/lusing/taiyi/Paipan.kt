@@ -7,5 +7,6 @@ class Paipan {
         println(ty1.getTaiSui())
         println(ty1.getHeShen())
         println(ty1.getJiShen(false))
+        println(ty1.getTaiyi())
     }
 }
