@@ -6,6 +6,8 @@ import com.github.lusing.qimen.GanZhi
 class Taiyi (var year: Int){
     val jiNianShu = 10155901 - 1984
     val gz = GanZhi(year)
+    val taisui = getTaiSui()
+    val heshen = getHeShen()
 
     // 年家太乙的局数
     fun Ju() : Int{
@@ -20,8 +22,13 @@ class Taiyi (var year: Int){
         return C
     }
 
-    fun taiSui() : DiZhi{
+    fun getTaiSui() : DiZhi{
         println("太岁为:${gz.mDz.getName()}")
         return gz.mDz
+    }
+
+    fun getHeShen() : DiZhi {
+        println("合神为:${taisui.getHe().getName()}")
+        return taisui.getHe()
     }
 }

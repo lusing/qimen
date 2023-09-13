@@ -137,6 +137,10 @@ class DiZhi(idz: Int) {
         return (dz2.diZhi + this.diZhi + 12) % 12 == 1
     }
 
+    fun getHe() : DiZhi {
+        return DiZhi(13 - this.diZhi)
+    }
+
     companion object {
         /**
          * 子
