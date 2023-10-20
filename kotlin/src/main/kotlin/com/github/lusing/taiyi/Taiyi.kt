@@ -8,7 +8,7 @@ class Taiyi (var year: Int){
     val gz = GanZhi(year)
     val taisui = getTaiSui()
     val heshen = getHeShen()
-    val jishen = getJiShen(false)
+    val jishen = getJiShen(true)
     // 年家太乙的局数
     fun Ju() : Int{
         println("${year} 积年数：${jinian}")
@@ -37,7 +37,9 @@ class Taiyi (var year: Int){
 
     // 计神
     fun getJiShen(yang : Boolean) : DiZhi {
-        val start = if(yang)  {DiZhi.YIN} else  DiZhi.SHEN
+        //println(yang)
+        val start = if(yang)  DiZhi.YIN else  DiZhi.SHEN
+        //println(start)
         var js = DiZhi(12 - this.taisui.diZhi + start)
         println("计神为:${js.getName()}")
         return js
@@ -45,7 +47,22 @@ class Taiyi (var year: Int){
 
     fun getTaiyi()  {
         val A = this.jinian % 24
-        println("太乙要走的宫位数=${A}")
+        var B = A
+        var C = 0
+        if (A>3){
+            B = A / 3
+            C = B % 3
+        }
+        println(this.jinian)
+        println("太乙要走的宫位数=${A},${B},${C}")
+        val D = 1 + B
+        println("落宫${D}宫,第${C+1}年")
+    }
+
+
+    fun getWenChang() {
+        val A = this.jinian % 18
+        println("文晶要走${A}步")
     }
 
     companion object{
