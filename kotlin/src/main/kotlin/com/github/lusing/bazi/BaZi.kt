@@ -1,9 +1,6 @@
 package com.github.lusing.bazi
 
-import com.github.lusing.qimen.DiZhi
-import com.github.lusing.qimen.GanZhi
-import com.github.lusing.qimen.TianGan
-import com.github.lusing.qimen.WuXing
+import com.github.lusing.qimen.*
 
 class BaZi {
     val nian: GanZhi
@@ -14,6 +11,7 @@ class BaZi {
     var male: Boolean
     var qinYun: Int
     var year: Int
+    var sshen : Array<Array<ShiShen>>
 
     constructor(
         nianGan: Int,
@@ -36,6 +34,8 @@ class BaZi {
         this.male = male
         this.qinYun = qiyun
         this.year = cal
+
+        this.sshen = arrayOf(arrayOf(ShiShen()),arrayOf(ShiShen()))
     }
 
     fun calcWang() {

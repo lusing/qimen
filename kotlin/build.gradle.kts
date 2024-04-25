@@ -17,7 +17,7 @@ dependencies {
     //testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.1.0")
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    testImplementation ("junit:junit:4.13.1")
+    //testImplementation ("junit:junit:4.13.1")
 }
 
 tasks.test {
@@ -25,7 +25,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "19"
 }
 
 application {

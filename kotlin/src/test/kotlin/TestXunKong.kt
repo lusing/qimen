@@ -1,8 +1,8 @@
 import com.github.lusing.qimen.DiZhi
 import com.github.lusing.qimen.GanZhi
 import com.github.lusing.qimen.TianGan
-import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class TestXunKong {
 

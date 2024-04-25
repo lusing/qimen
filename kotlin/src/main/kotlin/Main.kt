@@ -6,12 +6,15 @@ fun main() {
     //eng.run()
 
     val pp = Paipan()
-    pp.paipan(2023)
-    pp.paipan(2010)
+    //pp.paipan(2023)
+    //pp.paipan(2010)
 
     //ganzhi(1980)
     //ganzhi(1900)
 
 //    var test1 = Test()
 //    test1.test()
+
+    //val test1 = TestBaZi();
+
 }
