@@ -62,7 +62,7 @@ class Taiyi (var year: Int){
 
     fun getWenChang() {
         val A = this.jinian % 18
-        println("文晶要走${A}步")
+        println("文昌要走${A}步")
     }
 
     companion object{
