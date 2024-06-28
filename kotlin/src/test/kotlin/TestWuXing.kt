@@ -1,7 +1,7 @@
 import com.github.lusing.qimen.DiZhi
 import com.github.lusing.qimen.WuXing
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class TestWuXing {
     @Test
