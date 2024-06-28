@@ -2,7 +2,6 @@ import com.github.lusing.bazi.BaZi
 import com.github.lusing.qimen.DiZhi
 import com.github.lusing.qimen.GanZhi
 import com.github.lusing.qimen.TianGan
-//import org.junit.Test
 import org.junit.jupiter.api.Test
 
 class TestBaZi {
