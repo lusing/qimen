@@ -107,6 +107,8 @@ TianGan.REN = 8;
 TianGan.GUI = 9;
 TianGan.sTianGan = "甲乙丙丁戊己庚辛壬癸";
 
+module.exports = TianGan;
+
 // 测试实例
 const tg1 = new TianGan(1);
 const tg2 = new TianGan(6);
