@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诸葛老师三得法助学</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>诸葛老师三得法助学</h1>
+        <div class="form-group">
+            <label for="year">年柱:</label>
+            <select id="year"></select>
+        </div>
+        <div class="form-group">
+            <label for="month">月柱:</label>
+            <select id="month"></select>
+        </div>
+        <div class="form-group">
+            <label for="day">日柱:</label>
+            <select id="day"></select>
+        </div>
+        <div class="form-group">
+            <label for="hour">时柱:</label>
+            <select id="hour"></select>
+        </div>
+        <div class="form-group">
+            <label for="gender">性别:</label>
+            <select id="gender">
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="startAge">起大运年岁:</label>
+            <input type="number" id="startAge" min="1" max="120" value="10">
+        </div>
+        <button class="btn" onclick="convertBazi()">测算</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const tiangan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        const dizhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+
+        function populateSelects() {
+            const yearSelect = document.getElementById('year');
+            const monthSelect = document.getElementById('month');
+            const daySelect = document.getElementById('day');
+            const hourSelect = document.getElementById('hour');
+
+            for (let tg of tiangan) {
+                for (let dz of dizhi) {
+                    const option = document.createElement('option');
+                    option.value = tg + dz;
+                    option.text = tg + dz;
+                    yearSelect.add(option.cloneNode(true));
+                    monthSelect.add(option.cloneNode(true));
+                    daySelect.add(option.cloneNode(true));
+                    hourSelect.add(option.cloneNode(true));
+                }
+            }
+        }
+
+        function convertBazi() {
+            const year = document.getElementById('year').value;
+            const month = document.getElementById('month').value;
+            const day = document.getElementById('day').value;
+            const hour = document.getElementById('hour').value;
+            const gender = document.getElementById('gender').value;
+            const startAge = document.getElementById('startAge').value;
+
+            const bazi = year + month + day + hour;
+            const baziChars = '甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥';
+            let result = '';
+
+            for (let i = 0; i < bazi.length; i++) {
+                const index = baziChars.indexOf(bazi[i]);
+                if (index !== -1) {
+                    result += (index + 1) + ' ';
+                }
+            }
+
+            result = result.trim();
+            result += `\n性别: ${gender === 'male' ? '男' : '女'}`;
+            result += `\n起大运年岁: ${startAge}`;
+
+            document.getElementById('result').innerText = '转换结果:\n' + result;
+        }
+
+        window.onload = populateSelects;
+    </script>
+</body>
+</html>
