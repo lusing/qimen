@@ -2,51 +2,46 @@ package com.github.lusing.bazi
 
 import com.github.lusing.qimen.*
 
-class BaZi {
+class BaZi(
+    nianGan: Int,
+    nianZhi: Int,
+    yueGan: Int,
+    yueZhi: Int,
+    riGan: Int,
+    riZhi: Int,
+    shiGan: Int,
+    shiZhi: Int,
+    var male: Boolean,
+    qiyun: Int = 0,
+    cal: Int = 0
+) {
     val nian: GanZhi
     val yue: GanZhi
     val ri: GanZhi
     val shi: GanZhi
     var wang: Int
-    var male: Boolean
-    var qinYun: Int
-    var year: Int
+    var qinYun: Int = qiyun
+    var year: Int = cal
     var sshen: Array<Array<ShiShen>>
     var siZhu: Array<GanZhi>
 
-    constructor(
-        nianGan: Int,
-        nianZhi: Int,
-        yueGan: Int,
-        yueZhi: Int,
-        riGan: Int,
-        riZhi: Int,
-        shiGan: Int,
-        shiZhi: Int,
-        male: Boolean,
-        qiyun: Int = 0,
-        cal: Int = 0
-    ) {
+    init {
         this.nian = GanZhi(nianGan, nianZhi)
         this.yue = GanZhi(yueGan, yueZhi)
         this.ri = GanZhi(riGan, riZhi)
         this.shi = GanZhi(shiGan, shiZhi)
         this.wang = 0
-        this.male = male
-        this.qinYun = qiyun
-        this.year = cal
-
         this.sshen = arrayOf(arrayOf(ShiShen()), arrayOf(ShiShen()))
         siZhu = arrayOf(nian, yue, ri, shi)
     }
 
     fun calcWang() {
         println("=================================================")
-        var mu = 0
-        var huo = 0
-        var tu = 0
-        var jin = 0
-        var shui = 0
+//        var mu = 0
+//        var huo = 0
+//        var tu = 0
+//        var jin = 0
+//        var shui = 0
 
         checkLingDiZhu()
 
@@ -75,6 +70,8 @@ class BaZi {
 
         checkMuKu() // 查日主墓库
         checkCaiKu() // 查财库
+        checkRoots() // 检查是否有根
+        checkHeChongPoHai() // 检查合冲破害
 
 //        println("木: ${nianGan[0]}, 火: ${nianGan[1]}, 土: ${nianGan[2]}, 金: ${nianGan[3]}, 水: ${nianGan[4]}")
 //        println("木：${yueGan[0]}, 火: ${yueGan[1]}, 土: ${yueGan[2]}, 金: ${yueGan[3]}, 水: ${yueGan[4]}")
@@ -118,7 +115,7 @@ class BaZi {
                 var dyfen = calcDaYun(dy)
                 println(dyfen)
                 dy = dy.getPrev()
-                (0..9).forEach { j ->
+                (0..9).forEach { _ ->
                     print("----${year.getName()}")
                     if (this.year != 0) {
                         print(" ${this.year + sui}年")
@@ -136,7 +133,7 @@ class BaZi {
     }
 
     fun calcDaYun(gz: GanZhi): Int {
-        var value = 0.0
+        var value: Double
         var gan = gz.mTg
         var zhi = gz.mDz
         var ri = this.ri.mTg
@@ -349,7 +346,7 @@ class BaZi {
 
     fun checkMuKu() {
         for (gz in this.siZhu) {
-            if (gz.mDz.getMuKu(this.ri.mTg.xing) == gz.mDz) {
+            if (gz.mDz.getMuKu(this.ri.mTg.xing).diZhi == gz.mDz.diZhi) {
                 if (gz.mDz.diZhi == DiZhi.CHEN) {
                     println("命中出生的时候旁边有河流、湖泊、水库等")
                 } else if (gz.mDz.diZhi == DiZhi.XU) {
@@ -366,10 +363,65 @@ class BaZi {
     // 检查是否有财库
     fun checkCaiKu() {
         val cai = WuXing(this.ri.mTg.xing.xing + 2)
-        println(cai.toStringLong())
         for (gz in this.siZhu) {
-            if (gz.mDz.getMuKu(cai) == gz.mDz) {
+            if (gz.mDz.getMuKu(cai).diZhi == gz.mDz.diZhi) {
                 println("有财库,消费更保守,理财观念好")
+            }
+        }
+    }
+
+    // 检查是否有根
+    fun checkRoots() {
+        var roots = 0
+        for (gz in this.siZhu) {
+            //println(gz.mDz.cangGan)
+            var xingList = gz.mDz.cangGan.map { tg: TianGan -> tg.xing.xing }
+            //println(xingList)
+            if (this.ri.mTg.xing.xing in xingList) {
+                println("天干${this.ri.mTg.toString()}在地支${gz.mDz.toString()}中有根")
+            }
+        }
+    }
+
+    fun checkHeChongPoHai() {
+//        for (gz1 in this.siZhu) {
+//            for (gz2 in this.siZhu) {
+//                var tg1 = gz1.mTg
+//                var tg2 = gz2.mTg
+//                var dz1 = gz1.mDz
+//                var dz2 = gz2.mDz
+//                if (tg1.isHe(tg2) != null) {
+//                    println("${tg1.toString()}与${tg2.toString()}合")
+//                }
+//                if (tg1.isChong(tg2)) {
+//                    println("${tg1.toString()}与${tg2.toString()}冲")
+//                }
+//            }
+//        }
+        for(i in (0..3)){
+            for(j in (0..i)){
+                var gz1 = siZhu[i]
+                var gz2 = siZhu[j]
+                var tg1 = gz1.mTg
+                var tg2 = gz2.mTg
+                var dz1 = gz1.mDz
+                var dz2 = gz2.mDz
+                if (tg1.isHe(tg2) != null) {
+                    println("${tg1.toString()}与${tg2.toString()}合")
+                }
+                if (tg1.isChong(tg2)) {
+                    println("${tg1.toString()}与${tg2.toString()}冲")
+                }
+                if (dz1.isHe(dz2)) {
+                    println("${dz1.toString()}与${dz2.toString()}合")
+                }
+                if (dz1.isChong(dz2)) {
+                    println("${dz1.toString()}与${dz2.toString()}冲")
+                }
+                if (dz1.isHai(dz2)) {
+                    println("${dz1.toString()}与${dz2.toString()}冲")
+                }
+
             }
         }
     }

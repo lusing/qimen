@@ -48,4 +48,26 @@ class TestDiZhi {
         assertEquals(true, dz6.isHe(dz9))
         assertEquals(true, dz7.isHe(dz8))
     }
+
+    @Test
+    fun testHai() {
+        val dz1 = DiZhi(DiZhi.ZI)
+        val dz2 = DiZhi(DiZhi.CHOU)
+        val dz3 = DiZhi(DiZhi.YIN)
+        val dz4 = DiZhi(DiZhi.MAO)
+        val dz5 = DiZhi(DiZhi.CHEN)
+        val dz6 = DiZhi(DiZhi.SI)
+        val dz7 = DiZhi(DiZhi.WU)
+        val dz8 = DiZhi(DiZhi.WEI)
+        val dz9 = DiZhi(DiZhi.SHEN)
+        val dz10 = DiZhi(DiZhi.YOU)
+        val dz11 = DiZhi(DiZhi.XU)
+        val dz12 = DiZhi(DiZhi.HAI)
+        assertEquals(true, dz1.isHai(dz8))
+        assertEquals(true, dz2.isHai(dz7))
+        assertEquals(true, dz3.isHai(dz6))
+        assertEquals(true, dz4.isHai(dz5))
+        assertEquals(true, dz9.isHai(dz12))
+        assertEquals(true, dz10.isHai(dz11))
+    }
 }

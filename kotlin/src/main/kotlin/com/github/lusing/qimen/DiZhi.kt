@@ -121,8 +121,14 @@ class DiZhi(idz: Int) {
         return xing!!.isSheng(dz2.xing!!)
     }
 
+    // 相冲
     fun isChong(dz2: DiZhi): Boolean {
         return dz2.diZhi == (this.diZhi + 6) % 12
+    }
+
+    // 相害
+    fun isHai(dz2: DiZhi): Boolean {
+        return ((this.diZhi + dz2.diZhi) % 12) == 7
     }
 
     /*
