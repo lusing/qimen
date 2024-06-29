@@ -137,8 +137,17 @@ class DiZhi(idz: Int) {
         return (dz2.diZhi + this.diZhi + 12) % 12 == 1
     }
 
-    fun getHe() : DiZhi {
+    fun getHe(): DiZhi {
         return DiZhi(13 - this.diZhi)
+    }
+
+    fun getMuKu(x: WuXing): DiZhi {
+        when (x.xing) {
+            WuXing.SHUI -> return DiZhi(CHEN) // 水库辰
+            WuXing.MU -> return DiZhi(WEI) // 土库未
+            WuXing.JIN -> return DiZhi(CHOU) // 金库丑
+            else -> return DiZhi(XU) // 火土为戌
+        }
     }
 
     companion object {

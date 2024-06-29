@@ -24,9 +24,10 @@ class TestBaZi {
         bz.calcWang()
         bz.checkDaYun()
 
-        var bz2 =
-            BaZi(TianGan.YI, DiZhi.HAI, TianGan.JI, DiZhi.MAO, TianGan.JIA, DiZhi.ZI, TianGan.XIN, DiZhi.WEI, true)
-        bz2.calcWang()
+
+//        var bz2 =
+//            BaZi(TianGan.YI, DiZhi.HAI, TianGan.JI, DiZhi.MAO, TianGan.JIA, DiZhi.ZI, TianGan.XIN, DiZhi.WEI, true)
+//        bz2.calcWang()
 
         var bz3 =
             BaZi(

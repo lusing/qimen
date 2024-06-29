@@ -11,7 +11,8 @@ class BaZi {
     var male: Boolean
     var qinYun: Int
     var year: Int
-    var sshen : Array<Array<ShiShen>>
+    var sshen: Array<Array<ShiShen>>
+    var siZhu: Array<GanZhi>
 
     constructor(
         nianGan: Int,
@@ -35,10 +36,12 @@ class BaZi {
         this.qinYun = qiyun
         this.year = cal
 
-        this.sshen = arrayOf(arrayOf(ShiShen()),arrayOf(ShiShen()))
+        this.sshen = arrayOf(arrayOf(ShiShen()), arrayOf(ShiShen()))
+        siZhu = arrayOf(nian, yue, ri, shi)
     }
 
     fun calcWang() {
+        println("=================================================")
         var mu = 0
         var huo = 0
         var tu = 0
@@ -69,6 +72,9 @@ class BaZi {
         println("旺: ${this.wang}")
 
         println(result[0] + result[1] + result[2] + result[3] + result[4])
+
+        checkMuKu() // 查日主墓库
+        checkCaiKu() // 查财库
 
 //        println("木: ${nianGan[0]}, 火: ${nianGan[1]}, 土: ${nianGan[2]}, 金: ${nianGan[3]}, 水: ${nianGan[4]}")
 //        println("木：${yueGan[0]}, 火: ${yueGan[1]}, 土: ${yueGan[2]}, 金: ${yueGan[3]}, 水: ${yueGan[4]}")
@@ -126,6 +132,7 @@ class BaZi {
                 }
             }
         }
+        println("-------------------------------")
     }
 
     fun calcDaYun(gz: GanZhi): Int {
@@ -331,12 +338,39 @@ class BaZi {
 
         if (des >= 2) {
             println("日主旺")
-        }else{
+        } else {
             println("日主弱")
         }
     }
 
     fun isShengFu(x1: WuXing, x2: WuXing): Boolean {
         return x1.xing == x2.xing || x1.isSheng(x2)
+    }
+
+    fun checkMuKu() {
+        for (gz in this.siZhu) {
+            if (gz.mDz.getMuKu(this.ri.mTg.xing) == gz.mDz) {
+                if (gz.mDz.diZhi == DiZhi.CHEN) {
+                    println("命中出生的时候旁边有河流、湖泊、水库等")
+                } else if (gz.mDz.diZhi == DiZhi.XU) {
+                    println("命中出生的时候旁边有学校、电影院、文化局等")
+                } else if (gz.mDz.diZhi == DiZhi.CHOU) {
+                    println("命中出生的时候旁边有银行")
+                } else if (gz.mDz.diZhi == DiZhi.WEI) {
+                    println("命中出生的时候旁边有公园")
+                }
+            }
+        }
+    }
+
+    // 检查是否有财库
+    fun checkCaiKu() {
+        val cai = WuXing(this.ri.mTg.xing.xing + 2)
+        println(cai.toStringLong())
+        for (gz in this.siZhu) {
+            if (gz.mDz.getMuKu(cai) == gz.mDz) {
+                println("有财库,消费更保守,理财观念好")
+            }
+        }
     }
 }
