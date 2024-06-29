@@ -99,13 +99,3 @@ WuXing.JIN = 3;
 WuXing.SHUI = 4;
 
 module.exports = WuXing;
-
-// 测试实例
-const wx1 = new WuXing(1);
-const wx2 = new WuXing(2);
-console.log(wx1.toString());
-console.log(wx1.isSheng(wx2));
-console.log(wx1.isKe(wx2));
-console.log(wx1.toStringLong());
-//const dz = new DiZhi(DiZhi.WEI);
-//console.log(wx1.isRuMu(dz));

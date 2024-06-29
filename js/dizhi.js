@@ -257,6 +257,3 @@ DiZhi.HAI = 11;
 DiZhi.sDiZhi = "子丑寅卯辰巳午未申酉戌亥";
 
 module.exports = DiZhi;
-
-var dz = new DiZhi(DiZhi.YIN);
-console.log(dz.toString());

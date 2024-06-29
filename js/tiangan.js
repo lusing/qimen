@@ -108,20 +108,3 @@ TianGan.GUI = 9;
 TianGan.sTianGan = "甲乙丙丁戊己庚辛壬癸";
 
 module.exports = TianGan;
-
-// 测试实例
-const tg1 = new TianGan(1);
-const tg2 = new TianGan(6);
-
-console.log(tg1.toString()); // 乙
-console.log(tg1.getNext().toString()); // 丙
-console.log(tg1.getPrev().toString()); // 甲
-console.log(tg1.xing); // 实际 WuXing 实例
-console.log(tg1.isYang); // false
-console.log(tg1.getName()); // 乙
-console.log(tg1.isSheng(tg2)); // 根据 isSheng 方法的实现
-console.log(tg1.isKe(tg2)); // 根据 isKe 方法的实现
-console.log(tg1.isChong(tg2)); // 根据 isChong 方法的实现
-console.log(tg1.isHe(tg2)); // 根据 isHe 方法的实现
-console.log(tg1.getHe().toString()); // 根据 getHe 方法的实现
-console.log(tg1.getRomance()); // 温柔贤惠、仁慈善良、柔情似水、娴于世故、优柔寡断
