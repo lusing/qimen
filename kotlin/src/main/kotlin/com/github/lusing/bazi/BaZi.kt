@@ -71,7 +71,7 @@ class BaZi(
         checkMuKu() // 查日主墓库
         checkCaiKu() // 查财库
         checkRoots() // 检查是否有根
-        checkHeChongPoHai() // 检查合冲破害
+        checkHeChongXingHai() // 检查合冲刑害
 
 //        println("木: ${nianGan[0]}, 火: ${nianGan[1]}, 土: ${nianGan[2]}, 金: ${nianGan[3]}, 水: ${nianGan[4]}")
 //        println("木：${yueGan[0]}, 火: ${yueGan[1]}, 土: ${yueGan[2]}, 金: ${yueGan[3]}, 水: ${yueGan[4]}")
@@ -383,7 +383,7 @@ class BaZi(
         }
     }
 
-    fun checkHeChongPoHai() {
+    fun checkHeChongXingHai() {
 //        for (gz1 in this.siZhu) {
 //            for (gz2 in this.siZhu) {
 //                var tg1 = gz1.mTg
@@ -398,14 +398,17 @@ class BaZi(
 //                }
 //            }
 //        }
-        for(i in (0..3)){
-            for(j in (0..i)){
-                var gz1 = siZhu[i]
-                var gz2 = siZhu[j]
-                var tg1 = gz1.mTg
-                var tg2 = gz2.mTg
-                var dz1 = gz1.mDz
-                var dz2 = gz2.mDz
+        for (i in (0..3)) {
+            for (j in (0..i)) {
+                if (i == j) {
+                    continue
+                }
+                val gz1 = siZhu[i]
+                val gz2 = siZhu[j]
+                val tg1 = gz1.mTg
+                val tg2 = gz2.mTg
+                val dz1 = gz1.mDz
+                val dz2 = gz2.mDz
                 if (tg1.isHe(tg2) != null) {
                     println("${tg1.toString()}与${tg2.toString()}合")
                 }
@@ -419,9 +422,11 @@ class BaZi(
                     println("${dz1.toString()}与${dz2.toString()}冲")
                 }
                 if (dz1.isHai(dz2)) {
-                    println("${dz1.toString()}与${dz2.toString()}冲")
+                    println("${dz1.toString()}与${dz2.toString()}害")
                 }
-
+                if (dz1.isXing2(dz2)) {
+                    println("${dz1.toString()}与${dz2.toString()}刑")
+                }
             }
         }
     }

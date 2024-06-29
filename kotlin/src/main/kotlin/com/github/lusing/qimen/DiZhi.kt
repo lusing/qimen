@@ -131,6 +131,53 @@ class DiZhi(idz: Int) {
         return ((this.diZhi + dz2.diZhi) % 12) == 7
     }
 
+    // 相刑
+    fun isXing2(dz2: DiZhi): Boolean {
+        val d1 = this.diZhi
+        val d2 = dz2.diZhi
+
+        // 自刑
+        if (d1 == CHEN && d2 == CHEN) {
+            println("${this.diZhi.toString()}自刑")
+            return true
+        }
+        if (d1 == WU && d2 == WU) {
+            println("${this.diZhi.toString()}自刑")
+            return true
+        }
+        if (d1 == YOU && d2 == YOU) {
+            println("${this.diZhi.toString()}自刑")
+            return true
+        }
+        if (d1 == HAI && d2 == HAI) {
+            println("${this.diZhi.toString()}自刑")
+            return true
+        }
+
+        // 无礼之刑
+        val wu_li_xing = arrayOf(ZI, MAO)
+        if (d1 in wu_li_xing && d2 in wu_li_xing) {
+            println("无礼之刑")
+            return true
+        }
+
+        // 无恩之刑
+        val wu_en_xing = arrayOf(YIN, SI, SHEN)
+        if (d1 in wu_en_xing && d2 in wu_en_xing) {
+            println("无恩之刑")
+            return true
+        }
+
+        // 恃势之刑
+        val shi_shi_xing = arrayOf(CHOU, XU, WEI)
+        if (d1 in shi_shi_xing && d2 in shi_shi_xing) {
+            println("恃势之刑")
+            return true
+        }
+
+        return false
+    }
+
     /*
      * 0与1合
      * 2与11合
