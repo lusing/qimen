@@ -5,7 +5,7 @@ open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
         protected set
         get
 
-    override fun toString(): String {
+    fun toLongString(): String {
         val sb = StringBuilder()
         when (shiShen) {
             ShiShen.Companion.ZHENGYIN -> sb.append("正印（印绶）")
@@ -18,6 +18,24 @@ open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
             ShiShen.Companion.PIANCAI -> sb.append("偏财")
             ShiShen.Companion.BIJIAN -> sb.append("比肩")
             ShiShen.Companion.JIECAI -> sb.append("劫财")
+            else -> {}
+        }
+        return sb.toString()
+    }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        when (shiShen) {
+            ShiShen.Companion.ZHENGYIN -> sb.append("印")
+            ShiShen.Companion.PIANYIN -> sb.append("枭")
+            ShiShen.Companion.SHANGGUAN -> sb.append("伤")
+            ShiShen.Companion.SHISHEN -> sb.append("食")
+            ShiShen.Companion.ZHENGGUAN -> sb.append("官")
+            ShiShen.Companion.QISHA -> sb.append("杀")
+            ShiShen.Companion.ZHENGCAI -> sb.append("财")
+            ShiShen.Companion.PIANCAI -> sb.append("才")
+            ShiShen.Companion.BIJIAN -> sb.append("比")
+            ShiShen.Companion.JIECAI -> sb.append("劫")
             else -> {}
         }
         return sb.toString()
@@ -43,7 +61,7 @@ open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
          */
         const val ZHENGGUAN = 0x30
         const val QISHA = 0x31
-        val PIANGUAN: Int = ShiShen.Companion.QISHA
+        const val PIANGUAN: Int = ShiShen.Companion.QISHA
 
         /**
          * 我克者为妻财 / 财星 异性为正财 同性为偏财
@@ -65,9 +83,9 @@ open class ShiShen() : LiuQin(LiuQin.XIONGDI) {
             if (other.isSheng(me)) {
                 ss1.liuqin = FUMU
                 if (isSame) {
-                    ss1.shiShen = ShiShen.Companion.ZHENGYIN
-                } else {
                     ss1.shiShen = ShiShen.Companion.PIANYIN
+                } else {
+                    ss1.shiShen = ShiShen.Companion.ZHENGYIN
                 }
             } else if (me.isSheng(other)) {
                 ss1.liuqin = ZISUN

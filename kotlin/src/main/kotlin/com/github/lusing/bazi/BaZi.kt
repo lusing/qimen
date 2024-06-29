@@ -11,7 +11,7 @@ class BaZi(
     riZhi: Int,
     shiGan: Int,
     shiZhi: Int,
-    var male: Boolean,
+    male: Boolean,
     qiyun: Int = 0,
     cal: Int = 0
 ) {
@@ -22,6 +22,7 @@ class BaZi(
     var wang: Int
     var qinYun: Int = qiyun
     var year: Int = cal
+    var male: Boolean = male
     var sshen: Array<Array<ShiShen>>
     var siZhu: Array<GanZhi>
 
@@ -31,12 +32,23 @@ class BaZi(
         this.ri = GanZhi(riGan, riZhi)
         this.shi = GanZhi(shiGan, shiZhi)
         this.wang = 0
-        this.sshen = arrayOf(arrayOf(ShiShen()), arrayOf(ShiShen()))
-        siZhu = arrayOf(nian, yue, ri, shi)
+        this.siZhu = arrayOf(nian, yue, ri, shi)
+        this.sshen = arrayOf(emptyArray<ShiShen>(), emptyArray<ShiShen>())
+
+        for (i in this.siZhu) {
+            this.sshen[0] = this.sshen[0].plusElement(ShiShen.getShiShen(this.ri.mTg, i.mTg))
+            this.sshen[1] = this.sshen[1].plusElement(ShiShen.getShiShen(this.ri.mTg, i.mDz.cangGan[0]))
+        }
     }
 
     fun calcWang() {
         println("=================================================")
+        for (i in this.sshen) {
+            for (j in i) {
+                print(j.toString())
+            }
+            println();
+        }
 //        var mu = 0
 //        var huo = 0
 //        var tu = 0
@@ -61,7 +73,7 @@ class BaZi(
 
         println(this.ri.mTg.getName())
         val x = this.ri.mTg.xing.xing
-        println(x)
+//        println(x)
 
         this.wang = result[(x + 4) % 5] + result[x % 5]
         println("旺: ${this.wang}")
@@ -338,6 +350,78 @@ class BaZi(
         } else {
             println("日主弱")
         }
+
+        if (des == 0) {
+            println("从弱")
+        } else if (des == 1) {
+            println("身弱")
+        } else if (des == 2) {
+            println("身强")
+        } else {
+            println("从强")
+        }
+        checkYongShen(des)
+    }
+
+    // 检查用神和忌神
+
+    fun checkYongShen(state: Int) {
+        var yins = 0
+        var bijies = 0
+        var guans = 0
+        var cais = 0
+        var shishang = 0
+
+        for (i in this.sshen) {
+            for (j in i) {
+                when (j.shiShen) {
+                    ShiShen.ZHENGYIN -> yins++
+                    ShiShen.PIANYIN -> yins++
+                    ShiShen.ZHENGGUAN -> guans++
+                    ShiShen.QISHA -> guans++
+                    ShiShen.ZHENGCAI -> cais++
+                    ShiShen.PIANCAI -> cais++
+                    ShiShen.SHISHEN -> shishang++
+                    ShiShen.SHANGGUAN -> shishang++
+                    ShiShen.BIJIAN -> bijies++
+                    ShiShen.JIECAI -> bijies++
+                }
+            }
+        }
+        //去掉日主自己
+        bijies--
+
+        when (state) {
+            // 身弱用印比
+            1 -> {
+                // 查找有没有印星
+                if (yins > 0) {
+                    println("用神为印")
+                    println("命中有印，忌神为财")
+                }
+                if (bijies > 0) {
+                    println("用神为比劫")
+                    println("命中有比劫，忌神为官杀")
+                }
+            }
+            // 身强
+            2 -> {
+                // 查找有没有官杀
+                if (guans > 0) {
+                    println("命中有官杀，用神为官杀")
+                    println("命中有官杀，忌神为食伤")
+                } else {
+                    if (shishang > 0) {
+                        println("命中无官杀，用神为食伤")
+                        println("忌神为印")
+                    }
+                }
+                if (cais > 0) {
+                    println("命中有财，用神为财")
+                    println("忌神为比劫")
+                }
+            }
+        }
     }
 
     fun isShengFu(x1: WuXing, x2: WuXing): Boolean {
@@ -431,3 +515,4 @@ class BaZi(
         }
     }
 }
+

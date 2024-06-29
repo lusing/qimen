@@ -1,4 +1,6 @@
 import com.github.lusing.qimen.DiZhi
+import com.github.lusing.qimen.ShiShen
+import com.github.lusing.qimen.TianGan
 import com.github.lusing.qimen.WuXing
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -9,6 +11,16 @@ class TestWuXing {
         val w1 = WuXing(WuXing.SHUI)
         val w2 = WuXing(WuXing.MU)
         assertEquals(true, w1.isSheng(w2))
+    }
+
+    @Test
+    fun testShiShen() {
+        for(i in 0..9){
+            for(j in 0..9){
+                var s1 = ShiShen.getShiShen(TianGan(i),TianGan(j))
+                println(s1.toString())
+            }
+        }
     }
 
     // 入墓测试
