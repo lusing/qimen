@@ -14,11 +14,9 @@ class Taiyi (var year: Int){
         println("${year} 积年数：${jinian}")
         val A =  jinian % 360
         println("A=${A}")
-        val B = A % 60
+        val B = A % 72
         println("B=${B}")
-        val C = B % 72
-        println("C=${C}")
-        return C
+        return B
     }
 
     // 太岁
@@ -66,6 +64,6 @@ class Taiyi (var year: Int){
     }
 
     companion object{
-        const val jiNianShu = 10155901 - 1984
+        const val jiNianShu = 10153917
     }
 }
