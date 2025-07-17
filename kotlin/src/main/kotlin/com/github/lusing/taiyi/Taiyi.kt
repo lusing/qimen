@@ -54,7 +54,7 @@ class Taiyi (var year: Int){
 
     companion object{
         const val jiNianShu = 10153917
-        fun calcTaiyi(year:Int,yang: Boolean) : Int{
+        fun calcTaiyi(year:Int,yang: Boolean=true) : Int{
             var A= year - 1
             if(A<0){
                 A=23
