@@ -47,6 +47,10 @@ class TaiyiPan {
         val zhuDaJiang = zhuSuan?.rem(10)
         println("主大將數：${zhuDaJiang}")
         zhuDaJiang?.let { luoGong(it, XingShen(XingShen.ZHU_DAJIANG)) }
+
+        val zhuCanJiang = zhuDaJiang?.let { (it * 3) % 10 }
+        println("主參將數：${zhuCanJiang}")
+        zhuCanJiang?.let { luoGong(it, XingShen(XingShen.ZHU_CANJIANG)) }
     }
 
     fun mapGongToPos(gong: Int): Cell? {
