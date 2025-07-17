@@ -9,5 +9,8 @@ class Paipan {
         println(ty1.getJiShen(true))
         println(ty1.getTaiyi())
         println(ty1.getWenChang())
+        val tyPan = TaiyiPan()
+        tyPan.year(ty1)
+        tyPan.walk()
     }
 }

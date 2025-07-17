@@ -43,7 +43,7 @@ class Taiyi (var year: Int){
         return js
     }
 
-    fun getTaiyi()  {
+    fun getTaiyi() : Int {
         val A = this.jinian % 24
         var B = A
         var C = 0
@@ -55,6 +55,7 @@ class Taiyi (var year: Int){
         println("太乙要走的宫位数=${A},${B},${C}")
         val D = 1 + B
         println("落宫${D}宫,第${C+1}年")
+        return D
     }
 
 

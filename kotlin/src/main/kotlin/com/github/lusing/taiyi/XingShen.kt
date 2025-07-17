@@ -1,6 +1,7 @@
 package com.github.lusing.taiyi
 
-class XingShen {
+class XingShen(id: Int) {
+    val name = getName(id)
     companion object {
         const val TAI_YI = 0
         const val WEN_CHANG = 1
