@@ -47,9 +47,10 @@ class Taiyi (var year: Int){
         return calcTaiyi(this.jinian % 24,true)
     }
 
-    fun getWenChang() {
+    fun getWenChang(yang : Boolean = true) : Int{
         val A = this.jinian % 18
         println("文昌要走${A}步")
+        return A
     }
 
     companion object{
@@ -64,6 +65,7 @@ class Taiyi (var year: Int){
             A = A+1
             B = B+1
             C = C+1
+            // 不游中五
             if(B>=5){
                 B=B+1
             }

@@ -24,6 +24,8 @@ class XingShen(id: Int) {
         const val ZHI_FU = 18
         const val FEI_FU = 19
         const val TAI_SUI = 20
+        const val HE_SHEN = 21
+        const val JI_SHEN = 22
 
         fun getName(index: Int): String {
             return when (index) {
@@ -48,6 +50,8 @@ class XingShen(id: Int) {
                 ZHI_FU -> "直符"
                 FEI_FU -> "飞符"
                 TAI_SUI -> "太歲"
+                HE_SHEN -> "合神"
+                JI_SHEN -> "計神"
                 else -> "未知"
             }
         }
