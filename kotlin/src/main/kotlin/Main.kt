@@ -7,6 +7,7 @@ fun main() {
 
     val pp = Paipan()
     pp.paipan(2024)
+    pp.paipan(2025)
     //pp.paipan(2010)
 
     //ganzhi(1980)

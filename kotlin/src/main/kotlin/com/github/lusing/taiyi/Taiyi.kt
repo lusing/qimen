@@ -44,20 +44,8 @@ class Taiyi (var year: Int){
     }
 
     fun getTaiyi() : Int {
-        val A = this.jinian % 24
-        var B = A
-        var C = 0
-        if (A>3){
-            B = A / 3
-            C = B % 3
-        }
-        println(this.jinian)
-        println("太乙要走的宫位数=${A},${B},${C}")
-        val D = 1 + B
-        println("落宫${D}宫,第${C+1}年")
-        return D
+        return calcTaiyi(this.jinian % 24,true)
     }
-
 
     fun getWenChang() {
         val A = this.jinian % 18
@@ -66,5 +54,24 @@ class Taiyi (var year: Int){
 
     companion object{
         const val jiNianShu = 10153917
+        fun calcTaiyi(year:Int,yang: Boolean) : Int{
+            var A= year - 1
+            if(A<0){
+                A=23
+            }
+            var B = A / 3
+            var C = A % 3
+            A = A+1
+            B = B+1
+            C = C+1
+            if(B>=5){
+                B=B+1
+            }
+            if(!yang){
+                B=10-B
+            }
+            println("太乙在本輪${A}年,${B}宮,${C}年")
+            return B
+        }
     }
 }
