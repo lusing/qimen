@@ -46,7 +46,10 @@ class TaiyiPan {
         val wc_order = wc_cell?.gongOrder
         val zhuSuan = wc_gong?.let { wc_order?.let { order -> calcDist(it, gong, order) } }
         println("主算數：${zhuSuan}")
-        val zhuDaJiang = zhuSuan?.rem(10)
+        var zhuDaJiang = zhuSuan?.rem(10)
+        if (zhuDaJiang == 0) {
+            zhuDaJiang = zhuSuan?.rem(9)
+        }
         println("主大將數：${zhuDaJiang}")
         zhuDaJiang?.let { luoGong(it, XingShen(XingShen.ZHU_DAJIANG)) }
         val wc_start = wc_cell?.id
@@ -62,7 +65,21 @@ class TaiyiPan {
         println("始擊起始位置${wc_start}")
         val wc_stop = wc_start?.plus(stepJi)
         println("始擊結束位置${wc_stop}")
-        wc_stop?.let { luoId(it, XingShen(XingShen.SHI_JI)) }
+        val shiji_cell = wc_stop?.let { luoId(it, XingShen(XingShen.SHI_JI)) }
+        val sj_gong = shiji_cell?.gongNum
+        val sj_gong_order = shiji_cell?.gongOrder
+
+        val keSuan = sj_gong?.let { sj_gong_order?.let { order -> calcDist(it, gong, order) } }
+        println("客算數：${keSuan}")
+        var keDaJiang = keSuan?.rem(10)
+        if (keDaJiang == 0) {
+            keDaJiang = keSuan?.rem(9)
+        }
+        println("客大將數：${keDaJiang}")
+        keDaJiang?.let { luoGong(it, XingShen(XingShen.KE_DAJIANG)) }
+        val keCanJiang = keDaJiang?.let { (it * 3) % 10 }
+        println("客參將數：${keCanJiang}")
+        keCanJiang?.let { luoGong(it, XingShen(XingShen.KE_CANJIANG)) }
     }
 
     fun mapGongToPos(gong: Int): Cell? {
@@ -112,9 +129,10 @@ class TaiyiPan {
         cell?.shenList?.add(shen)
     }
 
-    fun luoId(id: Int, shen: XingShen) {
+    fun luoId(id: Int, shen: XingShen): Cell? {
         val cell = findCellById(id)
         cell?.shenList?.add(shen)
+        return cell
     }
 
     // 根據地支來確定位置
