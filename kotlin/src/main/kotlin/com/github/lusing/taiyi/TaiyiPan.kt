@@ -44,7 +44,9 @@ class TaiyiPan {
         val wc_order = wc_cell?.gongOrder
         val zhuSuan = wc_gong?.let { wc_order?.let { order -> calcDist(it, gong, order) } }
         println("主算數：${zhuSuan}")
-
+        val zhuDaJiang = zhuSuan?.rem(10)
+        println("主大將數：${zhuDaJiang}")
+        zhuDaJiang?.let { luoGong(it, XingShen(XingShen.ZHU_DAJIANG)) }
     }
 
     fun mapGongToPos(gong: Int): Cell? {
@@ -53,6 +55,7 @@ class TaiyiPan {
             2 -> pan[0][2]
             3 -> pan[4][0]
             4 -> pan[2][0]
+            5 -> pan[2][2]
             6 -> pan[2][4]
             7 -> pan[0][4]
             8 -> pan[4][2]
